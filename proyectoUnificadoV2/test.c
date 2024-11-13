@@ -43,10 +43,14 @@ int main() {
     ////++++++ TIENE QUE ESTAR EN EL MAIN, nombrearchivo es un parametro que todos usan
     //// importante Obtener aca el valor del archivo de datos???? , sino cambio las funciones
     char *nombreArchivo = getconfig("archivo_datos");
+    if (nombreArchivo == NULL) {
+        printf("No se pudo obtener el nombre del archivo de configuración.\n");
+        free(scoreList); // Liberar memoria antes de salir
+        return 1;
+    }
     ///////////************//////////////
 
 
-    
     int opcion;
     
     if (nombreArchivo == NULL) {
