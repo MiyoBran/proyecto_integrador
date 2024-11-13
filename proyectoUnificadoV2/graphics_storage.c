@@ -1,44 +1,36 @@
 #include "raylib.h"
+#include <stdbool.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include <stdio.h>
 
+////////////////////////Funciones propias////////////////////////
 
-// Includes Propios del proyecto
-#include "config.h" // para la funcion independiente que busca valor de configuracion en el .env
-#include "scoreboard.h" // donde estan declaradas las funciones comunes a los scoreboards
-#include "gamelogic.h" // las funciones declaradas en la logica
-#include "graphics_storage.h" // las funciones declaradas para la parte grafica - UI
+#include "scoreboard.h"
+#include "graphics_storage.h"
+#include "config.h"
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////
-myDeck playerDeck[] = { {DIAMANTE, NUEVE}, {PICA, K}, {TREBOL, CINCO}, {DIAMANTE, 9}, {PICA, K}, {TREBOL, CINCO}, {DIAMANTE, 9}, {PICA, K}, {TREBOL, CINCO} };  //Struct just to test cards
-myDeck dealerDeck[4] = {{CORAZON, NUEVE}, {PICA, K}, {DIAMANTE, NUEVE}, {PICA, K}};
-//Extern decks
-
-int dealerCards() {
-    srand(time(NULL)); // Inicializa la semilla para números aleatorios
-    int card = rand() % 11 + 1; // Genera un número entre 1 y 11
-    return card;
-}
-
-int getPlayerMoney() {
-    srand(time(NULL)); // Inicializa la semilla para números aleatorios
-    int money = rand() % 500; // Genera un número entre 1 y 11
-    return money;
-}
-
-int playerHit(int *amountCardsPlayer) {
-    srand(time(NULL)); // Inicializa la semilla para números aleatorios
-    int puntaje= rand() % 21+1; // Genera un número entre 10 y 21
-    return puntaje;
-}
-//Updates the player points
-//////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////
 
 Texture2D hearts[13];
 Texture2D clubs[13];
 Texture2D diamonds[13];
 Texture2D spades[13];
+
+int SCREEN_WIDTH;
+int SCREEN_HEIGHT;
+int MAX_CARDS_DISPLAYED;
+
+bool playerWin = false;
+bool roundEnd = false;
+bool gameStop = true;                           //THIS VARIABLE STOPS THE WINDOW FROM OPENING
+bool alreadyBet = false;
+
+int x_playerPosition = 0;                                               //Player's text x position
+int x_dealerPosition = 0;                                               //Dealer's text x position 
+int y_position = 520;                                                   //General text y position
+int buttonXPosition = 100;                                              //Difference between window "wall" and buttons
+int buttonYPosition = 290;                                              //Difference between window "roof" and buttons
 
 const char *diamondsFiles[13] = {
                                 "Blackjack cards/Diamonds/Diamonds ace.png",
@@ -102,6 +94,38 @@ const char *spadesFiles[13] = {
 };
 //This are pointers to strings. The LoadTexture function needs this type of variable
 
+
+
+void initializeGraphicsConfig(){
+    char *stringScreenWidth = getconfig("SCREEN_WIDTH");
+    char *stringScreenHeight = getconfig("SCREEN_HEIGHT");
+    char *stringMaxCards = getconfig("MAX_CARDS_DISPLAYED");
+
+    if (stringScreenWidth != NULL) {
+        SCREEN_WIDTH = atoi(stringScreenWidth);
+        free(stringScreenWidth);
+    } else {
+        printf("SCREEN_WIDTH no encontrado en la configuracion. Usando valor predeterminado\n");
+        SCREEN_WIDTH = 1280;  // Default value
+    }
+
+    if (stringScreenHeight != NULL) {
+        SCREEN_HEIGHT = atoi(stringScreenHeight);
+        free(stringScreenHeight);
+    } else {
+        printf("SCREEN_HEIGHT not found in configuration. Using default value.\n");
+        SCREEN_HEIGHT = 720;  // Default value
+    }
+
+    if (stringMaxCards != NULL) {
+        MAX_CARDS_DISPLAYED = atoi(stringMaxCards);
+        free(stringMaxCards);
+    } else {
+        printf("MAX_CARDS_DISPLAYED no encontrado en la configuracion. Usando valor predeterminado.\n");
+        MAX_CARDS_DISPLAYED = 5;
+    }
+}
+
 void loadCardTextures() {               //Loads the textures of the cards into four Texture2D arrays.
     for (int i = 0; i < 13; i++) {
         hearts[i] = LoadTexture(heartsFiles[i]);
@@ -135,9 +159,7 @@ void unloadCardTextures() {                 //Unloads the textures used by the c
 
 
 void printCard(int *amountCards, myDeck *cartas1, int playerCropier) {          //Prints cards depending on which side you want
-    int x_position = CARD_WIDTH;
-    int verticalMargin = 50;
-    if (playerCropier == 0) {
+    if (playerCropier == DEALER) {
         for (int i = 0; i < *amountCards; i ++) {
             switch (cartas1[i].cardType) {
                 case TREBOL:
@@ -173,7 +195,6 @@ void printCard(int *amountCards, myDeck *cartas1, int playerCropier) {          
         }
     }
 }
-//DrawTexture(clubs[cartas1[i].cardNumber], CARD_WIDTH*(i+1)+(CARD_DISTANCE*i), SCREEN_HEIGHT-verticalMargin-CARD_HEIGHT, WHITE);
 
 
 

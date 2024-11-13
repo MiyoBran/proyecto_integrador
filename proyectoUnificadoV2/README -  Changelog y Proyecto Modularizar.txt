@@ -1,3 +1,6 @@
+*Proyecto en GitHub.com/MiyoBran/proyecto_integrador.git 
+*Proyecto en Drive https://drive.google.com/drive/folders/1eUS_w_vo_eg3GkFpGmb9hGzu-Kx6sQyM?usp=drive_link
+
 +++++++++++++***************+++++++++++++++**************++++++++++++*************
 Verificar si tienen o no que estar en cada archivo.c que tengan
 // Includes Propios del proyecto
@@ -55,17 +58,18 @@ Horas Programacion
 *7hs nueva estructura archivos, memoria dinamica y lograr compilar todo junto
 // Proximo es integradorMiyoV3
 12/11 -> 5 horas, denuevo cambio la estructura de archivos // ahora config.c scoreboardV1 y scoreboardV2 junto a scoreboard_test
-
+12/11 -> 4 horas , revision de funciones memoria dinamica, proyecto en git y config.
 
 
 ------------------------------------------------------------------------------------------------
 Evolucion Archivos Files/scoreboard
+*Proyecto en Drive https://drive.google.com/drive/folders/1eUS_w_vo_eg3GkFpGmb9hGzu-Kx6sQyM?usp=drive_link
 -main.c archivo_configuracion.c archivo_configuracion.h
 -sinjuego.c archivo_configuracion.c archivo_configuracion.h
 ---Carpeta nueva
 -files.c files.h // tiene todo andando, agregado borrar archivo
 -files2.c files2.h // con memoria dinamica , revision de liberar memoria.
- --> realizado 12/11
+Pendiente:
 * definir parametros que recibo en mi funcion"main"
 *scoreboard_v1.c y scoreboard_v2.c. Esto ayudará a clarificar su propósito.
 Si contienen funciones similares pero con diferentes implementaciones, podría 
@@ -73,9 +77,15 @@ ser útil crear un archivo de cabecera (scoreboard.h) que contenga las definicio
 de las funciones que ambos archivos implementan. Esto permite que otros módulos 
 incluyan esta cabecera para acceder a las funciones del scoreboard, independientemente 
 de la implementación que elijas.
---> ahora config.c scoreboardV1 y scoreboardV2(con memoria dinamica) junto a scoreboard_test.c
+ --> realizado 12/11
+*Proyecto en GitHub.com/MiyoBran/proyecto_integrador.git 
+
+* ahora config.c scoreboardV1 y scoreboardV2(con memoria dinamica) junto a scoreboard_test.c
 se cambio las funciones definitivas a nombre en ingles, falta hacer lo mismo con las variables
----> Proximo Falta ver las funciones repetidas en los demas, y tratar de integrar lo que esta
+PENDIENTE:
+//Falta ver las funciones repetidas en los demas, y tratar de integrar lo que esta.
+//Armar un Prototipo de gamelogic para simular las interacciones necesarias
+//Terminar de hacer los cambios de variables de funciones provisorias o de testeo en español, a las definitivas en ingles.
 
 
 
