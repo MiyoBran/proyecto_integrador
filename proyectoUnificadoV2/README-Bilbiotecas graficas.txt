@@ -2,6 +2,7 @@ Las dos carpetas, raylib y glfw, adentro de home/NOMBREDEUSUARIO
 , son necesarias para compilar la parte grafica
 
 ************************************************** Raylib --> para graficos 
+https://github.com/raysan5/raylib --> Code ---> Download zip
 
 Extrae el archivo ZIP descargado a una ubicación de tu preferencia, como ~/raylib (en Home)
 y usar (hay unos comandos = off que quiza no necesiten -> son para cygwin):
@@ -36,8 +37,10 @@ gcc -o main main.c -I/home/Miyo/raylib/src -L/home/Miyo/raylib/build -lraylib -l
 
 
 ************************************************** GLFW --> para opengl
+https://github.com/glfw/glfw ---> code --> download zip
 copiar el contenido de glfw-master en una carpeta /glfw en el home
 y usar lo siguiente: (hay unos comandos = off que quiza no necesiten):
+mkdir glfw
 cd glfw
 mkdir build
 cd build

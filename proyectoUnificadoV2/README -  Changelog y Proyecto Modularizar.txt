@@ -57,8 +57,9 @@ Horas Programacion
 // IntegradorMiyoV2 -> memoria dinamica y primer intento de integracion de todos los codigos de cada uno
 *7hs nueva estructura archivos, memoria dinamica y lograr compilar todo junto
 // Proximo es integradorMiyoV3
-12/11 -> 5 horas, denuevo cambio la estructura de archivos // ahora config.c scoreboardV1 y scoreboardV2 junto a scoreboard_test
+12/11 -> 5 horas, de nuevo cambio la estructura de archivos // ahora config.c scoreboardV1 y scoreboardV2 junto a scoreboard_test
 12/11 -> 4 horas , revision de funciones memoria dinamica, proyecto en git y config.
+12-11 -> 4 horas , correcta instalacion de las bibliotecas graficas , en vez de copiarlas y qeu funcione a veces
 
 
 ------------------------------------------------------------------------------------------------
