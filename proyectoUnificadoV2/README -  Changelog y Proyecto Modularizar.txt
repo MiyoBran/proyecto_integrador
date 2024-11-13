@@ -1,3 +1,6 @@
+ cd proyectos/tpIntegrador/proyecto_integrador/
+
+
 *Proyecto en GitHub.com/MiyoBran/proyecto_integrador.git 
 *Proyecto en Drive https://drive.google.com/drive/folders/1eUS_w_vo_eg3GkFpGmb9hGzu-Kx6sQyM?usp=drive_link
 

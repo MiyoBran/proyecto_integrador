@@ -21,16 +21,23 @@ void mostrarMenu() {
 }
 
 int main() {
+    ///////////************////////////// Bloques importantes en main para funcionamiento de los scoreboard
+
     srand(time(NULL)); // Inicializar la semilla aleatoria
+    
     // Asigna memoria dinámica para el arreglo de jugadores
     Score *scoreList = calloc(TOTAL_REGISTROS, sizeof(Score)); // Asigna memoria y la inicializa en cero
     if (scoreList == NULL) { // Verifica si la asignación fue exitosa
         printf("Error al asignar memoria para scoreList.\n");
         return 1;
     }
-
-    // Obtén el nombre del archivo de configuración
+    ////++++++ TIENE QUE ESTAR EN EL MAIN, nombrearchivo es un parametro que todos usan
+    //// importante Obtener aca el valor del archivo de datos???? , sino cambio las funciones
     char *nombreArchivo = getconfig("archivo_datos");
+    ///////////************//////////////
+
+
+    
     int opcion;
 
     if (nombreArchivo == NULL) {
@@ -66,7 +73,7 @@ int main() {
             
             case 5:  // Opción para borrar el archivo
             if (remove(nombreArchivo) == 0) {
-                // si comento el memset, puedo mantener el arreglo en la ejecucion aunque borre el archivo
+                // sin memset, puedo mantener el arreglo en la ejecucion aunque borre el archivo
                 memset(scoreList, 0, TOTAL_REGISTROS * sizeof(Score)); // Reinicia el contenido
                 printf("Datos borrados y reiniciados.\n");  
                 printf("Archivo borrado con éxito.\n");

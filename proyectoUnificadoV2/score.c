@@ -14,8 +14,22 @@
 
 
 int main(void) {
-    Score scoreList[TOTAL_REGISTROS] = {0};
+    ///////////************////////////// Bloques importantes en main para funcionamiento de los scoreboard
+
+    srand(time(NULL)); // Inicializar la semilla aleatoria
+    
+    // Asigna memoria dinámica para el arreglo de jugadores
+    Score *scoreList = calloc(TOTAL_REGISTROS, sizeof(Score)); // Asigna memoria y la inicializa en cero
+    if (scoreList == NULL) { // Verifica si la asignación fue exitosa
+        printf("Error al asignar memoria para scoreList.\n");
+        return 1;
+    }
+    ////++++++ TIENE QUE ESTAR EN EL MAIN, nombrearchivo es un parametro que todos usan
+    //// importante Obtener aca el valor del archivo de datos???? , sino cambio las funciones
     char *nombreArchivo = getconfig("archivo_datos");
+    ///////////************//////////////
+    
+
     if (nombreArchivo == NULL) {
         printf("No se pudo obtener el nombre del archivo de configuración.\n");
         return 1;
