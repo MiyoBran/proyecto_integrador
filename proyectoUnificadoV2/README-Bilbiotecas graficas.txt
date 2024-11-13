@@ -28,6 +28,12 @@ cd build
 
 cmake .. -G "Unix Makefiles" -DPLATFORM=PLATFORM_DESKTOP
 
+
+*-* Si hay error de wayland, agregar paquetes a la instalacion de cygwin
+wayland-scanner no está incluido en el paquete wayland-protocols, sino en wayland-devel o libwayland-dev
+*-* Tambien puede faltar agregar alguna de las siguientes:
+libx11-dev libxrandr-dev libxinerama-dev libxi-dev libxcursor-dev libxfixes-dev libxext-dev libxcomposite-dev libglu1-mesa-dev
+
 ******************
 Usar Raylib en tu proyecto
 Después de compilar o instalar Raylib, puedes usarlo en tu proyecto. Asegúrate de incluir los archivos de encabezado y enlazar las bibliotecas correctamente:
@@ -64,3 +70,47 @@ cd glfw
 mkdir build
 cd build
 cmake .. -G "Unix Makefiles" -DGLFW_BUILD_WAYLAND=OFF -DGLFW_BUILD_X11=OFF
+
+----------------------------
+Linux - Ubuntu ->primero glfw
+----------------------------
+sudo apt update
+sudo apt make
+sudo apt cmake
+
+*Quiza algunos de los siguientes no sean necesarios
+sudo apt install libglfw3 libglfw3-dev libraylib-dev
+sudo apt-get install libx11-dev libxrandr-dev libxinerama-dev libxi-dev libxcursor-dev libxfixes-dev libxext-dev libxcomposite-dev libglu1-mesa-dev
+sudo apt-get install wayland-protocols
+sudo apt-get install libwayland-dev
+//Depende la distribucion podria ser -->wayland-devel en vez de libwayland-dev
+which wayland-scanner
+sudo apt-get install libxkbcommon-dev
+
+cd ~/glfw
+rm -rf build
+mkdir build
+cd build
+cmake ..
+cuando todo sea correcto
+make
+sudo make install
+
+Ahora Raylib, tambien en home
+cd ~/raylib
+rm -rf build
+mkdir build
+cd build
+cmake ..
+// cuando todo sea correcto
+make
+sudo make install
+
+*** Por ultimo verificar si esta en el usr :
+pkg-config --cflags --libs raylib
+Deberia decir --> -I/usr/local/include -L/usr/local/lib -lraylib 
+ahora se pueden usar los comandos de compilacion para linux en vez de los especificos
+
+
+
+

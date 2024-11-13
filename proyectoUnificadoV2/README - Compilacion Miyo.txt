@@ -1,8 +1,27 @@
 gcc -o main main.c -I/home/Miyo/raylib/src -I/home/Miyo/glfw/include/GLFW -L/home/Miyo/raylib/src -L/home/Miyo/glfw/build/src -lraylib -lglfw -lgdi32 graphics_storage.c
 <- Original de Miyo 
 
+*/*/*/*/* COn instalacion correcta en ubuntu (lo importante es copiar los flags de compilacion despues de los archivos fuente)
+$(pkg-config --cflags raylib) $(pkg-config --cflags glfw3) -L/usr/local/lib $(pkg-config --libs raylib) $(pkg-config --libs glfw3) -lm
 
-/////////////REVISAR CADA UNO
+
+Main:
+gcc -o mainGrafico main.c graphics_storage.c config.c scoreboardV2.c $(pkg-config --cflags raylib) $(pkg-config --cflags glfw3) -L/usr/local/lib $(pkg-config --libs raylib) $(pkg-config --libs glfw3) -lm
+
+Test.c : (para testear muestra del score)
+gcc -o TestGraficosConScore score.c graphics_storage.c config.c scoreboardV2.c $(pkg-config --cflags raylib) $(pkg-config --cflags glfw3) -L/usr/local/lib $(pkg-config --libs raylib) $(pkg-config --libs glfw3) -lm
+
+/* para compilar solo los de Archivos/SHOW ranking  y probar
+// Tienen que estar en la misma carpeta *scoreboard_test.c config.c config.h scoreboard.h
+gcc scoreboard_test.c config.c scoreboardV1.c -o scoreEstaticotest
+gcc scoreboard_test.c config.c scoreboardV2.c -o dinamicoScoretest
+
+
+---Para borrar todos los archivos compilados
+rm -rf dinamicoScoretest scoreEstaticotest TestGraficosConScore mainGrafico 
+
+
+/////////////REVISAR CADA UNO en windows
 gcc -o TestGraficosConScore score.c -I/home/Miyo/raylib/src -I/home/Miyo/glfw/include/GLFW -L/home/Miyo/raylib/src -L/home/Miyo/glfw/build/src -lraylib -lgdi32 -lopengl32 -lwinmm -lglfw3 graphics_storage.c config.c scoreboardV2.c
 /*Para miyo, solo lo de Miyo*/
 -lraylib -lgdi32 -lopengl32 -lwinmm -lglfw3
@@ -14,8 +33,8 @@ gcc -o BlackjackV2 main.c graphics_storage.c config.c scoreboardV2.c gamelogic.c
 
 /* para compilar solo los de Archivos/SHOW ranking  y probar
 // Tienen que estar en la misma carpeta *scoreboard_test.c config.c config.h scoreboard.h
-// gcc scoreboard_test.c config.c scoreboardV1.c -o blackjackV1
-// gcc scoreboard_test.c config.c scoreboardV2.c -o blackjackV2
+// gcc scoreboard_test.c config.c scoreboardV1.c -o scoreEstaticotest
+// gcc scoreboard_test.c config.c scoreboardV2.c -o dinamicoScoretest
 
 
 COMANDOS PARA GIT
