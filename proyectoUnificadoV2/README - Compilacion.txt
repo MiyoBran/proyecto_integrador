@@ -41,6 +41,9 @@ git push origin main
 # Verificar si hay actualizaciones en el repositorio remoto
 git fetch origin
 
+# Verificar direccion del escritorio remoto
+git remote -v
+
 # Comparar tu rama local con la rama remota
 git diff origin/main
 
