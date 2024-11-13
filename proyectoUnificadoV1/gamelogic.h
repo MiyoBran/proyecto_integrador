@@ -26,14 +26,14 @@ struct card randomCard(struct card Deck[], int *remaining_cards); // Función pa
 
 
 
-/*las de aca no se usan en el principal - las hace lizandro*/
+/*las de aca no se usan en el principal - las hace Miyo*/
 void imprimircarta(struct card Card); // Imprimir la carta
 void printDeck(struct card Deck[]); // Función para imprimir el mazo
 
 #endif // gamelogic_h
 
 // Estructura que define una carta en el juego
-/// ESTO LO NECESITA ASI LIZANDRO
+/// ESTO LO NECESITA ASI Miyo
 // typedef struct  {
 //     int cardType;
 //     int cardNumber;

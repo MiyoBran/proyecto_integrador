@@ -3,14 +3,10 @@
 #include <time.h>
 #include <locale.h>
 #include <wchar.h> /// para caracteres anchos / emoticones?
+#include "files2.h"
+#include "gamelogic.h"
+#include "graphics_storage.h"
 
-
-
-// Includes Propios del proyecto
-#include "config.h" // para la funcion independiente que busca valor de configuracion en el .env
-#include "scoreboard.h" // donde estan declaradas las funciones comunes a los scoreboards
-#include "gamelogic.h" // las funciones declaradas en la logica
-#include "graphics_storage.h" // las funciones declaradas para la parte grafica - UI
 
 #define decks 1
 

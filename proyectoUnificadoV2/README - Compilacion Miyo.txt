@@ -1,20 +1,15 @@
-gcc -o main main.c -I/home/Lizandro/raylib/src -I/home/Lizandro/glfw/include/GLFW -L/home/Lizandro/raylib/src -L/home/Lizandro/glfw/build/src -lraylib -lglfw -lgdi32 graphics_storage.c
-<- Original de Lizandro 
-
-gcc -o Original main.c -I/home/Miyo/raylib/src -I/home/Miyo/glfw/include/GLFW -L/home/Miyo/raylib/src -L/home/Miyo/glfw/build/src -lraylib -lglfw -lgdi32 graphics_storage.c
-
+gcc -o main main.c -I/home/Miyo/raylib/src -I/home/Miyo/glfw/include/GLFW -L/home/Miyo/raylib/src -L/home/Miyo/glfw/build/src -lraylib -lglfw -lgdi32 graphics_storage.c
+<- Original de Miyo 
 
 
 /////////////REVISAR CADA UNO
-gcc -o TestGraficosConScore score.c -I/home/Miyo/raylib/src -I/home/Miyo/glfw/include/GLFW -L/home/Miyo/raylib/src -L/home/Miyo/glfw/build/src -lraylib -lglfw -lgdi32 graphics_storage.c config.c scoreboardV2.c
-/*Para miyo, solo lo de Lizandro*/
-gcc -o mainGrafico main.c -I/home/Miyo/raylib/src -I/home/Miyo/glfw/include/GLFW -L/home/Miyo/raylib/src -L/home/Miyo/glfw/build/src -lraylib -lglfw -lgdi32 graphics_storage.c config.c scoreboardV2.c
+gcc -o TestGraficosConScore score.c -I/home/Miyo/raylib/src -I/home/Miyo/glfw/include/GLFW -L/home/Miyo/raylib/src -L/home/Miyo/glfw/build/src -lraylib -lgdi32 -lopengl32 -lwinmm -lglfw3 graphics_storage.c config.c scoreboardV2.c
+/*Para miyo, solo lo de Miyo*/
+-lraylib -lgdi32 -lopengl32 -lwinmm -lglfw3
+gcc -o mainGrafico main.c -I/home/Miyo/raylib/src -I/home/Miyo/glfw/include/GLFW -L/home/Miyo/raylib/src -L/home/Miyo/glfw/build/src -lraylib -lgdi32 -lopengl32 -lwinmm -lglfw3 graphics_storage.c config.c scoreboardV2.c
 
 /// PARA COMPILAR TODOS LOS ARCHIVOS Y PROBAR / CAMBIAR EL *usuario / Miyo ---> Tu nombre de carpeta
 gcc -o BlackjackV2 main.c graphics_storage.c config.c scoreboardV2.c gamelogic.c -I/home/Miyo/raylib/src -I/home/Miyo/glfw/include/GLFW -L/home/Miyo/raylib/src -L/home/Miyo/glfw/build/src -lraylib -lglfw -lgdi32
-
-/* para compilar solo gamelogic (cambiar lo que haga falta aca para que funcione, en teoria solo el /*Usuario -->Miyo)
-Chequear -> gcc -o test_gamelogic test_gamelogic.c gamelogic.c -I/home/*usuario/raylib/src -I/home/*usuario/glfw/include/GLFW
 
 
 /* para compilar solo los de Archivos/SHOW ranking  y probar

@@ -1,1 +1,0 @@
-gcc -o main main.c -I/home/Lizandro/raylib/src -I/home/Lizandro/glfw/include/GLFW -L/home/Lizandro/raylib/src -L/home/Lizandro/glfw/build/src -lraylib -lglfw -lgdi32 graphics_storage.c config.c scoreboardV2.c

@@ -1,6 +1,6 @@
-gcc -o main main.c -I/home/Lizandro/raylib/src -I/home/Lizandro/glfw/include/GLFW -L/home/Lizandro/raylib/src -L/home/Lizandro/glfw/build/src -lraylib -lglfw -lgdi32 graphics_storage.c
+gcc -o main main.c -I/home/Miyo/raylib/src -I/home/Miyo/glfw/include/GLFW -L/home/Miyo/raylib/src -L/home/Miyo/glfw/build/src -lraylib -lglfw -lgdi32 graphics_storage.c
 
-/*Para miyo, solo lo de Lizandro*/
+/*Para miyo, solo lo de Miyo*/
 gcc -o main main.c -I/home/Miyo/raylib/src -I/home/Miyo/glfw/include/GLFW -L/home/Miyo/raylib/src -L/home/Miyo/glfw/build/src -lraylib -lglfw -lgdi32 graphics_storage.c
 
 /// PARA COMPILAR TODOS LOS ARCHIVOS Y PROBAR / CAMBIAR EL Miyo ---> Tu nombre de carpeta
