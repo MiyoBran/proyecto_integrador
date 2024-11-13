@@ -35,7 +35,7 @@ void fileSave(Score *scoreList, const char *nombreArchivo){
 
 
 
-// Implementación de agregarJugador, mostrarJugadores y ordenarJugadores similar a `files.c`
+// Implementación de agregarJugador, mostrarJugadores y ordenarJugadores similar a `files2.c`
 
 // Función para agregar un jugador al ranking
 void checkScore(Score *scoreList, Score nuevoJugador,const char *nombreArchivo) {

@@ -19,7 +19,7 @@ void fileImport(Score *scoreList, const char *nombreArchivo);
 void fileSave(Score *scoreList, const char *nombreArchivo);
 
 // Funcion para imprimir el ranking
-void showRanking(Score scoreList[TOTAL_REGISTROS],const char *nombreArchivo);
+void showRanking(Score *scoreList,const char *nombreArchivo);
 void sortRanking(Score *scoreList);
 
 
