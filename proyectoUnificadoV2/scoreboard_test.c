@@ -10,11 +10,6 @@
 #define MAX_LINEA 256
 
 
-char *generarNombreAleatorio();
-// Funcion para "contruir" un score y mandarlo a comparar
-Score crearScore(const char *nombre, float dinero);
-
-
 
 // con el ultimo cambio, ya no es necesario usar las funciones 1 y 2
 void mostrarMenu() {

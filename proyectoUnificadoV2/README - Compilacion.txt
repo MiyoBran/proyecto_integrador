@@ -17,3 +17,7 @@ Chequear -> gcc -o test_gamelogic test_gamelogic.c gamelogic.c -I/home/*usuario/
 // Tienen que estar en la misma carpeta *scoreboard_test.c config.c config.h scoreboard.h
 // gcc scoreboard_test.c config.c scoreboardV1.c -o blackjackV1
 // gcc scoreboard_test.c config.c scoreboardV2.c -o blackjackV2
+
+
+para el git
+~/proyectos/tpIntegrador/proyecto_integrador
