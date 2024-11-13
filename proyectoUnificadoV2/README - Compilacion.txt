@@ -21,3 +21,14 @@ Chequear -> gcc -o test_gamelogic test_gamelogic.c gamelogic.c -I/home/*usuario/
 
 para el git
 ~/proyectos/tpIntegrador/proyecto_integrador
+
+git status
+
+git add .
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+
+git commit  -m "Aca va el mensaje del commit"
+
+// para mandar todo
+git push origin main
