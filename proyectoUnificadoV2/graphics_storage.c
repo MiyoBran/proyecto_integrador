@@ -23,7 +23,7 @@ int MAX_CARDS_DISPLAYED;
 
 bool playerWin = false;
 bool roundEnd = false;
-bool gameStop = true;                           //THIS VARIABLE STOPS THE WINDOW FROM OPENING
+bool gameStop = false;                           //THIS VARIABLE STOPS THE WINDOW FROM OPENING
 bool alreadyBet = false;
 
 int x_playerPosition = 0;                                               //Player's text x position
