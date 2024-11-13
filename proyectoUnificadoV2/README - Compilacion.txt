@@ -19,16 +19,28 @@ Chequear -> gcc -o test_gamelogic test_gamelogic.c gamelogic.c -I/home/*usuario/
 // gcc scoreboard_test.c config.c scoreboardV2.c -o blackjackV2
 
 
-para el git
-~/proyectos/tpIntegrador/proyecto_integrador
+COMANDOS PARA GIT
 
+# Para navegar a la carpeta del proyecto
+cd ~/proyectos/tpIntegrador/proyecto_integrador
+
+# Verificar el estado del repositorio
 git status
 
+# Agregar todos los cambios al área de preparación
 git add .
-  (use "git add <file>..." to update what will be committed)
-  (use "git restore <file>..." to discard changes in working directory)
 
-git commit  -m "Aca va el mensaje del commit"
+# Realizar el commit
+git commit -m "Aca va el mensaje del commit, sino abre nano"
 
-// para mandar todo
+# Verificar si hay actualizaciones en el repositorio remoto
+git fetch origin
+
+# Comparar tu rama local con la rama remota
+git diff origin/main
+
+# Actualizar tu proyecto local si es necesario
+git pull origin main
+
+# Mandar tus cambios al repositorio remoto
 git push origin main
