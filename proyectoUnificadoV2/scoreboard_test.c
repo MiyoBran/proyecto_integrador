@@ -15,11 +15,13 @@ void mostrarMenu() {
     printf("2. Guardar el archivo de puntajes\n");
     printf("3. Agregar jugador aleatorio al ranking\n");
     printf("4. Imprimir el ranking en la terminal\n");
-    printf("5. Salir\n");
+    printf("5. Borrar archivo de Scores Jugadores\n");
+    printf("6. Salir\n");
     printf("Seleccione una opción: ");
 }
 
 int main() {
+    srand(time(NULL)); // Inicializar la semilla aleatoria
     // Asigna memoria dinámica para el arreglo de jugadores
     Score *scoreList = calloc(TOTAL_REGISTROS, sizeof(Score)); // Asigna memoria y la inicializa en cero
     if (scoreList == NULL) { // Verifica si la asignación fue exitosa
@@ -61,13 +63,25 @@ int main() {
             case 4:
                 showRanking(scoreList, nombreArchivo);  // Muestra el ranking en la terminal
                 break;
-            case 5:
+            
+            case 5:  // Opción para borrar el archivo
+            if (remove(nombreArchivo) == 0) {
+                // si comento el memset, puedo mantener el arreglo en la ejecucion aunque borre el archivo
+                memset(scoreList, 0, TOTAL_REGISTROS * sizeof(Score)); // Reinicia el contenido
+                printf("Datos borrados y reiniciados.\n");  
+                printf("Archivo borrado con éxito.\n");
+            } else {
+                printf("Error al borrar el archivo.\n");
+            }
+            break;
+
+            case 6:
                 printf("Saliendo...\n");
                 break;
             default:
                 printf("Opción inválida. Intente de nuevo.\n");
         }
-    } while (opcion != 5);
+    } while (opcion != 6);
 
     // Liberar la memoria dinámica antes de salir
     free(scoreList);

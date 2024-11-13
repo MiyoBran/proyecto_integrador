@@ -1,7 +1,7 @@
 /*
 #include<stdio.h>
-#include<time.h>
 */
+#include<time.h>
 #include<string.h>
 #include<stdlib.h>
 
@@ -100,6 +100,7 @@ void sortRanking(Score scoreList[TOTAL_REGISTROS]) {
 }
 
 char *generarNombreAleatorio() {
+
     static char nombre[4];
     const char letras[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     const char vocales[] = "aeiou";
