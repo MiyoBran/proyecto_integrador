@@ -1,6 +1,6 @@
 Las dos carpetas, raylib y glfw, adentro de home/NOMBREDEUSUARIO
 , son necesarias para compilar la parte grafica
-
+WINDOWS
 ************************************************** Raylib --> para graficos 
 https://github.com/raysan5/raylib --> Code ---> Download zip
 
@@ -74,6 +74,11 @@ cmake .. -G "Unix Makefiles" -DGLFW_BUILD_WAYLAND=OFF -DGLFW_BUILD_X11=OFF
 ----------------------------
 Linux - Ubuntu ->primero glfw
 ----------------------------
+
+*/*/*/*/* COn instalacion correcta en ubuntu (lo importante es copiar los flags de compilacion despues de los archivos fuente)
+$(pkg-config --cflags raylib) $(pkg-config --cflags glfw3) -L/usr/local/lib $(pkg-config --libs raylib) $(pkg-config --libs glfw3) -lm
+PASOS:
+
 sudo apt update
 sudo apt make
 sudo apt cmake
