@@ -33,6 +33,11 @@ git add .
 # Realizar el commit
 git commit -m "Aca va el mensaje del commit, sino abre nano"
 
+# Mandar tus cambios al repositorio remoto
+git push origin main
+
+---- Para ver cambios
+
 # Verificar si hay actualizaciones en el repositorio remoto
 git fetch origin
 
@@ -42,5 +47,3 @@ git diff origin/main
 # Actualizar tu proyecto local si es necesario
 git pull origin main
 
-# Mandar tus cambios al repositorio remoto
-git push origin main
