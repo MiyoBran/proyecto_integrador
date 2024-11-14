@@ -10,13 +10,12 @@
 
 ////////////////////////Funciones propias////////////////////////
 
+#include "config.h"
 #include "scoreboard.h"
 #include "graphics_storage.h"
-#include "config.h"
+#include "gamelogic.h"
 
 /////////////////////////////////////////////////////////////////////////////////////
-
-
 
 #define DISTANCE_CARDS 20
 #define CARD_DISTANCE 20
@@ -27,38 +26,25 @@
 #define VERTICAL_MARGIN 50
 
 
-typedef enum {
+/* typedef enum {
     TREBOL, DIAMANTE, CORAZON, PICA
 } Palo;
 
+// Enumeraciones para los valores de las cartas
 typedef enum {
     A, DOS, TRES, CUATRO, CINCO, SEIS, SIETE, OCHO, NUEVE, DIEZ, J, Q, K
 } Carta;
 
-
 typedef struct  {
-    int cardType;
-    int cardNumber;
-}   myDeck;
-//Struct for cards
-
+    Palo cardType;
+    Carta cardNumber;
+    int puntaje;            
+}   myDeck; */
 
 typedef enum {                                 
     DEALER, PLAYER
 }   whichSidetoPrint;
 //This enum is for the printCard function, it tells the function which side it should print the cards.
-
-
-
-/* typedef struct {
-    char playerName;
-    int playerBet;
-    int playerTotalMoney;
-    int amountCards;
-    myDeck cardDeck[52];
-}   gameSpecifics; */
-
-
 
 typedef struct {
     Rectangle holdBox;

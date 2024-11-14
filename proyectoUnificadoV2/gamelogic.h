@@ -12,23 +12,26 @@ typedef enum {
 } Carta;
 
 
+typedef struct  {
+    Palo cardType;
+    Carta cardNumber;
+    int puntaje;            
+}   myDeck;
 // Estructura que define una carta en el juego
-struct card {
-    Palo palo;      // Cambia el nombre de 'Palo' a 'palo' para evitar confusión con el tipo enum
-    Carta carta;    // Cambia el nombre de 'Carta' a 'carta' para evitar confusión con el tipo enum
-    int puntaje;    // Mantener este campo como un entero está bien
-};
 
 
 // Prototipos de funciones
-void initDeck(struct card Deck[], int *remaining_cards, struct card Crupier[], struct card Player[]); // Inicializa el mazo
-struct card randomCard(struct card Deck[], int *remaining_cards); // Función para elegir cartas aleatorias
+void initDeck(myDeck Deck[], int *remaining_cards, myDeck Crupier[], myDeck Player[]); // Inicializa el mazo
+myDeck randomCard(myDeck Deck[], int *remaining_cards); // Función para elegir cartas aleatorias
 
 
 
 /*las de aca no se usan en el principal - las hace Miyo*/
-void imprimircarta(struct card Card); // Imprimir la carta
-void printDeck(struct card Deck[]); // Función para imprimir el mazo
+//void imprimircarta(myDeck Card); // Imprimir la carta
+//void printDeck(myDeck Deck[]); // Función para imprimir el mazo
+
+                                                        //Ambas funciones movidas a test_gamelogic.c//
+
 
 #endif // gamelogic_h
 

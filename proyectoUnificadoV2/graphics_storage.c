@@ -9,6 +9,7 @@
 #include "scoreboard.h"
 #include "graphics_storage.h"
 #include "config.h"
+#include "gamelogic.h"
 
 /////////////////////////////////////////////////////////////////////////////////////
 
@@ -231,15 +232,10 @@ void getUserName(char *userName, int *charCount) {                              
         userName[(*charCount)+1] = '\0';
         (*charCount)++;
     }
-    if (*charCount > 3) {
-        (*charCount) = 3;
-        userName[*charCount] = '\0';
-    }
     if (IsKeyPressed(KEY_BACKSPACE)) {
-        if (*charCount < 0) {
-            *charCount = 0;
-        }
         (*charCount)--;
+        if (*charCount < 0) *charCount = 0;
+
         userName[*charCount] = '\0';
     }
 }
@@ -288,7 +284,7 @@ void loadRankingVariables(const char **playerRankings, const char **playerNames,
 
 int showGraphicRanking(const char *playerRankings, const char *playerNames, const char *playerScores) {             //Displays three variables set in loadRankingVariables
     bool showScoreboard = true;
-    if (showScoreboard && !WindowShouldClose()) {
+    if (showScoreboard) {
         BeginDrawing();
         ClearBackground(BLACK);  
         DrawText("HIGHSCORE", SCREEN_WIDTH / 2 - 150, SCREEN_HEIGHT / 6, 40, RED);
@@ -306,29 +302,5 @@ int showGraphicRanking(const char *playerRankings, const char *playerNames, cons
     }
     return showScoreboard;
 }
-
-
-
-/* int showGraphicRanking(const char *playerRankings, const char *playerNames, const char *playerScores) {             //Displays three variables set in loadRankingVariables
-    bool scoreboardStop = false;
-    while (!scoreboardStop && !WindowShouldClose()) {
-        BeginDrawing();
-        ClearBackground(BLACK);  
-        DrawText("HIGHSCORE", SCREEN_WIDTH / 2 - 150, SCREEN_HEIGHT / 6, 40, RED);
-        DrawText(playerRankings, 430, 200, 40, BLUE);
-        DrawText(playerNames, 500, 200, 40, DARKBLUE);
-        DrawText(playerScores, 600, 200, 40, BLUE);
-        DrawText("Presione cualquier tecla para salir", SCREEN_WIDTH / 2 - 400, SCREEN_HEIGHT / 2 + 270, 40, PURPLE);
-        EndDrawing();
-
-        for (int key = KEY_SPACE; key < KEY_KB_MENU; key++) {
-            if (IsKeyPressed(key)) {
-                scoreboardStop = true;
-            }
-        }
-    }
-    return ;
-} */
-
 
 

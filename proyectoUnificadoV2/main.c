@@ -9,6 +9,7 @@
 #include "scoreboard.h"
 #include "graphics_storage.h"
 #include "config.h"
+#include "gamelogic.h"
 
 /////////////////////////////////////////////////////////////////////////////////////
 bool randomWin(bool playerWin) {
@@ -271,6 +272,7 @@ int main() {
     //All of this printf functions are to test, can be deleted later
 
     printf("------------------\n%d\n------------------", gameState);
+    printf("%s", userName);
     free(userName);
     return 0;
 }
