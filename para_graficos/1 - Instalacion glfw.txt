@@ -1,3 +1,6 @@
+**************************************************
+                    WINDOWS
+**************************************************
 copiar el contenido de glfw-master en una carpeta /glfw en el home
 y usar lo siguiente: (hay unos comandos = off que quiza no necesiten):
 cd glfw
@@ -15,25 +18,18 @@ y ver como se llama el archivo libglfw.a o libglfw3.a
 segun eso cambiar el comando de compilacion -lglfw3 en lugar de -lglfw , o renombrar los archivos
 
 
-tambien se puede:
-cd ~
-rm -rf glfw  # Elimina la carpeta glfw actual
-git clone https://github.com/glfw/glfw.git
-cd glfw
-mkdir build
-cd build
-cmake .. -G "Unix Makefiles" -DGLFW_BUILD_WAYLAND=OFF -DGLFW_BUILD_X11=OFF
-
+**************************************************
+                    Linux - Ubuntu 
+**************************************************
 ----------------------------
-Linux - Ubuntu ->primero glfw
+->primero glfw
 ----------------------------
 
-*/*/*/*/* COn instalacion correcta en ubuntu (lo importante es copiar los flags de compilacion despues de los archivos fuente)
-$(pkg-config --cflags raylib) $(pkg-config --cflags glfw3) -L/usr/local/lib $(pkg-config --libs raylib) $(pkg-config --libs glfw3) -lm
+
 PASOS:
 
 --- TESTEADO EN instalacion nueva de LINUXMINT
-*Opcional
+*Opcional pero yo lo hice
 sudo apt update
 sudo apt upgrade
 *Desde aca empiezan las indicaciones
@@ -49,7 +45,7 @@ sudo apt-get install libwayland-dev
 which wayland-scanner
 sudo apt-get install libxkbcommon-dev
 
-** Ahora si a la carpeta donde descomprimieron 
+---** ahora si nos tenemos que posicionar en la carpeta extraida 
 
 cd ~/glfw
 rm -rf build
@@ -74,3 +70,21 @@ sudo make install
 pkg-config --cflags --libs raylib
 Deberia decir --> -I/usr/local/include -L/usr/local/lib -lraylib 
 ahora se pueden usar los comandos de compilacion para linux en vez de los especificos
+
+*/*/*/*/* COn instalacion correcta en ubuntu (lo importante es copiar los flags de compilacion despues de los archivos fuente)
+$(pkg-config --cflags raylib) $(pkg-config --cflags glfw3) -L/usr/local/lib $(pkg-config --libs raylib) $(pkg-config --libs glfw3) -lm
+
+-----------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------
+
+
+Opcion B
+tambien se puede:
+cd ~
+rm -rf glfw  # Elimina la carpeta glfw actual
+git clone https://github.com/glfw/glfw.git
+cd glfw
+mkdir build
+cd build
+cmake .. -G "Unix Makefiles" -DGLFW_BUILD_WAYLAND=OFF -DGLFW_BUILD_X11=OFF

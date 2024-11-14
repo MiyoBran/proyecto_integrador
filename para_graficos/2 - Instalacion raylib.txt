@@ -9,35 +9,25 @@ cmake .. -G "Unix Makefiles" -DPLATFORM=PLATFORM_DESKTOP
 ---> despues make y make install
 
 
-tambien se puede:
-cd ~
-rm -rf raylib # Elimina la carpeta glfw actual
-
-
-git clone https://github.com/raysan5/raylib.git ~/raylib
-
-cd ~/raylib
-mkdir build
-cd build
-
-cmake .. -G "Unix Makefiles" -DPLATFORM=PLATFORM_DESKTOP
-
 ******************
 Usar Raylib en tu proyecto
 Después de compilar o instalar Raylib, puedes usarlo en tu proyecto. Asegúrate de incluir los archivos de encabezado y enlazar las bibliotecas correctamente:
 
 gcc -o main main.c -I/home/Miyo/raylib/src -L/home/Miyo/raylib/build -lraylib -lgdi32 -lopengl32 -lwinmm
 
+
+**************************************************
+                    Linux - Ubuntu 
+**************************************************
 ----------------------------
-Linux - Ubuntu ->primero glfw
+->primero glfw
 ----------------------------
 
-*/*/*/*/* COn instalacion correcta en ubuntu (lo importante es copiar los flags de compilacion despues de los archivos fuente)
-$(pkg-config --cflags raylib) $(pkg-config --cflags glfw3) -L/usr/local/lib $(pkg-config --libs raylib) $(pkg-config --libs glfw3) -lm
+
 PASOS:
 
 --- TESTEADO EN instalacion nueva de LINUXMINT
-*Opcional
+*Opcional pero yo lo hice
 sudo apt update
 sudo apt upgrade
 *Desde aca empiezan las indicaciones
@@ -53,8 +43,7 @@ sudo apt-get install libwayland-dev
 which wayland-scanner
 sudo apt-get install libxkbcommon-dev
 
-
-** Ahora si a la carpeta donde descomprimieron 
+---** ahora si nos tenemos que posicionar en la carpeta extraida 
 
 cd ~/glfw
 rm -rf build
@@ -79,3 +68,23 @@ sudo make install
 pkg-config --cflags --libs raylib
 Deberia decir --> -I/usr/local/include -L/usr/local/lib -lraylib 
 ahora se pueden usar los comandos de compilacion para linux en vez de los especificos
+
+*/*/*/*/* COn instalacion correcta en ubuntu (lo importante es copiar los flags de compilacion despues de los archivos fuente)
+$(pkg-config --cflags raylib) $(pkg-config --cflags glfw3) -L/usr/local/lib $(pkg-config --libs raylib) $(pkg-config --libs glfw3) -lm
+-----------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------
+
+OPCION B
+tambien se puede:
+cd ~
+rm -rf raylib # Elimina la carpeta glfw actual
+
+
+git clone https://github.com/raysan5/raylib.git ~/raylib
+
+cd ~/raylib
+mkdir build
+cd build
+
+cmake .. -G "Unix Makefiles" -DPLATFORM=PLATFORM_DESKTOP

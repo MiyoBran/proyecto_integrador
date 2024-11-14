@@ -1,5 +1,3 @@
- cd proyectos/tpIntegrador/proyecto_integrador/
-
 
 *Proyecto en GitHub.com/MiyoBran/proyecto_integrador.git 
 *Proyecto en Drive https://drive.google.com/drive/folders/1eUS_w_vo_eg3GkFpGmb9hGzu-Kx6sQyM?usp=drive_link
@@ -36,19 +34,7 @@ PD: si usamos scoreboardV2, recordar llamar apropiadamente (usar scoreboar_test 
 
 +++++++++++++***************+++++++++++++++**************++++++++++++*************
 
------------------------------------------------------------------------------------------------
-Miyo@MiyoPC ~/git-Materia/tpIntegrador/proyectoUnificadoV2
-$ ls
-'Blackjack cards'                                config.h        graphics_storage.c   scoreboardV1.c
- README.txt                                      cygglfw-3.dll   graphics_storage.h   scoreboardV2.c
-'Readme2 Changelog y Proyecto Modularizar.txt'   gamelogic.c     main.c               scoreboard_test.c
- config.c                                        gamelogic.h     scoreboard.h         test_gamelogic.c
-
-Miyo@MiyoPC ~/git-Materia/tpIntegrador/proyectoUnificadoV2
-$
-
-
---------------------Proyecto modularizado MIYO
+----------------------------Proyecto modularizado MIYO-----------------------------------------
 TAMAÑO PANTALLA 1280 * 720
 -----------------------------------------------------------------------------------------------
 
@@ -59,11 +45,11 @@ Horas Programacion
 *8hs con parte grafica Domingo
 // IntegradorMiyoV2 -> memoria dinamica y primer intento de integracion de todos los codigos de cada uno
 *7hs nueva estructura archivos, memoria dinamica y lograr compilar todo junto
-// Proximo es integradorMiyoV3
 12/11 -> 5 horas, de nuevo cambio la estructura de archivos // ahora config.c scoreboardV1 y scoreboardV2 junto a scoreboard_test
 12/11 -> 4 horas , revision de funciones memoria dinamica, proyecto en git y config.
 12-11 -> 4 horas , correcta instalacion de las bibliotecas graficas , en vez de copiarlas y qeu funcione a veces
-
+13-11 -> 6 horas , scoreboard_v3 , uso de diferentes carpetas , instalacion e instructivos linux
+14-11 ->  horas , Prototipo proyectoUnificadoV3 + gamelogic + main funcionando sin grafica
 
 ------------------------------------------------------------------------------------------------
 Evolucion Archivos Files/scoreboard
@@ -86,6 +72,7 @@ de la implementación que elijas.
 
 * ahora config.c scoreboardV1 y scoreboardV2(con memoria dinamica) junto a scoreboard_test.c
 se cambio las funciones definitivas a nombre en ingles, falta hacer lo mismo con las variables
+-->13/11
 PENDIENTE:
 //Falta ver las funciones repetidas en los demas, y tratar de integrar lo que esta.
 //Armar un Prototipo de gamelogic para simular las interacciones necesarias
