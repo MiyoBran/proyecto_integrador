@@ -15,6 +15,9 @@ gcc -o TestGraficosConScore score.c graphics_storage.c config.c scoreboardV2.c $
 // Tienen que estar en la misma carpeta *scoreboard_test.c config.c config.h scoreboard.h
 gcc scoreboard_test.c config.c scoreboardV1.c -o scoreEstaticotest
 gcc scoreboard_test.c config.c scoreboardV2.c -o dinamicoScoretest
+-- Version completamente dinamica y en las carpetas
+gcc -o v3scoreboard_test src/scoreboardV3_test.c src/scoreboardV3.c config.c -Iinclude -I.  -Wall -std=c11
+
 
 
 ---Para borrar todos los archivos compilados

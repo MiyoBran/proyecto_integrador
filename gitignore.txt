@@ -1,0 +1,24 @@
+# Archivos de configuración del sistema (bash, terminal, etc.)
+.bash_history  
+.bashrc   
+.inputrc
+.profile 
+.bash_profile
+.minttyrc
+
+# Ignorar archivos .exe generados
+*.exe
+*.dat
+
+# No ignorar otros archivos, como .txt, .png, .env, .c, .h
+!*.txt
+!*.png
+!.env
+!*.c
+!*.h
+
+# Incluir directorios si los necesitas
+!*/
+
+# Incluir archivos de configuración específicos si los tienes
+
