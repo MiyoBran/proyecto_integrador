@@ -13,8 +13,8 @@ gcc -o TestGraficosConScore score.c graphics_storage.c config.c scoreboardV2.c $
 
 /* para compilar solo los de Archivos/SHOW ranking  y probar
 // Tienen que estar en la misma carpeta *scoreboard_test.c config.c config.h scoreboard.h
-gcc scoreboard_test.c config.c scoreboardV1.c -o scoreEstaticotest
-gcc scoreboard_test.c config.c scoreboardV2.c -o dinamicoScoretest
+gcc -o scoreEstaticotest scoreboard_test.c config.c scoreboardV1.c 
+gcc -o dinamicoScoretest scoreboard_test.c config.c scoreboardV2.c 
 -- Version completamente dinamica y en las carpetas
 gcc -o v3scoreboard_test src/scoreboardV3_test.c src/scoreboardV3.c config.c -Iinclude -I.  -Wall -std=c11
 
