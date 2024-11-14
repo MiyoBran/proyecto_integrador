@@ -40,7 +40,7 @@ typedef struct  {
     int cardType;
     int cardNumber;
 }   myDeck;
-
+//Struct for cards
 
 
 typedef enum {                                 
@@ -83,7 +83,7 @@ extern Texture2D hearts[13];
 extern Texture2D clubs[13];
 extern Texture2D diamonds[13];
 extern Texture2D spades[13];
-
+//Variables that hold all the card textures
 
 
 extern int SCREEN_WIDTH;
@@ -92,14 +92,10 @@ extern int MAX_CARDS_DISPLAYED;
 //Variables searched in .env file
 
 
-extern bool playerWin;
-extern bool roundEnd;
-extern bool gameStop;
-extern bool alreadyBet;
-
-extern int ranking;
-extern char playerName[];
-extern int playerScore;
+extern bool playerWin;                                                      //Variable to check if player won
+extern bool roundEnd;                                                       //Variable to check if round ended
+extern int gameState;
+extern bool alreadyBet;                                                     //Variable to check if player already made bet
 
 extern int x_playerPosition;                                               //Player's text x position
 extern int x_dealerPosition;                                               //Dealer's text x position 
@@ -108,12 +104,14 @@ extern int buttonXPosition;                                              //Diffe
 extern int buttonYPosition;                                               //Difference between window "roof" and buttons
 
 
-void initializeGraphicsConfig();
-void loadCardTextures();
-void unloadCardTextures();
-void printCard(int *amountCards, myDeck *cartas1, int playerCropier);
-void getBet(int *bet, struct Rectangle betBox, bool *gameButtons, bool *alreadyBet);
-char *askUserName();
+void initializeGraphicsConfig();                                                                //Searches for values in the .env file config
+void loadCardTextures();                                                                       //Loads the textures of the cards into four Texture2D arrays.
+void unloadCardTextures();                                                                     //Unloads the textures used by the cards, think of it like dynamic memory
+void printCard(int *amountCards, myDeck *cartas1, int playerCropier);                                               //Prints cards depending on which side you want
+void getBet(int *bet, struct Rectangle betBox, bool *gameButtons, bool *alreadyBet);                                //Gets set bet number
+void getUserName(char *userName, int *charCount);                                                                    //Gets user name
+void loadRankingVariables(const char **playerRankings, const char **playerNames, const char **playerScores);       //Loads scoreboard into three variables
+int showGraphicRanking(const char *playerRankings, const char *playerNames, const char *playerScores);            //Displays three variables set in loadRankingVariables
 
 
 

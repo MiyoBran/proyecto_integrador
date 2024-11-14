@@ -1,0 +1,29 @@
+--------------------------------------------------------------
+Main function
+Line 102
+Replaced (!WindowShouldClose() && !gameStop) for (!WindowShouldClose() && gameStart) 
+gameStop now works with scoreboard functions and gameStart will be used with main menu
+
+
+line 232 to 237
+Added scoreboard stuff, still need to coordinate the rest
+
+--------------------------------------------------------------
+graphics_storage.h
+Line 98
+Declared extern bool gameStart 
+line 118
+Declared function loadRankingVariables
+Line 119
+Declared function showGraphicRanking
+
+--------------------------------------------------------------
+graphics_storage.c
+Line 26
+Initialized gameStart variable
+
+Line 241
+Initialized function loadRankingVariables
+
+Line 280
+Initialized showGraphicRanking

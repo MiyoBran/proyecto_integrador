@@ -23,7 +23,7 @@ int MAX_CARDS_DISPLAYED;
 
 bool playerWin = false;
 bool roundEnd = false;
-bool gameStop = false;                           //THIS VARIABLE STOPS THE WINDOW FROM OPENING
+int gameState = 1;                              //Variable that changes screens
 bool alreadyBet = false;
 
 int x_playerPosition = 0;                                               //Player's text x position
@@ -96,7 +96,7 @@ const char *spadesFiles[13] = {
 
 
 
-void initializeGraphicsConfig(){
+void initializeGraphicsConfig(){                                                                //Searches for values in the .env file config
     char *stringScreenWidth = getconfig("SCREEN_WIDTH");
     char *stringScreenHeight = getconfig("SCREEN_HEIGHT");
     char *stringMaxCards = getconfig("MAX_CARDS_DISPLAYED");
@@ -126,7 +126,8 @@ void initializeGraphicsConfig(){
     }
 }
 
-void loadCardTextures() {               //Loads the textures of the cards into four Texture2D arrays.
+
+void loadCardTextures() {                                                                       //Loads the textures of the cards into four Texture2D arrays.
     for (int i = 0; i < 13; i++) {
         hearts[i] = LoadTexture(heartsFiles[i]);
         clubs[i] = LoadTexture(clubsFiles[i]);
@@ -148,7 +149,7 @@ void loadCardTextures() {               //Loads the textures of the cards into f
 }
 
 
-void unloadCardTextures() {                 //Unloads the textures used by the cards, think of it like dynamic memory
+void unloadCardTextures() {                                                                          //Unloads the textures used by the cards, think of it like dynamic memory
     for (int i = 0; i < 13; i++) {
         UnloadTexture(hearts[i]);
         UnloadTexture(clubs[i]);
@@ -158,7 +159,7 @@ void unloadCardTextures() {                 //Unloads the textures used by the c
 }
 
 
-void printCard(int *amountCards, myDeck *cartas1, int playerCropier) {          //Prints cards depending on which side you want
+void printCard(int *amountCards, myDeck *cartas1, int playerCropier) {                              //Prints cards depending on which side you want
     if (playerCropier == DEALER) {
         for (int i = 0; i < *amountCards; i ++) {
             switch (cartas1[i].cardType) {
@@ -197,8 +198,7 @@ void printCard(int *amountCards, myDeck *cartas1, int playerCropier) {          
 }
 
 
-
-void getBet(int *bet, struct Rectangle betBox, bool *gameButtons, bool *alreadyBet) {                       //Gets set bet number
+void getBet(int *bet, struct Rectangle betBox, bool *gameButtons, bool *alreadyBet) {               //Gets set bet number
     Vector2 mousePosition = GetMousePosition();
     Rectangle bet100 = {betBox.x+170, betBox.y-55, 100, 50};
     Rectangle bet200 = {betBox.x+170, betBox.y+20, 100, 50};
@@ -224,15 +224,111 @@ void getBet(int *bet, struct Rectangle betBox, bool *gameButtons, bool *alreadyB
 }
 
 
-char *askUserName() {                                           //Asks user's name
-    char *userName = NULL; 
-    size_t length = 0; 
-    printf("Escriba su nickname\nNickname: ");
-    getline(&userName, &length, stdin);
-
-    if (userName[length - 1] == '\n') {
-        userName[length - 1] = '\0'; 
+void getUserName(char *userName, int *charCount) {                                                  //Gets user name
+    int key = GetCharPressed();
+    if ((key >= 32) && (key <= 125) && (*charCount < 3)) {
+        userName[*charCount] = (char)key;
+        userName[(*charCount)+1] = '\0';
+        (*charCount)++;
     }
-    return userName;
+    if (*charCount > 3) {
+        (*charCount) = 3;
+        userName[*charCount] = '\0';
+    }
+    if (IsKeyPressed(KEY_BACKSPACE)) {
+        if (*charCount < 0) {
+            *charCount = 0;
+        }
+        (*charCount)--;
+        userName[*charCount] = '\0';
+    }
 }
+
+
+
+void loadRankingVariables(const char **playerRankings, const char **playerNames, const char **playerScores) {       //Loads scoreboard into three variables
+    static char allRankings[100] = "";
+    static char allNames[300] = "";
+    static char allScores[300] = "";
+
+    Score scoreList[TOTAL_REGISTROS] = {0};
+    char *nombreArchivo = getconfig("archivo_datos");
+    if (nombreArchivo == NULL) {
+        printf("No se pudo obtener el nombre del archivo de configuración.\n");
+        return;
+    }
+
+    fileImport(scoreList, nombreArchivo);
+
+    allRankings[0] = '\0';
+    allNames[0] = '\0';
+    allScores[0] = '\0';
+
+    for (int i = 0; i < TOTAL_REGISTROS; i++) {
+        if (scoreList[i].money > 0) {
+            char temp[100];
+            snprintf(temp, sizeof(temp), "%d\n", scoreList[i].ranking);
+            strcat(allRankings, temp);
+
+            snprintf(temp, sizeof(temp), "%s\n", scoreList[i].name);
+            strcat(allNames, temp);
+
+            snprintf(temp, sizeof(temp), "\t\t%.0f\n", scoreList[i].money);
+            strcat(allScores, temp);
+        }
+    }
+
+    *playerRankings = TextFormat("%s", allRankings);  
+    *playerNames = TextFormat("%s", allNames);  
+    *playerScores = TextFormat("%s", allScores);  
+
+    free(nombreArchivo);
+}
+
+
+int showGraphicRanking(const char *playerRankings, const char *playerNames, const char *playerScores) {             //Displays three variables set in loadRankingVariables
+    bool showScoreboard = true;
+    if (showScoreboard && !WindowShouldClose()) {
+        BeginDrawing();
+        ClearBackground(BLACK);  
+        DrawText("HIGHSCORE", SCREEN_WIDTH / 2 - 150, SCREEN_HEIGHT / 6, 40, RED);
+        DrawText(playerRankings, 430, 200, 40, BLUE);
+        DrawText(playerNames, 500, 200, 40, DARKBLUE);
+        DrawText(playerScores, 600, 200, 40, BLUE);
+        DrawText("Presione cualquier tecla para salir", SCREEN_WIDTH / 2 - 400, SCREEN_HEIGHT / 2 + 270, 40, PURPLE);
+        EndDrawing();
+
+        for (int key = KEY_SPACE; key < KEY_KB_MENU; key++) {
+            if (IsKeyPressed(key)) {
+                showScoreboard = false;
+            }
+        }
+    }
+    return showScoreboard;
+}
+
+
+
+/* int showGraphicRanking(const char *playerRankings, const char *playerNames, const char *playerScores) {             //Displays three variables set in loadRankingVariables
+    bool scoreboardStop = false;
+    while (!scoreboardStop && !WindowShouldClose()) {
+        BeginDrawing();
+        ClearBackground(BLACK);  
+        DrawText("HIGHSCORE", SCREEN_WIDTH / 2 - 150, SCREEN_HEIGHT / 6, 40, RED);
+        DrawText(playerRankings, 430, 200, 40, BLUE);
+        DrawText(playerNames, 500, 200, 40, DARKBLUE);
+        DrawText(playerScores, 600, 200, 40, BLUE);
+        DrawText("Presione cualquier tecla para salir", SCREEN_WIDTH / 2 - 400, SCREEN_HEIGHT / 2 + 270, 40, PURPLE);
+        EndDrawing();
+
+        for (int key = KEY_SPACE; key < KEY_KB_MENU; key++) {
+            if (IsKeyPressed(key)) {
+                scoreboardStop = true;
+            }
+        }
+    }
+    return ;
+} */
+
+
 
