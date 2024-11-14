@@ -4,12 +4,9 @@ gcc -o main main.c -I/home/Miyo/raylib/src -I/home/Miyo/glfw/include/GLFW -L/hom
 */*/*/*/* COn instalacion correcta en ubuntu (lo importante es copiar los flags de compilacion despues de los archivos fuente)
 $(pkg-config --cflags raylib) $(pkg-config --cflags glfw3) -L/usr/local/lib $(pkg-config --libs raylib) $(pkg-config --libs glfw3) -lm
 
+EJ en linux--->Main:
+gcc -o mainGrafico main.c  graphics_storage.c config.c scoreboardV2.c gamelogic.c $(pkg-config --cflags raylib) $(pkg-config --cflags glfw3) -L/usr/local/lib $(pkg-config --libs raylib) $(pkg-config --libs glfw3) -lm
 
-Main:
-gcc -o mainGrafico main.c graphics_storage.c config.c scoreboardV2.c $(pkg-config --cflags raylib) $(pkg-config --cflags glfw3) -L/usr/local/lib $(pkg-config --libs raylib) $(pkg-config --libs glfw3) -lm
-
-Test.c : (para testear muestra del score)
-gcc -o TestGraficosConScore score.c graphics_storage.c config.c scoreboardV2.c $(pkg-config --cflags raylib) $(pkg-config --cflags glfw3) -L/usr/local/lib $(pkg-config --libs raylib) $(pkg-config --libs glfw3) -lm
 
 /* para compilar solo los de Archivos/SHOW ranking  y probar
 // Tienen que estar en la misma carpeta *scoreboard_test.c config.c config.h scoreboard.h
@@ -21,17 +18,13 @@ gcc -o v3scoreboard_test src/scoreboardV3_test.c src/scoreboardV3.c config.c -Ii
 
 
 ---Para borrar todos los archivos compilados
-rm -rf dinamicoScoretest scoreEstaticotest TestGraficosConScore mainGrafico 
+rm -rf scoreEstaticotest dinamicoScoretest v3scoreboard_test mainGrafico 
 
 
 /////////////REVISAR CADA UNO en windows
-gcc -o TestGraficosConScore score.c -I/home/Miyo/raylib/src -I/home/Miyo/glfw/include/GLFW -L/home/Miyo/raylib/src -L/home/Miyo/glfw/build/src -lraylib -lgdi32 -lopengl32 -lwinmm -lglfw3 graphics_storage.c config.c scoreboardV2.c
-/*Para miyo, solo lo de Miyo*/
+/*Para miyo, cada uno cambiar la carpeta /home/nombre y flags si hace falta*/
 -lraylib -lgdi32 -lopengl32 -lwinmm -lglfw3
-gcc -o mainGrafico main.c -I/home/Miyo/raylib/src -I/home/Miyo/glfw/include/GLFW -L/home/Miyo/raylib/src -L/home/Miyo/glfw/build/src -lraylib -lgdi32 -lopengl32 -lwinmm -lglfw3 graphics_storage.c config.c scoreboardV2.c
-
-/// PARA COMPILAR TODOS LOS ARCHIVOS Y PROBAR / CAMBIAR EL *usuario / Miyo ---> Tu nombre de carpeta
-gcc -o BlackjackV2 main.c graphics_storage.c config.c scoreboardV2.c gamelogic.c -I/home/Miyo/raylib/src -I/home/Miyo/glfw/include/GLFW -L/home/Miyo/raylib/src -L/home/Miyo/glfw/build/src -lraylib -lglfw -lgdi32
+gcc -o mainGrafico main.c  graphics_storage.c config.c scoreboardV2.c gamelogic.c -I/home/Miyo/raylib/src -I/home/Miyo/glfw/include/GLFW -L/home/Miyo/raylib/src -L/home/Miyo/glfw/build/src -lraylib -lgdi32 -lopengl32 -lwinmm -lglfw3
 
 
 /* para compilar solo los de Archivos/SHOW ranking  y probar
@@ -42,8 +35,6 @@ gcc -o BlackjackV2 main.c graphics_storage.c config.c scoreboardV2.c gamelogic.c
 
 COMANDOS PARA GIT
 
-# Para navegar a la carpeta del proyecto
-cd ~/proyectos/tpIntegrador/proyecto_integrador
 
 # Verificar el estado del repositorio
 git status

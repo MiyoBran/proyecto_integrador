@@ -10,7 +10,8 @@
 #include "graphics_storage.h" // las funciones declaradas para la parte grafica - UI
 
 int main() {
-    struct card testCard;
+    /// revisar si esto sirve de algo, ahora no esta la struct card en ningun lado, solo comentada en gamelogic
+    struct card struct card testCard;
     testCard.palo = TREBOL;
     testCard.carta = A;
     testCard.puntaje = 11; // O el valor que necesites
