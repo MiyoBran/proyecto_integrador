@@ -36,9 +36,13 @@ Linux - Ubuntu ->primero glfw
 $(pkg-config --cflags raylib) $(pkg-config --cflags glfw3) -L/usr/local/lib $(pkg-config --libs raylib) $(pkg-config --libs glfw3) -lm
 PASOS:
 
+--- TESTEADO EN instalacion nueva de LINUXMINT
+*Opcional
 sudo apt update
-sudo apt make
-sudo apt cmake
+sudo apt upgrade
+*Desde aca empiezan las indicaciones
+sudo apt install make
+sudo apt install cmake
 
 *Quiza algunos de los siguientes no sean necesarios
 sudo apt install libglfw3 libglfw3-dev libraylib-dev
@@ -48,6 +52,9 @@ sudo apt-get install libwayland-dev
 //Depende la distribucion podria ser -->wayland-devel en vez de libwayland-dev
 which wayland-scanner
 sudo apt-get install libxkbcommon-dev
+
+
+** Ahora si a la carpeta donde descomprimieron 
 
 cd ~/glfw
 rm -rf build
