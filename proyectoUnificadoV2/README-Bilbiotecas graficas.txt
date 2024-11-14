@@ -1,7 +1,10 @@
+LINUX ---> a partir de linea 80 estan los comandos
+
+WINDOWS
+**************************************************
 Las dos carpetas, raylib y glfw, adentro de home/NOMBREDEUSUARIO
 , son necesarias para compilar la parte grafica
-WINDOWS
-************************************************** Raylib --> para graficos 
+ Raylib --> para graficos 
 https://github.com/raysan5/raylib --> Code ---> Download zip
 
 Extrae el archivo ZIP descargado a una ubicación de tu preferencia, como ~/raylib (en Home)
@@ -71,6 +74,8 @@ mkdir build
 cd build
 cmake .. -G "Unix Makefiles" -DGLFW_BUILD_WAYLAND=OFF -DGLFW_BUILD_X11=OFF
 
+
+**************************************************
 ----------------------------
 Linux - Ubuntu ->primero glfw
 ----------------------------
@@ -79,9 +84,13 @@ Linux - Ubuntu ->primero glfw
 $(pkg-config --cflags raylib) $(pkg-config --cflags glfw3) -L/usr/local/lib $(pkg-config --libs raylib) $(pkg-config --libs glfw3) -lm
 PASOS:
 
+--- TESTEADO EN instalacion nueva de LINUXMINT
+*Opcional
 sudo apt update
-sudo apt make
-sudo apt cmake
+sudo apt upgrade
+*Desde aca empiezan las indicaciones
+sudo apt install make
+sudo apt install cmake
 
 *Quiza algunos de los siguientes no sean necesarios
 sudo apt install libglfw3 libglfw3-dev libraylib-dev
@@ -91,6 +100,8 @@ sudo apt-get install libwayland-dev
 //Depende la distribucion podria ser -->wayland-devel en vez de libwayland-dev
 which wayland-scanner
 sudo apt-get install libxkbcommon-dev
+
+---** ahora si nos tenemos que posicionar en la carpeta extraida 
 
 cd ~/glfw
 rm -rf build
