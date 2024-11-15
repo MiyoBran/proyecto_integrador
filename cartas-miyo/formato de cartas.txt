@@ -1,0 +1,23 @@
+archivos de vectores - Freepik
+Clubs.eps 
+Diamonds.eps
+Hearts.eps
+Spades.eps
+
+Programa -> inkscape.org
+Programa -> GIMP 2.10.12
+
+
+Falta
+ancho 120
+alto 170
+120*170 
+.png y .jpg
+
+Clubs 2 3 4 5 6 7 8 9 10 ace joker king queen
+
+Diamonds 2 3 4 5 6 7 8 9 10 ace joker king queen
+
+Hearts 2 3 4 5 6 7 8 9 10 ace joker king queen
+
+Spades 2 3 4 5 6 7 8 9 10 ace joker king queen

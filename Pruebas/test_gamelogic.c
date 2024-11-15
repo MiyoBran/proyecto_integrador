@@ -28,7 +28,8 @@ int main() {
         printf("Error al asignar memoria para scoreList.\n");
         return 1;
     }
-
+    
+    // esta en la funcion loadRankingVariables , pero esto puede ir aca y pasarlo como argumento
     char *scoreDB = getconfig("archivo_datos"); // obtiene nombre del archivo-base de datos del rankin
     if (scoreDB == NULL) {
         printf("No se pudo obtener el nombre del archivo de configuración.\n");

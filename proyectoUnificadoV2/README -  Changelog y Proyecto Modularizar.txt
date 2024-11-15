@@ -49,7 +49,8 @@ Horas Programacion
 12/11 -> 4 horas , revision de funciones memoria dinamica, proyecto en git y config.
 12-11 -> 4 horas , correcta instalacion de las bibliotecas graficas , en vez de copiarlas y qeu funcione a veces
 13-11 -> 6 horas , scoreboard_v3 , uso de diferentes carpetas , instalacion e instructivos linux
-14-11 ->  horas , Prototipo proyectoUnificadoV3 + gamelogic + main funcionando sin grafica
+14-11 -> 2 horas , Edicion de READMES , creacion de carpeta Pruebas con menos archivos, para hacer un gamelogic+main de prueba
+15-11 -> 2 Horas , division de vector de cada mazo en cartas individuales .png
 
 ------------------------------------------------------------------------------------------------
 Evolucion Archivos Files/scoreboard
