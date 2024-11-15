@@ -6,7 +6,7 @@ typedef enum {
     TREBOL, DIAMANTE, CORAZON, PICA
 } Palo;
 
-// Enumeraciones para los valores de las cartas
+// Enum para Identificar cada carta 
 typedef enum {
     A, DOS, TRES, CUATRO, CINCO, SEIS, SIETE, OCHO, NUEVE, DIEZ, J, Q, K
 } Carta;
