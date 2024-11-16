@@ -7,45 +7,41 @@
 ////////////////////////Funciones propias////////////////////////
 
 #include "mazo.h"
-
+#include "logica.h"
 
 /////////////////////////////////////////////////////////////////////////////////////
 
 
 int main() {
-    myDeck mazo, jugador1, jugador2;
+    myDeck mazo, jugador1, croupier;
 
     // Inicializar el mazo y los jugadores
     inicializarMazo(&mazo);
-    //Para corroborar
-    imprimirMazo(&mazo,TAMANO_MAZO);
-
-
     inicializarJugador(&jugador1);
-    inicializarJugador(&jugador2);
+    inicializarJugador(&croupier);
 
     // Mezclar el mazo
-    barajarMazo(&mazo);
-    //Para corroborar
-    imprimirMazo(&mazo,TAMANO_MAZO);
+    barajarMazo(&mazo);     //Para corroborar     imprimirMazo(&mazo,TAMANO_MAZO);
 
     int indiceMazo = TAMANO_MAZO - 1; // Inicia en la última carta del mazo
-    int indiceJ1 = 0, indiceJ2 = 0;
+    int indiceJ1 = 0, indiceC = 0; // cada jugador con un indice propio
 
-    // Jugador 1 y Jugador 2 piden cartas hasta completar su mano
-    for (int i = 0; i < CARTAS_POR_JUGADOR; i++) {
-        if (!pedir1carta(&mazo, &jugador1, &indiceMazo, &indiceJ1)) break;
-        if (!pedir1carta(&mazo, &jugador2, &indiceMazo, &indiceJ2)) break;
-    }
+    //Turnos
+    printf("Turno del jugador:\n");
+    turnoJugador(&mazo, &jugador1, &indiceMazo, &indiceJ1);
 
-    // Imprimir las cartas de los jugadores
-    printf("\nCartas de Jugador 1:\n");
-    imprimirCartasJugador(&jugador1,CARTAS_POR_JUGADOR);
+    printf("Turno del croupier:\n");
+    turnoCroupier(&mazo, &croupier, &indiceMazo, &indiceC);
 
-    printf("\nCartas de Jugador 2:\n");
-    imprimirCartasJugador(&jugador2,CARTAS_POR_JUGADOR);
 
-    ///---> en este punto tenemos 2 mazos &jugador1 y &jugador2 que tienen solo 10 cartas con valores >0 
+    // Resultados
+    int puntajeJugador = calcularPuntaje(&jugador1, indiceJ1);
+    int puntajeCroupier = calcularPuntaje(&croupier, indiceC);
+    bool jugadorGano = evaluarResultado(puntajeJugador, puntajeCroupier);
+
+    // Mostrar mensajes
+    mostrarMensajeResultado(puntajeJugador, puntajeCroupier, jugadorGano);
+
 
     return 0;
 }
