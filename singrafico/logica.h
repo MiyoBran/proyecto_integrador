@@ -14,8 +14,16 @@ void mostrarMensajeResultado(int puntajeJugador, int puntajeCroupier, bool jugad
 
 
 //Simular Turnos
-void turnoCroupier(myDeck *mazo, myDeck *croupier, int *indiceMazo, int *indiceCroupier);
+//Jugador
+bool evaluarResultado(int puntajeJugador, int puntajeCroupier);
+void mostrarEstadoJugador(myDeck *jugador, int numCartas);
+char preguntarAccionJugador();
+bool verificarPasoDePuntaje(myDeck *jugador, int numCartas);
+bool realizarAccionJugador(char accion, myDeck *mazo, myDeck *jugador, int *indiceMazo, int *indiceJugador);
 void turnoJugador(myDeck *mazo, myDeck *jugador, int *indiceMazo, int *indiceJugador);
+//Croupier
+bool debePedirCarta(int puntajeCroupier);
+void turnoCroupier(myDeck *mazo, myDeck *croupier, int *indiceMazo, int *indiceCroupier);
 
 
 
