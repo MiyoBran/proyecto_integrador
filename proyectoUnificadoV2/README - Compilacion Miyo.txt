@@ -26,6 +26,7 @@ gcc -o mainGrafico main.c  graphics_storage.c config.c scoreboardV2.c gamelogic.
 -----------------------------------------------------------------------------------------------
 /*Para compilar y probar solo 1 a la vez // Comentar el include raylib si se puede
 
+gcc -o blackjack config.c  jugador.c  logica.c  main.c  mazo.c scoreboardV2.c
 
 
 gcc -o dinamicoScoretest scoreboard_test.c config.c scoreboardV2.c 

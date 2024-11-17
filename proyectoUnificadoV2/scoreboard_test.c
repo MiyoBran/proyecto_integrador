@@ -25,7 +25,7 @@ int main() {
 
     srand(time(NULL)); // Inicializar la semilla aleatoria
     
-    // Asigna memoria dinámica para el arreglo de jugadores
+    // Asignando memoria dinámica para el arreglo de lista Ranking
     Score *scoreList = calloc(TOTAL_REGISTROS, sizeof(Score)); // Asigna memoria y la inicializa en cero
     if (scoreList == NULL) { // Verifica si la asignación fue exitosa
         printf("Error al asignar memoria para scoreList.\n");

@@ -4,6 +4,24 @@
         "stdbool.h": "c",
         "stdio.h": "c",
         "mazo.h": "c",
-        "time.h": "c"
+        "time.h": "c",
+        "bit": "c",
+        "compare": "c",
+        "condition_variable": "c",
+        "cstddef": "c",
+        "string": "c",
+        "optional": "c",
+        "limits": "c",
+        "memory": "c",
+        "mutex": "c",
+        "new": "c",
+        "functional": "c",
+        "__locale": "c",
+        "atomic": "c",
+        "ios": "c",
+        "locale": "c",
+        "type_traits": "c",
+        "logica.h": "c",
+        "jugador.h": "c"
     }
 }

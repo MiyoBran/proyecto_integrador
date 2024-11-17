@@ -7,7 +7,7 @@
 #define CARTAS_POR_PALO 13 // Número total de cartas por palo
 #define MAX_CARTAS_JUGADOR 10 // Límite de cartas por jugador
 
-
+// Structs-Enums para manejo de Cartas y Barajas
 typedef enum {
     TREBOL, DIAMANTE, CORAZON, PICA
 } Palo;
@@ -26,28 +26,28 @@ typedef struct {
     myCard cartas[52]; // Mazo completo de 52 cartas
 } myDeck;
 
-// Declaración de funciones
+// Declaración de funciones -> Mazo
 
-// Inicializa una carta con un palo, un número y su puntaje correspondiente
+// Inicializa una carta con su palo, número y puntaje correspondiente.
 void inicializarCarta(myCard *carta, Palo palo, Carta numero);
 
-// Inicializa un mazo completo con 52 cartas en orden
+// Inicializa el mazo de cartas con 52 cartas (13 por cada uno de los 4 palos).
 void inicializarMazo(myDeck *mazo);
 
-// Imprime una carta específica (para verificar su contenido)
+// Función para imprimir una carta con su nombre, palo y puntaje
 void imprimirCarta(myCard carta);
 
-// Imprime todas las cartas del mazo completo
+// Función de depuración para imprimir el mazo completo
 void imprimirMazo(myDeck mazo[], int numCartas);
 
-// Mezcla el mazo utilizando el algoritmo Fisher-Yates
+// Función para barajar el mazo (algoritmo Fisher-Yates)
 void barajarMazo(myDeck *mazo);
 
-// Asigna una carta del mazo a un jugador, actualizando los índices correspondientes
+// Función para pedir una carta del mazo y asignársela al jugador.
 int pedir1carta(myDeck *mazo, myDeck *jugador, int *indiceMazo, int *indiceJugador);
 
 // Inicializa las cartas del mazo de un jugador con valores predeterminados
-void inicializarJugador(myDeck *jugador);
+void inicializarMazoJugador(myDeck *jugador);
 
 // Imprime todas las cartas del mazo hasta una posicion
 void imprimirCartasJugador(myDeck jugador[], int numCartasJugador);
