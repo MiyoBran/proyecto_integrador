@@ -6,12 +6,11 @@
 
 
 
-////////////////////////Funciones propias////////////////////////
+// Includes Propios del proyecto
 #include "config.h" // para la funcion independiente que busca valor de configuracion en el .env
 #include "scoreboard.h" // donde estan declaradas las funciones comunes a los scoreboards
 #include "gamelogic.h" // las funciones declaradas en la logica
 #include "graphics_storage.h" // las funciones declaradas para la parte grafica - UI
-////////////////////////Funciones propias////////////////////////
 
 #define decks 1
 
@@ -56,3 +55,47 @@ int gamelogic(){
     int remaining_cards;
     initDeck(Deck,&remaining_cards,Crupier,Player);
 }
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////
+bool randomWin(bool *playerWin) {
+    int aaaa = rand() % 2;
+    if (aaaa == 1) {
+        *playerWin = true;
+    }   else {
+        *playerWin = false;
+    }
+    return *playerWin;
+}
+//function to test player or dealer win
+
+
+/////////////////////////////////////////////////////////////////////////////////////
+int getPlayerMoney(int bet, bool *playerWin) {
+    int money = 10000;
+    if (*playerWin) {
+        money = money + bet;
+    }   else {
+        money = money - bet;
+    }
+    return money;
+}
+
+void getCard(myDeck *deck) {
+    for (int i = 0; i < MAX_CARDS_DISPLAYED; i++) {
+        deck[i].cardType = rand() % 4;
+        deck[i].cardNumber = rand() % 13;
+    }
+
+}
+
+int calculatePoints(myDeck *deck, int *amountCards) {
+    int totalPoints = 0;
+    for (int i = 0; i < *amountCards; i++) {
+        totalPoints = totalPoints + deck[i].cardNumber; 
+    }
+    return totalPoints;
+}
+/////////////////////////////////////////////////////////////////////////////////////

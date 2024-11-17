@@ -1,4 +1,3 @@
-
 #ifndef graphics_storage
 #define graphics_storage
 
@@ -52,6 +51,9 @@ typedef struct {
     Rectangle hitBox;
     Rectangle gameContinueBox;
     Rectangle gameEndBox;
+    Rectangle menuPlay;
+    Rectangle menuScoreboard;
+    Rectangle menuQuit;
 }   buttonBoxes;
 //Struct for button logic
 
@@ -78,9 +80,9 @@ extern int MAX_CARDS_DISPLAYED;
 //Variables searched in .env file
 
 
-extern bool playerWin;                                                      //Variable to check if player won
-extern bool roundEnd;                                                       //Variable to check if round ended
-extern int gameState;
+/* extern bool playerWin;                                                      //Variable to check if player won
+extern bool roundEnd;                                                       //Variable to check if round ended */
+extern int screenState;
 extern bool alreadyBet;                                                     //Variable to check if player already made bet
 
 extern int x_playerPosition;                                               //Player's text x position
@@ -98,7 +100,7 @@ void getBet(int *bet, struct Rectangle betBox, bool *gameButtons, bool *alreadyB
 void getUserName(char *userName, int *charCount);                                                                    //Gets user name
 void loadRankingVariables(const char **playerRankings, const char **playerNames, const char **playerScores);       //Loads scoreboard into three variables
 int showGraphicRanking(const char *playerRankings, const char *playerNames, const char *playerScores);            //Displays three variables set in loadRankingVariables
-
+void resetRound(int *amountCardsPlayer, int *amountCardsDealer, int *playerPoints, int *bet, myDeck playerDeck[MAX_CARDS_DISPLAYED], myDeck dealerDeck[MAX_CARDS_DISPLAYED], gameState *currentGame);
 
 
 #endif // graphics_storage

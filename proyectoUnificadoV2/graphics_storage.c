@@ -22,9 +22,9 @@ int SCREEN_WIDTH;
 int SCREEN_HEIGHT;
 int MAX_CARDS_DISPLAYED;
 
-bool playerWin = false;
-bool roundEnd = false;
-int gameState = 1;                              //Variable that changes screens
+/* bool playerWin = false;
+bool roundEnd = false; */
+int screenState = 0;                              //Variable that changes screens
 bool alreadyBet = false;
 
 int x_playerPosition = 0;                                               //Player's text x position
@@ -303,4 +303,14 @@ int showGraphicRanking(const char *playerRankings, const char *playerNames, cons
     return showScoreboard;
 }
 
-
+ 
+void resetRound(int *amountCardsPlayer, int *amountCardsDealer, int *playerPoints, int *bet, myDeck playerDeck[MAX_CARDS_DISPLAYED], myDeck dealerDeck[MAX_CARDS_DISPLAYED], gameState *currentGame) {
+    *amountCardsPlayer = 2;
+    *amountCardsDealer = 1;
+    *bet = 100;
+    getCard(playerDeck);
+    getCard(dealerDeck); 
+    *playerPoints = calculatePoints(playerDeck, amountCardsPlayer);
+    currentGame->playerWin = false;
+    currentGame->roundEnd = false;
+}

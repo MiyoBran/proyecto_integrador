@@ -1,15 +1,22 @@
 #ifndef gamelogic_h
 #define gamelogic_h
 
+#include <stdbool.h>
+
 // Enumeraciones para los palos de las cartas
 typedef enum {
     TREBOL, DIAMANTE, CORAZON, PICA
 } Palo;
 
-// Enum para Identificar cada carta 
+// Enumeraciones para los valores de las cartas
 typedef enum {
     A, DOS, TRES, CUATRO, CINCO, SEIS, SIETE, OCHO, NUEVE, DIEZ, J, Q, K
 } Carta;
+
+typedef struct {
+    bool playerWin;                                                      //Variable to check if player won
+    bool roundEnd;                                                       //Variable to check if round ended
+}  gameState;
 
 
 typedef struct  {
@@ -62,3 +69,12 @@ myDeck randomCard(myDeck Deck[], int *remaining_cards); // Función para elegir 
 //     int Carta;
 //     int puntaje;
 // };
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////
+bool randomWin(bool *playerWin);
+int getPlayerMoney(int bet, bool *playerWin);
+void getCard(myDeck *deck);
+int calculatePoints(myDeck *deck, int *amountCards);
+/////////////////////////////////////////////////////////////////////////////////////

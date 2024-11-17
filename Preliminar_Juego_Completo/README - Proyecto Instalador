@@ -1,0 +1,119 @@
+
+Para empaquetar tu proyecto usando CMake y asegurarte de que otra persona pueda ejecutar el juego sin problemas, debes seguir varios pasos. CMake te ayudará a gestionar las dependencias y generar un archivo de compilación que facilite tanto la construcción del proyecto como la distribución de los archivos necesarios.
+
+Paso 1: Estructura de tu Proyecto
+/mi_juego_blackjack
+|-- CMakeLists.txt
+|-- main.c
+|-- mazo.c
+|-- logica.c
+|-- jugador.c
+|-- config.c
+|-- scoreboardV2.c
+|-- mazo.h
+|-- logica.h
+|-- jugador.h
+|-- config.h
+|-- scoreboardV2.h
+|-- /libs
+    |-- glfw3.dll
+    |-- otros_archivos_dll
+|-- /assets
+    |-- imagenes
+    |-- sonidos
+    |-- otros_recursos
+
+---->   Paso 2: Crear el archivo CMakeLists.txt
+cmake_minimum_required(VERSION 3.10)
+project(Blackjack)
+
+# Indicamos que el proyecto es en C
+set(CMAKE_C_STANDARD 99)
+
+# Agregar los archivos fuente
+set(SOURCES
+    main.c
+    mazo.c
+    logica.c
+    jugador.c
+    config.c
+    scoreboardV2.c
+)
+
+# Agregar los archivos de cabecera (opcional, solo para mantener el orden)
+include_directories(
+    ${PROJECT_SOURCE_DIR}
+)
+
+# Crear el ejecutable
+add_executable(blackjack ${SOURCES})
+
+# Si usas bibliotecas externas como GLFW, incluye la configuración correspondiente
+# Por ejemplo, si tienes GLFW en una carpeta de librerías llamada "/libs":
+# link_directories(${PROJECT_SOURCE_DIR}/libs)
+# target_link_libraries(blackjack glfw3)
+
+------>  Paso 3: Instrucciones para Compilar el Proyecto
+Una vez que tengas el archivo CMakeLists.txt, compila el proyecto de la siguiente manera:
+
+Genera el proyecto con CMake: Abre una terminal (puedes usar la terminal de Cygwin si estás trabajando en ese entorno), navega al directorio de tu proyecto y ejecuta:
+
+bash
+Copiar código
+mkdir build
+cd build
+cmake ..
+//Compilar con 
+make
+
+------->Paso 4: Empaquetar el Proyecto
+Una vez que el ejecutable está listo, debes empaquetar los archivos necesarios para que otra persona pueda ejecutar el juego en su computadora. Aquí te explico cómo hacerlo:
+
+Incluir el ejecutable: Asegúrate de incluir el archivo blackjack (el ejecutable generado por CMake) en el paquete.
+
+Incluir las librerías necesarias: Si estás usando bibliotecas externas como glfw3.dll, asegúrate de incluir estos archivos .dll en el mismo directorio que el ejecutable blackjack.
+
+Incluir recursos (si los tienes): Si tu juego depende de archivos de recursos como imágenes o sonidos, incluye la carpeta /assets en el paquete.
+
+La estructura del paquete final podría ser algo como esto:
+
+lua
+Copiar código
+/mi_juego_blackjack
+|-- blackjack.exe
+|-- glfw3.dll
+|-- otros_archivos_dll
+|-- /assets
+    |-- imagenes
+    |-- sonidos
+    |-- otros_recursos
+Paso 5: Instrucciones para la Persona que Recibe el Paquete
+Cuando le pases los archivos a otra persona, asegúrate de proporcionarle las siguientes instrucciones:
+
+Coloca todos los archivos en el mismo directorio: La persona debe colocar blackjack.exe, las librerías .dll y la carpeta /assets en el mismo directorio.
+
+Ejecuta el juego: Una vez que todo esté en su lugar, puede ejecutar el juego haciendo doble clic en blackjack.exe. Si todo está bien configurado, el juego debería ejecutarse sin problemas.
+
+Paso 6: Usar CMake para Crear un Instalador (Opcional)
+Si quieres hacer que la distribución sea aún más fácil, puedes usar CMake para generar un instalador que empaquete todo. Existen módulos de CMake que permiten crear paquetes para diferentes plataformas (como .deb para Debian, .rpm para Red Hat, o incluso .zip para Windows).
+
+Aquí hay un ejemplo básico de cómo podrías agregar la creación de un archivo .zip en tu CMakeLists.txt:
+
+cmake
+Copiar código
+include(InstallRequiredSystemLibraries)
+
+# Agregar los archivos necesarios para el instalador
+install(TARGETS blackjack DESTINATION bin)
+install(DIRECTORY assets/ DESTINATION assets)
+
+# Empaquetar todo en un archivo ZIP
+set(CPACK_GENERATOR "ZIP")
+set(CPACK_PACKAGE_FILE_NAME "blackjack_package")
+include(CPack)
+Luego, cuando ejecutes el comando cmake --build ., CMake generará un archivo comprimido .zip que contiene el ejecutable, las librerías y los recursos. Este archivo .zip es mucho más fácil de distribuir.
+
+Resumen de Pasos para la Persona que Recibe el Juego
+Coloca todos los archivos en un solo directorio: blackjack.exe, las librerías .dll y los archivos de recursos (si existen).
+Ejecuta el juego desde el archivo blackjack.exe en ese directorio.
+Con esta configuración, deberías poder distribuir tu juego de manera que otra persona pueda jugarlo sin necesidad de configurar nada adicional.

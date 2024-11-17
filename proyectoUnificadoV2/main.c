@@ -11,100 +11,99 @@
 #include "config.h"
 #include "gamelogic.h"
 
-/////////////////////////////////////////////////////////////////////////////////////
-bool randomWin(bool playerWin) {
-    int aaaa = rand() % 2;
-    if (aaaa == 1) {
-        playerWin = true;
-    }   else {
-        playerWin = false;
-    }
-    return playerWin;
-}
-//function to test player or dealer win
-
-int getPlayerMoney(int bet, bool playerWin) {
-    int money = 5000;
-    if (playerWin) {
-        money = money + bet;
-    }   else {
-        money = money - bet;
-    }
-    return money;
-}
-
-void getCard(myDeck *deck) {
-    for (int i = 0; i < MAX_CARDS_DISPLAYED; i++) {
-        deck[i].cardType = rand() % 4;
-        deck[i].cardNumber = rand() % 13;
-    }
-
-}
-
-int calculatePoints(myDeck *deck, int *amountCards) {
-    int totalPoints = 0;
-    for (int i = 0; i < *amountCards; i++) {
-        totalPoints = totalPoints + deck[i].cardNumber; 
-    }
-    return totalPoints;
-}
-/////////////////////////////////////////////////////////////////////////////////////
-
-
+////////////////////////////////////////////////////////////////
 
 int main() {
     srand(time(NULL));
     initializeGraphicsConfig();                                             //Busca los valores de configuracion
+
     int charCount = 0;
     char *userName = malloc(4*sizeof(char));
+    Score *scoreList = calloc(TOTAL_REGISTROS, sizeof(Score));
+    char *scoreFileName = getconfig("archivo_datos");
+    if (scoreList == NULL) { // Verifica si la asignación fue exitosa
+        printf("Error al asignar memoria para lista de puntaje\n");
+        return 1;
+    }
+    if (userName == NULL) {
+        printf("Error al asignar memoria para nombre de usuario\n");
+        return 1;
+    }
+    if (scoreFileName == NULL) {
+        printf("No se pudo obtener el nombre del archivo de configuración.\n");
+        return 1;
+    }
+    
     myDeck playerDeck[MAX_CARDS_DISPLAYED];
     myDeck dealerDeck[MAX_CARDS_DISPLAYED];
+    gameState currentGame = {false, false};
+    
     int amountCardsPlayer = 2;
     int amountCardsDealer = 1;
+    
     int playerPoints = 0;
     int dealerPoints = 0;
+
     int bet = 0;
-    int playerMoney = getPlayerMoney(bet, playerWin);
-    getCard(dealerDeck);                                                    //Draw entire dealer's deck
-    getCard(playerDeck);                                                    //Draw entire player's deck
+    int playerMoney = getPlayerMoney(bet, &currentGame.playerWin);
 
     buttons gameButtons = {false, false, false, false, false};              //Struct for logic with buttons
     buttonBoxes gameBoxes = {                                               //Struct for logic with buttons
 
-        //      x,                       y,                 wid,         heig
+        //      x,                       y,                 wid,         height
         {buttonXPosition      , buttonYPosition      , BUTTON_WIDTH, BUTTON_HEIGHT},          //Hold box
         {buttonXPosition + 200, buttonYPosition + 40 , BUTTON_WIDTH, BUTTON_HEIGHT},          //Bet box
         {buttonXPosition      , buttonYPosition + 60 , BUTTON_WIDTH, BUTTON_HEIGHT},          //Hit box
         {buttonXPosition + 250, buttonYPosition + 110, BUTTON_WIDTH, BUTTON_HEIGHT},          //gameContinue box
-        {buttonXPosition + 400, buttonYPosition + 110, BUTTON_WIDTH, BUTTON_HEIGHT}           //gameEnd box
+        {buttonXPosition + 400, buttonYPosition + 110, BUTTON_WIDTH, BUTTON_HEIGHT},           //gameEnd box
+        {SCREEN_WIDTH/3-110, SCREEN_HEIGHT/3+125, BUTTON_WIDTH+40, BUTTON_HEIGHT+10},     //menuPlay box
+        {SCREEN_WIDTH/3-110, SCREEN_HEIGHT/3+200, BUTTON_WIDTH+235, BUTTON_HEIGHT+10},     //menuScoreboard box
+        {SCREEN_WIDTH/3-110, SCREEN_HEIGHT/3+275, BUTTON_WIDTH+15, BUTTON_HEIGHT+10}      //menuQuit box
     };
     Vector2 mousePosition = { 0.0f, 0.0f };                             //Initialize variable that tracks mouse position.
-
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Blackjack");               //Initialize Window parameters.
+    Texture2D texture_table = LoadTexture("Blackjack cards/Table blank.png");
     SetTargetFPS(60); 
     loadCardTextures();
-    Texture2D texture_table = LoadTexture("Blackjack cards/Table blank.png");
+    
 
 
     while (!WindowShouldClose())                                //Loop to maintain window working
     {
-        mousePosition = GetMousePosition();                             //Update mouse position
 
-        switch (gameState) {
+        mousePosition = GetMousePosition();                             //Update mouse position
+         if (texture_table.id == 0) {
+            texture_table = LoadTexture("Blackjack cards/Table blank.png");
+        } 
+        DrawTexture(texture_table, 0, 0, WHITE);
+        switch (screenState) {
             case 0:                         //Main menu
                 BeginDrawing();
-                DrawTexture(texture_table, 0, 0, WHITE);                        //Loads table texture into the screen
+
                 DrawText("BLACKJACK", SCREEN_WIDTH/3-125, 100, 125, GOLD);
                 DrawText("Menu principal:", SCREEN_WIDTH/3-100, SCREEN_HEIGHT/3+50, 60, BLACK);
-                DrawText("Jugar", SCREEN_WIDTH/3-100, SCREEN_HEIGHT/3+125, 60, BLACK);
+                DrawRectangle(gameBoxes.menuPlay.x, gameBoxes.menuPlay.y, gameBoxes.menuPlay.width, gameBoxes.menuPlay.height, WHITE);
+                if (CheckCollisionPointRec(mousePosition, gameBoxes.menuPlay) && IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+                    screenState = 1;
+                    getCard(dealerDeck);                                                    //Draw entire dealer's deck
+                    getCard(playerDeck);                                                    //Draw entire player's deck
+                }
+                DrawText("Jugar", SCREEN_WIDTH/3-100, SCREEN_HEIGHT/3+125, 58, BLACK);
+                DrawRectangle(gameBoxes.menuScoreboard.x, gameBoxes.menuScoreboard.y, gameBoxes.menuScoreboard.width, gameBoxes.menuScoreboard.height, WHITE);
+                if (CheckCollisionPointRec(mousePosition, gameBoxes.menuScoreboard) && IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+                    screenState = 3;
+                }
                 DrawText("Scoreboard", SCREEN_WIDTH/3-100, SCREEN_HEIGHT/3+200, 60, BLACK);
+                DrawRectangle(gameBoxes.menuQuit.x, gameBoxes.menuQuit.y, gameBoxes.menuQuit.width, gameBoxes.menuQuit.height, WHITE);
+                if (CheckCollisionPointRec(mousePosition, gameBoxes.menuQuit) && IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+                    screenState = 4;
+                }
                 DrawText("Salir", SCREEN_WIDTH/3-100, SCREEN_HEIGHT/3+275, 60, BLACK);
+
                 EndDrawing();
                 break;
             case 1:                         //Play
                 BeginDrawing();
-
-                DrawTexture(texture_table, 0, 0, WHITE);                    //Loads table texture into the screen
                 const char *moneyPrint = TextFormat("Dinero: %d", playerMoney);     
                 const char *playerPointPrint = TextFormat("Puntos: %d", playerPoints);
                 const char *dealerPointPrint = TextFormat("Puntos: %d", dealerPoints);
@@ -130,7 +129,7 @@ int main() {
                 DrawRectangle(gameBoxes.betBox.x , gameBoxes.betBox.y, gameBoxes.betBox.width, gameBoxes.betBox.height, WHITE);             //Everything about bet functions
                 DrawText ("Apostar", gameBoxes.betBox.x+5, gameBoxes.betBox.y, 35, BLACK);
                 if (!alreadyBet || amountCardsPlayer == 2) {
-                    if((CheckCollisionPointRec(mousePosition, gameBoxes.betBox)) && (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) && !roundEnd) {
+                    if((CheckCollisionPointRec(mousePosition, gameBoxes.betBox)) && (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) && !currentGame.roundEnd) {
                         gameButtons.betButton = true;
                     }
                     if (gameButtons.betButton) {
@@ -142,7 +141,7 @@ int main() {
                 if (bet != 0) {
                     DrawRectangle(gameBoxes.hitBox.x, gameBoxes.hitBox.y, gameBoxes.hitBox.width, gameBoxes.hitBox.height, WHITE);              //Everything about hit functions
                     DrawText("Hit", gameBoxes.hitBox.x+10, gameBoxes.hitBox.y, 35, BLACK);
-                    if((CheckCollisionPointRec(mousePosition, gameBoxes.hitBox)) && (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) && !roundEnd) {
+                    if((CheckCollisionPointRec(mousePosition, gameBoxes.hitBox)) && (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) && !currentGame.roundEnd) {
                         gameButtons.hitButton = true;
                         amountCardsPlayer++;
                         if (amountCardsPlayer > MAX_CARDS_DISPLAYED) {
@@ -150,38 +149,37 @@ int main() {
                         }
                     }
                     if (gameButtons.hitButton) {   
-
                         playerPoints = calculatePoints(playerDeck, &amountCardsPlayer);
                         gameButtons.hitButton = false;
                     }
 
                     DrawRectangle(gameBoxes.holdBox.x, gameBoxes.holdBox.y, gameBoxes.holdBox.width, gameBoxes.holdBox.height, WHITE);          //Everything about hold functions
                     DrawText("Hold", gameBoxes.holdBox.x+10, gameBoxes.holdBox.y, 35, BLACK);
-                    if((CheckCollisionPointRec(mousePosition, gameBoxes.holdBox )) && (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) && !roundEnd) {
+                    if((CheckCollisionPointRec(mousePosition, gameBoxes.holdBox )) && (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) && !currentGame.roundEnd) {
                         gameButtons.holdButton = true;
                     }
                     if (gameButtons.holdButton) {
                         //amountCardsDealer = dealerCards();
                         //int dealerPoint = dealerPoints();   //To change name */
                                                             //Functions related to logic with dealer go here. Only works after user clicked on hold
-                        roundEnd = true;
+                        currentGame.roundEnd = true;
                         //playerWin = randomWin(playerWin);
                         gameButtons.holdButton = false;
                     }
-                    if (playerPoints > 21) {                            //PLAYER LOSES
+                    if (playerPoints > 21) {                            //PLAYER LOSE, should remove this since new function apparently does this 
                                                                         //HAVE TO PRINT PLAYER LOSES             
-                        roundEnd = true;
-                        playerWin = false;
+                        currentGame.roundEnd = true;        
+                        currentGame.playerWin = false;
                     }
 
-                    printCard(&amountCardsPlayer, playerDeck, PLAYER);                       //This prints the cards that correspond to the user, variable to decide
+                    printCard(&amountCardsPlayer, playerDeck, PLAYER);                       //Both of this functions print the current cards of both parties
                     printCard(&amountCardsDealer, dealerDeck, DEALER);
                     
                 }
                 
 
-                if (roundEnd) {                                               //End Round is a variable that I'm still thinking about, will probably need to wait for logical part
-                    playerMoney = getPlayerMoney(bet, playerWin);
+                if (currentGame.roundEnd) {                                                                 //Checks if round has ended
+                    playerMoney = getPlayerMoney(bet, &currentGame.playerWin);
                     DrawRectangle(0, buttonYPosition, SCREEN_WIDTH, 200, RED);
                     DrawText("Quiere continuar el juego?", SCREEN_HEIGHT/2, buttonYPosition+75, 35, BLACK);
                     DrawRectangle(gameBoxes.gameContinueBox.x, gameBoxes.gameContinueBox.y, gameBoxes.gameContinueBox.width, gameBoxes.gameContinueBox.height, WHITE);
@@ -189,17 +187,8 @@ int main() {
                     if((CheckCollisionPointRec(mousePosition, gameBoxes.gameContinueBox)) && (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))) {
                         gameButtons.gameContinueButton = true;
                     }
-                    if (gameButtons.gameContinueButton) {   
-                        amountCardsPlayer = 2;
-                        amountCardsDealer = 1;
-                        bet = 100;
-                        getCard(playerDeck);
-                        getCard(dealerDeck);
-                        playerPoints = calculatePoints(playerDeck, &amountCardsPlayer);
-                        //Dealer points function
-
-                        roundEnd = false;
-                        playerWin = false;
+                    if (gameButtons.gameContinueButton) {                               //If player continues playing, the variables are set back to their inital value
+                        resetRound(&amountCardsPlayer, &amountCardsDealer, &playerPoints, &bet, playerDeck, dealerDeck, &currentGame);
                         gameButtons.gameContinueButton = false;
 
                     }
@@ -211,13 +200,13 @@ int main() {
 
                     }
                     if (gameButtons.gameEndButton) {   
-                        gameState = 2;
+                        screenState = 2;
                         gameButtons.gameEndButton = false;
                         break;
                     }
-                    if (playerWin) {
+                    if (currentGame.playerWin) {
                         DrawText("Usted gana!", SCREEN_HEIGHT/2, buttonYPosition, 35, BLACK);
-                    }   else if (playerPoints > 21) {
+                    }   else if (!currentGame.playerWin && playerPoints > 21) {
                         DrawText("Se paso de 21 puntos\nLa casa gana!", SCREEN_HEIGHT/2, buttonYPosition, 35, BLACK);
                     } else {
                         DrawText("La casa gana!", SCREEN_HEIGHT/2, buttonYPosition, 35, BLACK);
@@ -227,6 +216,10 @@ int main() {
                 EndDrawing();
                 break;
             case 2:                         //Finish game
+            resetRound(&amountCardsPlayer, &amountCardsDealer, &playerPoints, &bet, playerDeck, dealerDeck, &currentGame);
+            UnloadTexture(texture_table);
+            texture_table.id = 0;
+            fileImport(scoreList, scoreFileName);
             getUserName(userName, &charCount); 
             BeginDrawing();
             ClearBackground(BLACK);
@@ -240,30 +233,30 @@ int main() {
             DrawText("Presione enter para continuar.", SCREEN_WIDTH/3-100, SCREEN_HEIGHT/2+200, 40, BLUE);
             EndDrawing();
             if (IsKeyPressed(KEY_ENTER)){
-                //SOMETHING
-                gameState = 3;
+                Score newPlayer = crearScore(userName, playerMoney); // Convierte nombre y dinero a un Score
+                checkScore(scoreList, newPlayer, scoreFileName); // Verifica y agrega el jugador
+                fileSave(scoreList, scoreFileName);
+                charCount = 0;
+                screenState = 3;
             }
             break;
             case 3:                         //  Check scoreboard
+                if (texture_table.id != 0) {                   //Checks if the player has been through the name asking part, to see if it needs to unload the table
+                    UnloadTexture(texture_table);
+                    texture_table.id = 0;
+                }
                 const char *playerRankings = NULL;
                 const char *playerNames = NULL;
                 const char *playerScores = NULL;
                 loadRankingVariables(&playerRankings, &playerNames, &playerScores);
-                if (!showGraphicRanking(playerRankings, playerNames, playerScores)) gameState = 0;
+                if (!showGraphicRanking(playerRankings, playerNames, playerScores)) screenState = 0;
                 break;
             case 4:                         //Exit
                     unloadCardTextures();
-                    UnloadTexture(texture_table);
                     CloseWindow();
                 break;
         }
     }
-    
-
-
-
-    //userName = getUserName(userName, &charCount);                                   //Function that asks user to input their name after game ends
-    // Scoreboard functions go here?
 
     for (int i = 0; i < MAX_CARDS_DISPLAYED; i++) {
         printf("\nPlayer = [%d], [%d]\n", playerDeck[i].cardNumber, playerDeck[i].cardType);
@@ -271,9 +264,12 @@ int main() {
     }
     //All of this printf functions are to test, can be deleted later
 
-    printf("------------------\n%d\n------------------", gameState);
+    printf("------------------\n%d\n------------------", screenState);
     printf("%s", userName);
+    showRanking(scoreList, scoreFileName);
+    free(scoreList);
     free(userName);
+    free(scoreFileName);
     return 0;
 }
 
