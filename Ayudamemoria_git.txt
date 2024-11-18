@@ -1,0 +1,81 @@
+# PASOS PARA CREAR Y CONFIGURAR UN REPOSITORIO GIT CON SSH
+
+# 1. Ve a la carpeta donde trabajarás
+cd ruta/a/tu/carpeta
+
+# 2. Si clonas un repositorio existente:
+git clone git@github.com:Usuario/repositorio.git
+
+# 3. Si inicias un repositorio desde cero:
+git init  # Inicializa un repositorio vacío en la carpeta actual
+
+# 4. Renombra la rama principal a "main" (o el nombre que prefieras)
+git branch -m main
+
+# 5. Comprueba el estado del repositorio (para ver en qué rama estás y archivos pendientes)
+git status
+
+# 6. Verifica si ya tienes claves SSH configuradas:
+ls ~/.ssh  # Busca si existen archivos como "id_rsa" y "id_rsa.pub"
+
+# 7. Inicia el agente SSH si aún no lo has hecho:
+eval "$(ssh-agent -s)"
+
+# 8. Verifica si ya tienes una clave SSH cargada:
+ssh-add -l  # Si no hay claves, usa el siguiente paso para agregar una
+
+# 9. Si necesitas añadir tu clave SSH (si existe):
+ssh-add ~/.ssh/id_rsa  # Cambia el nombre si tu clave no es "id_rsa"
+
+# 10. Prueba tu conexión SSH con GitHub:
+ssh -T git@github.com
+# Deberías ver un mensaje como "Hi Usuario! You've successfully authenticated..."
+
+# 11. Configura el remoto "origin" con la URL SSH de tu repositorio:
+git remote add origin git@github.com:Usuario/repositorio.git
+
+# 12. Verifica que el remoto se haya configurado correctamente:
+git remote -v
+
+# 13. Agrega tus archivos y haz un primer commit:
+git add .  # Añade todos los archivos al índice
+git commit -m "First commit"  # Crea un commit inicial
+
+# 14. Sube los cambios al repositorio remoto:
+git push -u origin main  # La opción "-u" vincula la rama local "main" con la remota
+
+# LISTO: Ahora puedes trabajar normalmente con este repositorio.
+Notas importantes:
+Si ya tienes un repositorio remoto en GitHub, usa el paso 2 (git clone).
+Si estás iniciando un proyecto desde cero, comienza desde el paso 3 (git init).
+-----------------------------------------------------------------------------------------------
+
+COMANDOS PARA GIT
+
+
+# Verificar el estado del repositorio
+git status
+
+# Agregar todos los cambios al área de preparación
+git add .
+
+# Realizar el commit
+git commit -m "Aca va el mensaje del commit, sino abre nano"
+
+# Mandar tus cambios al repositorio remoto
+git push origin main
+
+---- Para ver cambios
+
+# Verificar si hay actualizaciones en el repositorio remoto
+git fetch origin
+
+# Verificar direccion del escritorio remoto
+git remote -v
+
+# Comparar tu rama local con la rama remota
+git diff origin/main
+
+# Actualizar tu proyecto local si es necesario
+git pull origin main
+

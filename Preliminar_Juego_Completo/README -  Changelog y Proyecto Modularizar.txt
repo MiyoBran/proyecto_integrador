@@ -1,38 +1,7 @@
-
+Base
 *Proyecto en GitHub.com/MiyoBran/proyecto_integrador.git 
 *Proyecto en Drive https://drive.google.com/drive/folders/1eUS_w_vo_eg3GkFpGmb9hGzu-Kx6sQyM?usp=drive_link
 
-+++++++++++++***************+++++++++++++++**************++++++++++++*************
-Verificar si tienen o no que estar en cada archivo.c que tengan
-// Includes Propios del proyecto
-#include "config.h" // para la funcion independiente que busca valor de configuracion en el .env
-#include "scoreboard.h" // donde estan declaradas las funciones comunes a los scoreboards
-#include "gamelogic.h" // las funciones declaradas en la logica
-#include "graphics_storage.h" // las funciones declaradas para la parte grafica - UI
-
-
-
-+++++++++++++***************+++++++++++++++**************++++++++++++*************
-
-si hacemos un struct - enum - typedef ---> en el correspondiente archivo.h asi todos lo tienen 
-(verificar que nadie mas haga uno parecido para lo mismo)
-
-toda funcion que hagamos en nuestro archivo.c , debemos "declararla" en el archivo.h , para que los demas puedan acceder si necesitan
-
-config.c y config.h se usan solo apra obtener un valor que se encuentre en el archivo.env
-gamelogic.c y gamelogic.h se usan para structs y funciones que calculan manu y benja
-graphics_storage.h/c se usan para funciones exclusivamente graficas
-los 3 scoreboard, son para las funciones de manejo del ranking y los archivos
-el archivo .env y el dll son necesarios para que tanto la parte grafica como la de archivos funione correctamente
-
-*-*
-en main manejamos el loop principal, y llamamos a las funciones cuando sea necesario
-*-*
-
-PD: si usamos scoreboardV2, recordar llamar apropiadamente (usar scoreboar_test de guia) y liberar memoria
-
-
-+++++++++++++***************+++++++++++++++**************++++++++++++*************
 
 ----------------------------Proyecto modularizado MIYO-----------------------------------------
 TAMAÑO PANTALLA 1280 * 720
@@ -51,40 +20,16 @@ Horas Programacion
 13-11 -> 6 horas , scoreboard_v3 , uso de diferentes carpetas , instalacion e instructivos linux
 14-11 -> 2 horas , Edicion de READMES , creacion de carpeta Pruebas con menos archivos, para hacer un gamelogic+main de prueba
 15-11 -> 2 Horas , division de vector de cada mazo en cartas individuales .png
-
+15-11 / 16-11 / 17-11 -> 16 horas aprox , nuevo juego completo sin graficos
 
 ------------------------------------------------------------------------------------------------
-Evolucion Archivos Files/scoreboard
-*Proyecto en Drive https://drive.google.com/drive/folders/1eUS_w_vo_eg3GkFpGmb9hGzu-Kx6sQyM?usp=drive_link
--main.c archivo_configuracion.c archivo_configuracion.h
--sinjuego.c archivo_configuracion.c archivo_configuracion.h
----Carpeta nueva
--files.c files.h // tiene todo andando, agregado borrar archivo
--files2.c files2.h // con memoria dinamica , revision de liberar memoria.
-Pendiente:
-* definir parametros que recibo en mi funcion"main"
-*scoreboard_v1.c y scoreboard_v2.c. Esto ayudará a clarificar su propósito.
-Si contienen funciones similares pero con diferentes implementaciones, podría 
-ser útil crear un archivo de cabecera (scoreboard.h) que contenga las definiciones 
-de las funciones que ambos archivos implementan. Esto permite que otros módulos 
-incluyan esta cabecera para acceder a las funciones del scoreboard, independientemente 
-de la implementación que elijas.
- --> realizado 12/11
-*Proyecto en GitHub.com/MiyoBran/proyecto_integrador.git 
-
-* ahora config.c scoreboardV1 y scoreboardV2(con memoria dinamica) junto a scoreboard_test.c
-se cambio las funciones definitivas a nombre en ingles, falta hacer lo mismo con las variables
--->13/11
 PENDIENTE:
 //Falta ver las funciones repetidas en los demas, y tratar de integrar lo que esta.
-//Armar un Prototipo de gamelogic para simular las interacciones necesarias
 //Terminar de hacer los cambios de variables de funciones provisorias o de testeo en español, a las definitivas en ingles.
-
-
-
 
 Reglas:
 https://www.casino.es/blackjack/reglas-blackjack-europeo/
+Posible Estructura
 
 blackjack/
 ├── include/

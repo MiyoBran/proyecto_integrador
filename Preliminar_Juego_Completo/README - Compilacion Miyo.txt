@@ -12,63 +12,30 @@ gcc -o mainGrafico main.c  graphics_storage.c config.c scoreboardV2.c gamelogic.
 Para Windows+cygwin
 /////////////REVISAR CADA UNO 
 /*Cada uno cambiar la carpeta /home/nombre y flags si hace falta*/
-Lizandro:
--I/home/Lizandro/raylib/src -I/home/Lizandro/glfw/include/GLFW -L/home/Lizandro/raylib/src -L/home/Lizandro/glfw/build/src 
--lraylib -lglfw -lgdi32
 
 Miyo:
 -lraylib -lgdi32 -lopengl32 -lwinmm -lglfw3
 -I/home/Miyo/raylib/src -I/home/Miyo/glfw/include/GLFW -L/home/Miyo/raylib/src -L/home/Miyo/glfw/build/src
-
 
 Example:
 gcc -o mainGrafico main.c  graphics_storage.c config.c scoreboardV2.c gamelogic.c -I/home/Miyo/raylib/src -I/home/Miyo/glfw/include/GLFW -L/home/Miyo/raylib/src -L/home/Miyo/glfw/build/src -lraylib -lgdi32 -lopengl32 -lwinmm -lglfw3
 -----------------------------------------------------------------------------------------------
 /*Para compilar y probar solo 1 a la vez // Comentar el include raylib si se puede
 
---- Ultima compilacion completa juego Blackjack
-$ gcc -o blackjack config.c  jugador.c  logica.c  mazo.c scoreboardV2.c mainV4.c
+/*Para compilar PRUEBAS EJ:
+
+gcc -o blackjack main.c config.c jugador.c logica.c mazo.c record.c scoreboard.c
 
 
-
-
-
-
--- Version completamente dinamica y en las carpetas
+-- Version  con las carpetas EJ:
 gcc -o v3scoreboard_test src/scoreboardV3_test.c src/scoreboardV3.c config.c -Iinclude -I.  -Wall -std=c11
 
-
-
 ->Para borrar todos los archivos compilados
-rm -rf scoreEstaticotest dinamicoScoretest v3scoreboard_test mainGrafico 
+rm -rf  blackjack v3scoreboard_test  
 
 -----------------------------------------------------------------------------------------------
-COMANDOS PARA GIT
+-----------------------------------------------------------------------------------------------
+importante --> archivo .env  con lo siguiente:
 
-
-# Verificar el estado del repositorio
-git status
-
-# Agregar todos los cambios al área de preparación
-git add .
-
-# Realizar el commit
-git commit -m "Aca va el mensaje del commit, sino abre nano"
-
-# Mandar tus cambios al repositorio remoto
-git push origin main
-
----- Para ver cambios
-
-# Verificar si hay actualizaciones en el repositorio remoto
-git fetch origin
-
-# Verificar direccion del escritorio remoto
-git remote -v
-
-# Comparar tu rama local con la rama remota
-git diff origin/main
-
-# Actualizar tu proyecto local si es necesario
-git pull origin main
-
+archivo_ranking=datos_ranking.dat
+archivo_historial=datos_historial.dat

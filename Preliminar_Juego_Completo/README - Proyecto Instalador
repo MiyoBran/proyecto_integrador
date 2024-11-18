@@ -14,7 +14,7 @@ Paso 1: Estructura de tu Proyecto
 |-- logica.h
 |-- jugador.h
 |-- config.h
-|-- scoreboardV2.h
+|-- scoreboard.h
 |-- /libs
     |-- glfw3.dll
     |-- otros_archivos_dll
