@@ -1,6 +1,6 @@
 Base
 *Proyecto en GitHub.com/MiyoBran/proyecto_integrador.git 
-*Proyecto en Drive https://drive.google.com/drive/folders/1eUS_w_vo_eg3GkFpGmb9hGzu-Kx6sQyM?usp=drive_link
+*Proyecto en Drive : con todas las "copias de seguridad" enviadas
 
 
 ----------------------------Proyecto modularizado MIYO-----------------------------------------
@@ -22,10 +22,21 @@ Horas Programacion
 15-11 -> 2 Horas , division de vector de cada mazo en cartas individuales .png
 -------->Implementacion de lo anterior en el juego actual.
 15-11 / 16-11 / 17-11 / 18-11 -> 20/22 horas aprox , nuevo juego completo sin graficos
+19/11 -> TXT y PDF GuiA Implementacion,  -> 2HS -> Juego_Completo_M1.0
 
 ------------------------------------------------------------------------------------------------
-PENDIENTES MIYO al 18-11:
-// Imprimir reglas
+PENDIENTES / funcionalidades posibles para los archivos actuales al 19-11:
+//  Falta logica para opcion Doblar apuesta 
+//  Falta logica para recuperar apuesta si perdemos pero teniamos blackjack
+//  Falta logica para dividir cartas
+//  Falta solucionar/revisar problema con indice en manoInicial usando formato
+//  Imprimir reglas (europeo) , leer desde archivo txt?
+//  Exportar registro a txt/csv.
+//  Validar archivo para poder importar (hashing?)
+//  Importar archivo de registro de alguien mas para merge
+//  Funciones de busqueda y ordenamiento para un registro mas grande
+//  
+
 // Verificar compilacion con archivos en diferentes carpetas
 // Crear cmakelist
 // Empaquetar y crear paquete de instalacion
@@ -33,19 +44,35 @@ PENDIENTES MIYO al 18-11:
 // configuracion con .env o .txt?
 
 ---> Entrega 25/11
-Mejoras posibles:
+
+
+Otros Caminos posibles:
 Opcion A:
-//Implementación de graficos con alguna biblioteca para el juego actual sin mas modificacion
-//Implementacion de mejoras graficas por terminal
+//  Implementación de graficos con alguna biblioteca para el juego actual sin mas modificacion
+//  Esta alternativa implica hacer un archivomain.c , que reemplaza a main.c al compilar
+//  Implementacion de mejoras graficas por terminal usando otros archivos .c .h
+    ->Imprimir cartas o cosas asi (esto hace compatible agregar juegos, en otro case, sin reescribir el main )
+    ->Se deberian revisar todas las funciones que tienen un printF.
+    ->Copiarlas,pegarlas,renombrarlas y cambiar las funicones que las utilizan?
 
 
 Opcion B:
-//Falta logica para Doblar apuesta
-//Agregar otros juegos completos con baraja Francesa como opcion en el menu
-//IMPORTANTE:-> (usando las structs de cartas y jugador actuales, sin repetir nombre de funcion para manejo de archivos)
-//Implementar sistema de id de usuario para retomar partida
-//Login para validar?
-//Cambiar funciones actuales para implementar conceptos de la teoria que hayan faltado
+//  Agregar un blackjack con reglas europeas e implementacion diferente.
+//  Agregar un blackjack con reglas americanas.
+//  Agregar otros juegos completos con baraja Francesa (poker?) como opcion en el menu
+//  Agregar opcion para juegos que usan mas mazos
+//  IMPORTANTE:-> (usando las structs de cartas y jugador actuales, sin repetir nombre de funcion para manejo de archivos)
+//  Implementar sistema de id de usuario para retomar partida
+//  login para validar?
+//  Cambiar funciones actuales para implementar conceptos de la teoria que hayan faltado:
+    1-paridad
+    2-humming
+    3-luhn
+    4-modulo11
+    5-Hashing
+    6-regresion_lineal
+    7-Jump_table
+    8-Lista enlazada y doblemente enlazada
 
 
 Reglas:

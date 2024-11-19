@@ -12,6 +12,10 @@
 #include "jugador.h"    // donde estan declaradas las funciones del JUGADOR durante la SESION
 #include "scoreboard.h" // donde estan declaradas las estructuras y funciones para persistencia ranking
 #include "record.h"     // donde estan declaradas las funciones para la persistencia del historial de partidas
+// Espacio para nueva funcionalidad o juego
+// Espacio para nueva funcionalidad o juego
+// Espacio para nueva funcionalidad o juego
+
 /////////////////////////////////////////////////////////////////////////////////////
 void mostrarMenuPrincipal() {
         printf("\n=== Menú Principal ===\n");
@@ -19,6 +23,9 @@ void mostrarMenuPrincipal() {
         printf("2. Jugar una partida\n");
         printf("3. Mostrar Ranking actual\n");
         printf("4. Mostrar Historial de Partidas\n");
+        // Espacio para nueva funcionalidad o juego
+        // Espacio para nueva funcionalidad o juego
+        // Espacio para nueva funcionalidad o juego
         printf("5. Salir\n");
         printf("Seleccione una opción: ");
 }

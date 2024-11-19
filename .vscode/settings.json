@@ -22,6 +22,8 @@
         "locale": "c",
         "type_traits": "c",
         "logica.h": "c",
-        "jugador.h": "c"
+        "jugador.h": "c",
+        "record.h": "c",
+        "config.h": "c"
     }
 }
