@@ -20,12 +20,27 @@ Horas Programacion
 13-11 -> 6 horas , scoreboard_v3 , uso de diferentes carpetas , instalacion e instructivos linux
 14-11 -> 2 horas , Edicion de READMES , creacion de carpeta Pruebas con menos archivos, para hacer un gamelogic+main de prueba
 15-11 -> 2 Horas , division de vector de cada mazo en cartas individuales .png
-15-11 / 16-11 / 17-11 -> 16 horas aprox , nuevo juego completo sin graficos
+-------->Implementacion de lo anterior en el juego actual.
+15-11 / 16-11 / 17-11 / 18-11 -> 20/22 horas aprox , nuevo juego completo sin graficos
 
 ------------------------------------------------------------------------------------------------
-PENDIENTE:
-//Falta ver las funciones repetidas en los demas, y tratar de integrar lo que esta.
-//Terminar de hacer los cambios de variables de funciones provisorias o de testeo en español, a las definitivas en ingles.
+PENDIENTES MIYO al 18-11:
+//Imprimir reglas
+// Verificar compilacion con archivos en diferentes carpetas
+// Crear cmakelist
+// Empaquetar y crear paquete de instalacion
+// Version otro SO ?
+// configuracion con .env o .txt?
+
+
+Mejoras posibles:
+Opcion A:
+//Implementación de graficos para el juego actual sin mas modificacion
+
+Opcion B:
+//Falta logica para Doblar apuesta
+//Agregar otros juegos completos con baraja Francesa como opcion en el menu (usando las structs de cartas y jugador actuales, sin repetir nombre de funcion)
+
 
 Reglas:
 https://www.casino.es/blackjack/reglas-blackjack-europeo/

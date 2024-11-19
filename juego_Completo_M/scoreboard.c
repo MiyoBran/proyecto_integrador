@@ -6,18 +6,20 @@
 #include "scoreboard.h" // donde estan declaradas las funciones comunes a los scoreboards
 #include "config.h" // para la funcion independiente que busca valor de configuracion en el .env
 
-/// Implementacion usando memoria dinamica?
+/// Implementacion usando arreglo declarado con MALLOC
 
+//Abre archivo con arreglos tipo Score y actualiza el array
 void rankingImport(Score *scoreList, const char *nombreArchivo) {
     FILE *archivo = fopen(nombreArchivo, "rb");
     if (archivo == NULL) {
-        printf("El archivo no existe, se creará al guardar.\n");
+        printf("El archivo de Ranking no existe, se creará al guardar.\n");
         return;
     }
     fread(scoreList, sizeof(Score), TOTAL_REGISTROS, archivo);
     fclose(archivo);
 }
 
+//Guarda archivo con un arreglo tipo Score
 void rankingSave(Score *scoreList, const char *nombreArchivo){
     FILE *archivo = fopen(nombreArchivo, "wb");
     if (archivo == NULL) {
@@ -29,12 +31,7 @@ void rankingSave(Score *scoreList, const char *nombreArchivo){
 }
 
 
-
-
-
-// Implementación de agregarJugador, mostrarJugadores y ordenarJugadores similar a `files2.c`
-
-// Función para agregar un jugador al ranking
+// Agregar un jugador al ranking si hay lugar vacio o si es mayor al ultimo
 void checkScore(Score *scoreList, Score nuevoJugador,const char *nombreArchivo) {
     if (scoreList[TOTAL_REGISTROS - 1].money > 0) {
         // Si el último jugador tiene dinero, reemplazarlo si el nuevo tiene más dinero
@@ -56,7 +53,7 @@ void checkScore(Score *scoreList, Score nuevoJugador,const char *nombreArchivo) 
     updateRanking(scoreList,nombreArchivo);
 }
 
-// Función para insertar al jugador
+// Función para insertar al jugador en el ultimo lugar
 void insertPlayer(Score *scoreList, Score nuevoJugador) {
     for (int i = 0; i < TOTAL_REGISTROS; i++) {
         if (scoreList[i].money == 0) {
@@ -77,16 +74,29 @@ void updateRanking(Score *scoreList,const char *nombreArchivo) {
     rankingSave(scoreList, nombreArchivo);  // Guardar cambios en el archivo
 }
 
-// Función para imprimir como tabla el ranking
-void showRanking(Score scoreList[TOTAL_REGISTROS],const char *nombreArchivo) {
-
+// Función para imprimir como tabla el ranking --> rankingDisplay?
+void showRanking(Score scoreList[TOTAL_REGISTROS], const char *nombreArchivo) {
+    // Importar datos del archivo
     rankingImport(scoreList, nombreArchivo);
-    printf("\nRanking\tNombre\tDinero\n");
+
+    // Encabezado de la tabla
+    printf("\n===================== RANKING =====================\n");
+    printf("%-8s %-20s %-10s\n", "Ranking", "Nombre", "Dinero");
+    printf("--------------------------------------------------\n");
+
+    // Imprimir cada entrada del ranking
     for (int i = 0; i < TOTAL_REGISTROS; i++) {
-        if (scoreList[i].money > 0) {
-            printf("%d\t%s\t%.2f\n", scoreList[i].ranking, scoreList[i].name, scoreList[i].money);
+        // Solo mostrar entradas válidas
+        if (scoreList[i].money > 0 && strlen(scoreList[i].name) > 0) {
+            printf("%-8d %-20s $%-10.2f\n", 
+                   scoreList[i].ranking, 
+                   scoreList[i].name, 
+                   scoreList[i].money);
         }
     }
+
+    // Cierre decorativo
+    printf("==================================================\n");
 }
 
 // Función para ordenar la lista de jugadores en función del dinero (descendente) - Bubble Sort porque son pocos
@@ -102,6 +112,7 @@ void sortRanking(Score scoreList[TOTAL_REGISTROS]) {
     }
 }
 
+// Funcion de Prueba / Tests
 char *generarNombreAleatorio() {
     static char nombre[4];
     const char letras[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -116,7 +127,7 @@ char *generarNombreAleatorio() {
 }
 
 
-/// funcion para transformar el nombre y monto en un score, despues hay que llamar a checkscore
+// Funcion para convertir datos de la en arreglo tipo Score
 Score crearScore(const char *nombre, float dinero) {
     Score nuevoJugador;
     nuevoJugador.ranking = 0; // Se actualizará en `updateRanking`

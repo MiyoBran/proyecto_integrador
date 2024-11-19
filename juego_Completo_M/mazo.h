@@ -7,23 +7,26 @@
 #define CARTAS_POR_PALO 13 // Número total de cartas por palo
 #define MAX_CARTAS_JUGADOR 10 // Límite de cartas por jugador
 
-// Structs-Enums para manejo de Cartas y Barajas
+// ENUM QUE DETERMINA LA CANTIDAD DE PALOS
 typedef enum {
     TREBOL, DIAMANTE, CORAZON, PICA
 } Palo;
 
+// ENUM QUE DETERMINA LA CANTIDAD DE CARTAS DIFERENTES
 typedef enum {
     A, DOS, TRES, CUATRO, CINCO, SEIS, SIETE, OCHO, NUEVE, DIEZ, J, Q, K
 } Carta;
 
+// STRUCT PARA Una Carta con su PALO , Figura , Puntaje asociado
 typedef struct {
     Palo cardType;     // Palo de la carta (TREBOL, DIAMANTE, etc.)
     Carta cardNumber;  // Valor de la carta (A, DOS, etc.)
     int puntaje;       // Puntaje asignado a la carta
 } myCard;
 
+// MAZO que contiene Cartas, estructura que permite tener mazos diferentes y de diferentes tamaños
 typedef struct {
-    myCard cartas[52]; // Mazo completo de 52 cartas
+    myCard cartas[TAMANO_MAZO]; // Mazo completo -> 52 cartas
 } myDeck;
 
 // Declaración de funciones -> Mazo

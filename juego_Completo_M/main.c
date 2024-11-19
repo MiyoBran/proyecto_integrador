@@ -60,7 +60,9 @@ int main() {
 
 
     char nombreJugador[MAX_NOMBRE];
-    myDeck mazo, mazoJugador, mazoCroupier;
+    myDeck mazo;
+    myDeck mazoJugador;
+    myDeck mazoCroupier;
     Jugador jugador1; // Estructura con Nombre, Saldos, victorias y empates
 
     // Mostrar mensaje de bienvenida
@@ -72,11 +74,24 @@ int main() {
     // Inicializar el jugador con el nombre ingresado
     inicializarJugadorGlobal(&jugador1, nombreJugador, SALDO_INICIAL);
 
-    // Inicializar el mazo general y Barajar
+    // Inicializar el mazo general y Barajar - > cada partida igual lo vuelve a hacer
     inicializarMazo(&mazo);
     barajarMazo(&mazo);
     // Depuración: verificar mazo mezclado
     // imprimirMazo(&mazo, TAMANO_MAZO);
+
+    // Declaracion inicial de indices. -> CUIDADO quien puede modificarlo
+    // Nos dicen hasta donde llenamos de cartas el mazo de cada Jugador
+    int indiceMazo = TAMANO_MAZO - 1; // Índice de la última carta en el mazo
+    int indiceJ1 = 0;
+    int indiceC = 0;    // Índices para el jugador y el croupier
+
+    int apuesta = 200; // Apuesta inicial, "cambiar" antes de mandar a jugarpartida
+
+    // Este booleando Nos indica si la partida termina de manera forzada
+    // Se modifica en turnoJugador , adentro de jugarPartida
+    bool pasoDePuntajeJugador = false;
+
 
     // INICIO del BUCLE
     int opcion;
@@ -94,35 +109,38 @@ int main() {
        
         switch (opcion) { 
             case 1:
-                printf("=== Datos del Jugador ===\n");
+                printf("\n=== Datos del Jugador ===\n");
                 imprimirJugador(&jugador1);
                 break;
             case 2: {
                 // Si saco la verificacion, podriamos dejar en el historial saldos negativos de partidas
                 if (jugador1.saldo <= 0) {
-                    printf("No tienes saldo suficiente para jugar. ¡Vuelve cuando tengas más dinero!\n");
+                    printf("\n*** No tienes saldo suficiente para jugar. ¡Vuelve cuando tengas más dinero! ***\n");
                 } else {
-                    jugarPartida(&mazo, &jugador1);
-                }
+                    // Simulacion de una Ronda completa -> Verificar paso de punteros correctamente
+                    jugarPartida(&mazo, &jugador1,&mazoJugador, &mazoCroupier, &indiceMazo, &indiceJ1, &indiceC, apuesta, &pasoDePuntajeJugador);
+                    
+                }   
                 break;
             }
             case 3:
                 showRanking(scoreList, nombreArchivoRanking);  // Actualiza y muestra el ranking en la terminal
                 break;
             case 4:
-                printf("=== Historial de Jugadores ===\n");
+                printf("\n=== Historial de Jugadores ===\n");
                 showRecord(historial, cantidadRegistros);  // Llamamos a showRecord para imprimir el historial
                 break;
             case 5:
                 salir = true;
-                printf("Gracias por jugar. ¡Hasta pronto!\n");
+                printf("\n=== Gracias por jugar. ¡Hasta pronto! 🎉 ===\n");
                 break;
             
             default:
-                printf("Opción no válida. Intente de nuevo.\n");
-                        
+            printf("\n*** Opción no válida. Intente de nuevo. ***\n");
+                                    
         
         }//Fin Menu Principal
+        
     } // Fin While Externo
 
     // Actualizacion del Ranking
@@ -138,11 +156,15 @@ int main() {
     printf("----------------------------------------------------------\n");
 
     showRanking(scoreList, nombreArchivoRanking);
-    printf("=======================================\n");
-    printf(" Gracias por jugar. ¡Hasta pronto!🎉\n");
-    printf("=======================================\n");
 
-    
+    // Línea decorativa final
+    printf("==========================================================\n");
+
+    // Mensaje de despedida
+    printf("Gracias por jugar. ¡Hasta pronto! 🎉\n");
+    printf("==========================================================\n");
+
+        
     // Agregar el nuevo registro al historial
     insertRecordEOF(&historial, jugador1, cantidadRegistros);
 

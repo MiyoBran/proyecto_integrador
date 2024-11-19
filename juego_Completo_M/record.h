@@ -17,7 +17,7 @@
 /////////////////////////////////////////////////////////////////////////////////////
 
 
-//--> Declaracion de funciones PROTOTIPO -> Usando Realloc
+//--> Declaracion de funciones
 //Lee el historial de jugadores desde un archivo binario y lo guarda en memoria dinámica.
 void recordImport(Jugador **historial, const char *nombreArchivo);
 

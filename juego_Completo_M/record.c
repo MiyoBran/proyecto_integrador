@@ -10,50 +10,26 @@
 
 /////////////////////////////////////////////////////////////////////////////////////
 
-// Recordatorio funcion impresion jugador actual para hacerla similar ?
-/* // Imprime la información relevante de un jugador, como su nombre, saldo y estadísticas.
-void imprimirJugador(const Jugador *jugador) {
-    if (jugador == NULL) {
-        printf("Jugador no válido.\n");
-        return;  // Si el puntero del jugador es nulo, se imprime un mensaje y se retorna.
-    }
-
-    // Imprimir el nombre del jugador y sus estadísticas
-    printf("Jugador: %s\n", jugador->nombre);
-    printf("Saldo: $%d\n", jugador->saldo);
-    printf("Victorias: %d | Derrotas: %d | BlackJacks: %d\n",
-           jugador->victorias, jugador->derrotas, jugador->blackjack);
-}
-*/
-
-/* //Recordatorio struct:
-// // Estructura completa para un jugador
-// typedef struct {
-//     char nombre[MAX_NOMBRE];  // Nombre del jugador
-//     int saldo;                // Dinero del jugador
-//     int victorias;            // Número de partidas ganadas
-//     int derrotas;             // Número de partidas perdidas
-//     int blackjack;              // Número de partidas empatadas
-// } Jugador;
-*/
-
-//--> Declaracion de funciones PROTOTIPO -> Usando Realloc
+//--> Declaracion de funciones 
 
 //Lee el historial de jugadores desde un archivo binario y lo guarda en memoria dinámica.
 void recordImport(Jugador **historial, const char *nombreArchivo) {
     // Verificar si el archivo existe y abrirlo en modo binario
     FILE *archivo = fopen(nombreArchivo, "rb");
     if (archivo == NULL) {
-        printf("El archivo no existe, se creará al guardar.\n");
+        printf("El archivo de historial no existe. No se encontraron registros previos.\n" );
         return;
     }
 
     // Obtener el número de registros del archivo usando recordSize
     int cantidadRegistros = recordSize(nombreArchivo);
     if (cantidadRegistros == 0) {
+        printf("El archivo está vacío. No se encontraron registros.\n");
         fclose(archivo);  // Si no hay registros, cerrar archivo
         return;
     }
+
+    printf("Se encontraron %d registros.\n", cantidadRegistros);
 
     // Asignar memoria dinámica para los registros
     if (*historial == NULL) {
@@ -61,33 +37,49 @@ void recordImport(Jugador **historial, const char *nombreArchivo) {
     } else {
         *historial = realloc(*historial, cantidadRegistros * sizeof(Jugador));
     }
-    //Manejo del error
+
+    // Manejo de error al asignar memoria
     if (*historial == NULL) {
-        printf("Error al asignar memoria para el historial.\n");
+        printf("Error al asignar memoria para el historial. No se pudieron cargar los registros.\n");
         fclose(archivo);
         return;
     }
 
     // Leer los registros del archivo
-    fread(*historial, sizeof(Jugador), cantidadRegistros, archivo);
+    size_t leidos = fread(*historial, sizeof(Jugador), cantidadRegistros, archivo);
+    if (leidos < (size_t)cantidadRegistros) {
+        printf("Advertencia: Solo se pudieron leer %zu de registros del archivo %s.\n", leidos, cantidadRegistros);
+    } else {
+        printf("Los registros se cargaron exitosamente.\n");
+    }
     fclose(archivo);
 }
 
-// Guarda el historial de jugadores en un archivo binario.
+// Guarda un archivo con struct de tipo Jugador
 void recordSave(Jugador *historial, const char *nombreArchivo, int cantidadRegistros) {
     // Abrir archivo para escritura en binario
     FILE *archivo = fopen(nombreArchivo, "wb");
     if (archivo == NULL) {
-        printf("Error al abrir el archivo.\n");
+      printf("Error: No se pudo abrir el archivo de historial para guardar los registros.\n");
         return;
     }
 
     // Escribir los registros al archivo
-    fwrite(historial, sizeof(Jugador), cantidadRegistros, archivo);
+    size_t escritos = fwrite(historial, sizeof(Jugador), cantidadRegistros, archivo);
     fclose(archivo);
+    
+    // Verificar si la escritura fue completa : depuracion
+    /*if (escritos < (size_t)cantidadRegistros) {
+        printf("Advertencia: Solo se pudieron guardar %zu de %d registros en el archivo %s.\n", escritos, cantidadRegistros, nombreArchivo);
+    } else {
+        printf("Se guardaron exitosamente %d registros en el archivo %s.\n", cantidadRegistros, nombreArchivo);
+    }
+    */
+
+
 }
 
-//Inserta un nuevo jugador al final del historial en memoria dinámica.
+//Escribe" un nuevo jugador al final del historial en memoria dinámica.
 void insertRecordEOF(Jugador **historial, Jugador nuevoJugador, int cantidadRegistros) {
     // Redimensionar el arreglo para agregar un nuevo jugador
     if (*historial == NULL) {

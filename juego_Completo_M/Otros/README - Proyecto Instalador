@@ -2,26 +2,30 @@
 Para empaquetar tu proyecto usando CMake y asegurarte de que otra persona pueda ejecutar el juego sin problemas, debes seguir varios pasos. CMake te ayudará a gestionar las dependencias y generar un archivo de compilación que facilite tanto la construcción del proyecto como la distribución de los archivos necesarios.
 
 Paso 1: Estructura de tu Proyecto
-/mi_juego_blackjack
-|-- CMakeLists.txt
-|-- main.c
-|-- mazo.c
-|-- logica.c
-|-- jugador.c
-|-- config.c
-|-- scoreboardV2.c
-|-- mazo.h
-|-- logica.h
-|-- jugador.h
-|-- config.h
-|-- scoreboard.h
-|-- /libs
-    |-- glfw3.dll
-    |-- otros_archivos_dll
-|-- /assets
-    |-- imagenes
-    |-- sonidos
-    |-- otros_recursos
+blackjack/
+├── include/
+│   ├── config.h
+│   ├── jugador.h
+│   ├── logica.h
+│   ├── mazo.h
+│   ├── record.h
+│   ├── scoreboard.h
+├── src/
+│   ├── config.c
+│   ├── jugador.c
+│   ├── logica.c
+│   ├── mazo.c
+│   ├── record.c
+│   ├── scoreboard.c
+├── .env
+├── main.c
+├── README/
+│   ├── Changelog.txt
+│   ├── Modularizar.txt
+│   ├── Compilacion.txt
+│   └── Implementacion_Funciones.txt
+└── Makefile
+
 
 ---->   Paso 2: Crear el archivo CMakeLists.txt
 cmake_minimum_required(VERSION 3.10)

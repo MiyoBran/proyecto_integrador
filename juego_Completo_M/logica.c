@@ -9,72 +9,96 @@
 #include "logica.h"     // donde estan declaradas las funciones de los turnos de juego
 
 /////////////////////////////////////////////////////////////////////////////////////
-// La partida completa de Blackjack
-void jugarPartida(myDeck *mazo, Jugador *jugador1) {
-    myDeck mazoJugador, mazoCroupier;
+// Funcion que engloba la partida completa de Blackjack:
+void jugarPartida(myDeck *mazo, Jugador *jugador1, myDeck *mazoJugador, myDeck *mazoCroupier,int *indiceMazo, int *indiceJ1, int *indiceC, int apuesta, bool *pasoDePuntajeJugador) {
+    /* ACLARACIÓN SOBRE PUNTEROS:
+    * Esta función trabaja exclusivamente con punteros. En las llamadas internas:
+    * - Si se necesita el valor contenido, usar *variable.
+    * - En las funciones que aceptan punteros, pasar la variable directamente.
+    */
     bool jugarOtra = true;
 
     while (jugarOtra) {
         // Inicializar mazos para el jugador y el croupier
-        barajarMazo(mazo);
-        inicializarMazoJugador(&mazoJugador);
-        inicializarMazoJugador(&mazoCroupier);
+        barajarMazo(mazo); // ACLARACION PUNTEROS OJO!!
+        inicializarMazoJugador(mazoJugador); // ACLARACION PUNTEROS OJO!!
+        inicializarMazoJugador(mazoCroupier);// ACLARACION PUNTEROS OJO!!
 
-        int indiceMazo = TAMANO_MAZO - 1; // Índice de la última carta en el mazo
-        int indiceJ1 = 0, indiceC = 0;    // Índices para el jugador y el croupier
+        // Reiniciar indices en cada partida. // ACLARACION PUNTEROS!!
+        *indiceMazo = TAMANO_MAZO - 1; // Índice de la última carta en el mazo
+        *indiceJ1 = 0; 
+        *indiceC = 0;    // Índices para el jugador y el croupier
 
         // Repartir la mano inicial
-        manoInicial(mazo, &mazoJugador, &mazoCroupier, &indiceMazo, &indiceJ1, &indiceC);
-        int puntajeJugador = calcularPuntaje(&mazoJugador, indiceJ1);
+        // Ojo al llamar esta funcion desde otro lado aca son punteros ya, por eso no se usa &
+        manoInicial(mazo, mazoJugador, mazoCroupier, indiceMazo, indiceJ1, indiceC); // ACLARACION PUNTEROS!!
 
-        // Comprobar si el jugador tiene blackjack
+
+        // ACLARACION PUNTEROS: el primer argumento es un puntero, el segundo un int
+        int puntajeJugador = calcularPuntaje(mazoJugador, *indiceJ1);// ACLARACION PUNTEROS!!
+
+        // Comprobar si el jugador tiene blackjack (21 en la ronda inicial)
         bool jugadorBlackjack = puntajeJugador == 21;
         if (jugadorBlackjack) {
+            // Importante --> LO IMPORTANTE ES QUE NOS SALTAMOS EL TURNO DEL JUGADOR
             printf("¡FELICITACIONES! Obtuviste BLACKJACK.\n");
         } else {
             // Turno del jugador
-            bool pasoDePuntajeJugador = false;
-            turnoJugador(mazo, &mazoJugador, &indiceMazo, &indiceJ1, &pasoDePuntajeJugador);
+
+            // Este booleando Nos indica si la partida termina de manera forzada
+            *pasoDePuntajeJugador = false;
+            turnoJugador(mazo, mazoJugador, indiceMazo, indiceJ1, pasoDePuntajeJugador);// ACLARACION PUNTEROS!!
 
             // Actualizar puntaje final del jugador
-            puntajeJugador = calcularPuntaje(&mazoJugador, indiceJ1);
+            puntajeJugador = calcularPuntaje(mazoJugador, *indiceJ1); // ACLARACION PUNTEROS!!
             printf("\n=== Tus cartas finales ===\n");
-            imprimirCartasJugador(&mazoJugador, indiceJ1);
+            imprimirCartasJugador(mazoJugador, *indiceJ1); // ACLARACION PUNTEROS: OJO !!
             printf("Tu puntaje final: %d\n", puntajeJugador);
         }
 
-        // Turno del croupier
-        turnoCroupier(mazo, &mazoCroupier, &indiceMazo, &indiceC);
-        int puntajeCroupier = calcularPuntaje(&mazoCroupier, indiceC);
+        // Turno del croupier - > ACLARACION PUNTEROS: OJO
+        turnoCroupier(mazo, mazoCroupier, indiceMazo, indiceC);
+        int puntajeCroupier = calcularPuntaje(mazoCroupier, *indiceC);
 
         // Mostrar las cartas del croupier
         printf("\n=== Cartas del Croupier ===\n");
-        imprimirCartasJugador(&mazoCroupier, indiceC);
+        imprimirCartasJugador(mazoCroupier, *indiceC);
         printf("Puntaje del Croupier: %d\n", puntajeCroupier);
 
         // Evaluar el resultado
-        bool jugadorGano = evaluarResultado(puntajeJugador, puntajeCroupier);
+        bool jugadorGano = evaluarResultado(puntajeJugador, puntajeCroupier); // ACLARACION PUNTEROS: OJO !!
 
         // Actualizar estadísticas y saldo del jugador (PENDIENTE POSIBILITAR DOBLAR APUESTA)
-        actualizarEstadisticas(jugador1, jugadorGano, jugadorBlackjack);
-        int apuesta = 200; // Apuesta inicial
+        actualizarEstadisticas(jugador1, jugadorGano, jugadorBlackjack); // ACLARACION PUNTEROS: OJO !!
+
+        int ganancia = apuesta;
         if (jugadorBlackjack) {
-            apuesta *= 1.5; // Bonus por blackjack
+            ganancia *= 1.5;  // Bonus por blackjack
         }
-        modificarSaldo(jugador1, jugadorGano ? apuesta : -apuesta);
+        //Modifica jugador1->saldo: Si jugadorGano == true paga ganancia , sino - apuesta
+        modificarSaldo(jugador1, jugadorGano ? ganancia : -apuesta); // ACLARACION PUNTEROS: OJO !!
 
         // Mostrar el resultado
-        mostrarMensajeResultado(puntajeJugador, puntajeCroupier, jugadorGano);
+        mostrarMensajeResultado(puntajeJugador, puntajeCroupier, jugadorGano); // ACLARACION PUNTEROS: OJO !!
 
         // Mostrar los datos actuales del jugador
-        imprimirJugador(jugador1);
+        imprimirJugador(jugador1); // ACLARACION PUNTEROS: OJO !!
 
-        // Preguntar si el jugador quiere otra partida
-        jugarOtra = preguntarJugarOtra();
+        // Preguntar si el jugador quiere otra partida (true -> puede)
+        if (puedeSeguirJugando(jugador1, apuesta))
+        {
+            jugarOtra = preguntarJugarOtra();
+        }
+        else
+        {
+            jugarOtra = false;
+        }
+
+            
     }
 }
 
-
+// Calcula puntaje con un myDeck y un indice que le indica hasta que carta contabilizar - ajusta valor del as
 int calcularPuntaje(const myDeck *jugador, int numCartas) {
     int puntaje = 0, ases = 0;
 
@@ -197,7 +221,7 @@ bool realizarAccionJugador(bool deseaOtraCarta, myDeck *mazo, myDeck *jugador, i
 // Utiliza varias funciones auxiliares para calcular el puntaje, mostrar cartas, y tomar decisiones del jugador.
 // El turno termina cuando el jugador se pasa de 21, alcanza 21 puntos, o decide plantarse.
 void turnoJugador(myDeck *mazo, myDeck *jugador, int *indiceMazo, int *indiceJugador, bool *pasoDePuntaje) {
-    printf("****** INICIO DEL TURNO DEL JUGADOR ******\n"); // Depuración: Inicio del turno
+    // printf("****** INICIO DEL TURNO DEL JUGADOR ******\n"); // Depuración: Inicio del turno
 
     *pasoDePuntaje = false;  // Inicializar el indicador de si el jugador se pasa de 21
     int puntaje;  // Variable para almacenar el puntaje actual del jugador
@@ -207,7 +231,7 @@ void turnoJugador(myDeck *mazo, myDeck *jugador, int *indiceMazo, int *indiceJug
 
         // Mostrar las cartas del jugador si ya tiene al menos 2 cartas
         if (*indiceJugador > 2) {
-            printf("\n---- TURNO DEL JUGADOR ----\n");
+            printf("\n---- TURNO DEL JUGADOR ----\n"); // Depuracion
             printf("Tus cartas:\n");
             imprimirCartasJugador(jugador, *indiceJugador);  // Mostrar las cartas del jugador
             printf("--------------------------\n");
@@ -236,8 +260,8 @@ void turnoJugador(myDeck *mazo, myDeck *jugador, int *indiceMazo, int *indiceJug
             break;  // Terminar el turno si el jugador se planta o no hay cartas
         }
     }
+    printf("=== FIN DE LA RONDA ===\n");  // Indicar el fin de la ronda // Depuracion
 
-    printf("****** FIN DEL TURNO DEL JUGADOR ******\n");  // Depuración: Fin del turno
 }
 
 // Esta funcion se llama antes de Turno jugador y Turno Croupier
@@ -276,7 +300,7 @@ void manoInicial(myDeck *mazo, myDeck *jugador, myDeck *croupier, int *indiceMaz
     int puntajeJugador = calcularPuntaje(jugador, *indiceJugador);  // Calcular puntaje del jugador
     printf("Tu puntaje actual es: %d\n", puntajeJugador);  // Mostrar puntaje del jugador
 
-    printf("\n=== FIN DE LA RONDA INICIAL ===\n");  // Indicar el fin de la ronda inicial
+    // printf("\n=== FIN DE LA RONDA INICIAL ===\n");  // DEPURACION: Indicar el fin de la ronda inicial
 }
 
 
@@ -317,4 +341,13 @@ void turnoCroupier(myDeck *mazo, myDeck *croupier, int *indiceMazo, int *indiceC
     }
 }
 
-
+//Funcion alternativa a los if para validar si se puede seguir o no
+bool puedeSeguirJugando(Jugador *jugador, int apuesta)
+{
+    if (jugador->saldo >= apuesta)
+    {
+        return true;
+    }
+    printf("Lo siento, no tienes suficiente saldo para jugar otra partida :(\n");
+    return false;
+}

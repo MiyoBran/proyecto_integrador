@@ -7,7 +7,7 @@
 
 //declaracion de funciones -> LOGICA
 // La partida completa de Blackjack
-void jugarPartida(myDeck *mazo, Jugador *jugador1);
+void jugarPartida(myDeck *mazo, Jugador *jugador1, myDeck *mazoJugador, myDeck *mazoCroupier,int *indiceMazo, int *indiceJ1, int *indiceC, int apuesta, bool *pasoDePuntajeJugador);
 
 
 int calcularPuntaje(const myDeck *jugador, int numCartas);
@@ -36,6 +36,8 @@ bool debePedirCarta(int puntajeCroupier);
 /// Gestiona el turno del Croupier, determinando si debe pedir una carta o plantarse automáticamente según las reglas del Blackjack.
 void turnoCroupier(myDeck *mazo, myDeck *croupier, int *indiceMazo, int *indiceCroupier);
 
+//Funcion alternativa a los if para validar si se puede seguir o no
+bool puedeSeguirJugando(Jugador *jugador, int apuesta);
 
 
 #endif // LOGICA_H
