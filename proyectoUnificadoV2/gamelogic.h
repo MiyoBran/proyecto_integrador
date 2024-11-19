@@ -73,8 +73,8 @@ myDeck randomCard(myDeck Deck[], int *remaining_cards); // Función para elegir 
 
 
 /////////////////////////////////////////////////////////////////////////////////////
-bool randomWin(bool *playerWin);
 int getPlayerMoney(int bet, bool *playerWin);
-void getCard(myDeck *deck);
+void getCard(myDeck *deck, int *amountCards);
 int calculatePoints(myDeck *deck, int *amountCards);
+bool compareScores(int puntajeJugador, int puntajeCroupier);
 /////////////////////////////////////////////////////////////////////////////////////

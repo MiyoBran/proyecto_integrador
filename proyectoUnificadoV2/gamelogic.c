@@ -60,16 +60,23 @@ int gamelogic(){
 
 
 /////////////////////////////////////////////////////////////////////////////////////
-bool randomWin(bool *playerWin) {
-    int aaaa = rand() % 2;
-    if (aaaa == 1) {
-        *playerWin = true;
-    }   else {
-        *playerWin = false;
+bool compareScores(int puntajeJugador, int puntajeCroupier) {
+    
+    // Si el puntaje del jugador excede 21, el jugador ha perdido
+    if (puntajeJugador > 21) {
+        return false; // El jugador se pasa de 21
     }
-    return *playerWin;
+    
+    // Si el croupier se pasa de 21, o el puntaje del jugador es mayor que el del croupier, el jugador gana
+    else if (puntajeCroupier > 21 || puntajeJugador > puntajeCroupier) {
+        return true;  // El jugador gana
+    }
+    
+    // Si el puntaje del jugador es igual o menor que el del croupier, el jugador pierde o empata
+    else {
+        return false; // Empate o el croupier gana
+    }
 }
-//function to test player or dealer win
 
 
 /////////////////////////////////////////////////////////////////////////////////////
@@ -83,10 +90,13 @@ int getPlayerMoney(int bet, bool *playerWin) {
     return money;
 }
 
-void getCard(myDeck *deck) {
-    for (int i = 0; i < MAX_CARDS_DISPLAYED; i++) {
-        deck[i].cardType = rand() % 4;
-        deck[i].cardNumber = rand() % 13;
+void getCard(myDeck *deck, int *amountCards) {
+    if (*amountCards == MAX_CARDS_DISPLAYED) {
+        *amountCards = MAX_CARDS_DISPLAYED;
+    }   else {
+        deck[*amountCards].cardType = rand() % 4;
+        deck[*amountCards].cardNumber = rand() % 13;
+        (*amountCards)++;
     }
 
 }
@@ -94,7 +104,7 @@ void getCard(myDeck *deck) {
 int calculatePoints(myDeck *deck, int *amountCards) {
     int totalPoints = 0;
     for (int i = 0; i < *amountCards; i++) {
-        totalPoints = totalPoints + deck[i].cardNumber; 
+        totalPoints = totalPoints + deck[i].cardNumber+1; 
     }
     return totalPoints;
 }

@@ -24,22 +24,6 @@
 #define BUTTON_HEIGHT 50
 #define VERTICAL_MARGIN 50
 
-
-/* typedef enum {
-    TREBOL, DIAMANTE, CORAZON, PICA
-} Palo;
-
-// Enumeraciones para los valores de las cartas
-typedef enum {
-    A, DOS, TRES, CUATRO, CINCO, SEIS, SIETE, OCHO, NUEVE, DIEZ, J, Q, K
-} Carta;
-
-typedef struct  {
-    Palo cardType;
-    Carta cardNumber;
-    int puntaje;            
-}   myDeck; */
-
 typedef enum {                                 
     DEALER, PLAYER
 }   whichSidetoPrint;
@@ -100,7 +84,7 @@ void getBet(int *bet, struct Rectangle betBox, bool *gameButtons, bool *alreadyB
 void getUserName(char *userName, int *charCount);                                                                    //Gets user name
 void loadRankingVariables(const char **playerRankings, const char **playerNames, const char **playerScores);       //Loads scoreboard into three variables
 int showGraphicRanking(const char *playerRankings, const char *playerNames, const char *playerScores);            //Displays three variables set in loadRankingVariables
-void resetRound(int *amountCardsPlayer, int *amountCardsDealer, int *playerPoints, int *bet, myDeck playerDeck[MAX_CARDS_DISPLAYED], myDeck dealerDeck[MAX_CARDS_DISPLAYED], gameState *currentGame);
+void startRound(int *amountCardsPlayer, int *amountCardsDealer, int *playerPoints, int *dealerPoints, int *bet, myDeck playerDeck[MAX_CARDS_DISPLAYED], myDeck dealerDeck[MAX_CARDS_DISPLAYED], gameState *currentGame);
 
 
 #endif // graphics_storage

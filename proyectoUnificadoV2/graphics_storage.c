@@ -22,8 +22,6 @@ int SCREEN_WIDTH;
 int SCREEN_HEIGHT;
 int MAX_CARDS_DISPLAYED;
 
-/* bool playerWin = false;
-bool roundEnd = false; */
 int screenState = 0;                              //Variable that changes screens
 bool alreadyBet = false;
 
@@ -254,7 +252,7 @@ void loadRankingVariables(const char **playerRankings, const char **playerNames,
         return;
     }
 
-    fileImport(scoreList, nombreArchivo);
+   rankingImport(scoreList, nombreArchivo);
 
     allRankings[0] = '\0';
     allNames[0] = '\0';
@@ -304,13 +302,17 @@ int showGraphicRanking(const char *playerRankings, const char *playerNames, cons
 }
 
  
-void resetRound(int *amountCardsPlayer, int *amountCardsDealer, int *playerPoints, int *bet, myDeck playerDeck[MAX_CARDS_DISPLAYED], myDeck dealerDeck[MAX_CARDS_DISPLAYED], gameState *currentGame) {
-    *amountCardsPlayer = 2;
-    *amountCardsDealer = 1;
+void startRound(int *amountCardsPlayer, int *amountCardsDealer, int *playerPoints, int *dealerPoints, int *bet, myDeck playerDeck[MAX_CARDS_DISPLAYED], myDeck dealerDeck[MAX_CARDS_DISPLAYED], gameState *currentGame) {
+    *amountCardsPlayer = 0;
+    *amountCardsDealer = 0;
     *bet = 100;
-    getCard(playerDeck);
-    getCard(dealerDeck); 
+    for (int i = 0; i < 2; i++) {
+        getCard(playerDeck, amountCardsPlayer);
+    }
+    getCard(dealerDeck, amountCardsDealer); 
     *playerPoints = calculatePoints(playerDeck, amountCardsPlayer);
+    *dealerPoints = calculatePoints(dealerDeck, amountCardsDealer);
     currentGame->playerWin = false;
     currentGame->roundEnd = false;
 }
+

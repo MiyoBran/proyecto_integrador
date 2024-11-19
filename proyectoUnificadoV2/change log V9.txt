@@ -1,0 +1,11 @@
+gamelogic.h
+lines 78 to 79
+Deleted randomWin 
+declared compareScores function
+
+
+gamelogic.c
+lines 63 to 79
+Declared compareScores and deleted randomWin
+
+Changed the way getCard works, now it gives you only one card instead of the whole deck
