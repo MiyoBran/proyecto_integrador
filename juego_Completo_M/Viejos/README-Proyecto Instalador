@@ -41,7 +41,7 @@ set(SOURCES
     logica.c
     jugador.c
     config.c
-    scoreboardV2.c
+    scoreboard.c
 )
 
 # Agregar los archivos de cabecera (opcional, solo para mantener el orden)
