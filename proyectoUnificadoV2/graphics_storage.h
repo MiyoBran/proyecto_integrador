@@ -50,41 +50,45 @@ typedef struct {
 }   buttons;
 //Struct for button logic
 
-
 extern Texture2D hearts[13];
 extern Texture2D clubs[13];
 extern Texture2D diamonds[13];
 extern Texture2D spades[13];
 //Variables that hold all the card textures
 
-
 extern int SCREEN_WIDTH;
 extern int SCREEN_HEIGHT;
 extern int MAX_CARDS_DISPLAYED;
 //Variables searched in .env file
 
-
-/* extern bool playerWin;                                                      //Variable to check if player won
-extern bool roundEnd;                                                       //Variable to check if round ended */
 extern int screenState;
-extern bool alreadyBet;                                                     //Variable to check if player already made bet
+extern bool alreadyBet;                                                   //Variable to check if player already made bet
 
-extern int x_playerPosition;                                               //Player's text x position
-extern int x_dealerPosition;                                               //Dealer's text x position 
-extern int y_position;                                                   //General text y position
+extern int x_playerPosition;                                             //Player's text 'x' position
+extern int x_dealerPosition;                                             //Dealer's text 'x' position 
+extern int y_position;                                                   //General text 'y' position
 extern int buttonXPosition;                                              //Difference between window "wall" and buttons
-extern int buttonYPosition;                                               //Difference between window "roof" and buttons
+extern int buttonYPosition;                                              //Difference between window "roof" and buttons
 
 
-void initializeGraphicsConfig();                                                                //Searches for values in the .env file config
-void loadCardTextures();                                                                       //Loads the textures of the cards into four Texture2D arrays.
-void unloadCardTextures();                                                                     //Unloads the textures used by the cards, think of it like dynamic memory
-void printCard(int *amountCards, myDeck *cartas1, int playerCropier);                                               //Prints cards depending on which side you want
-void getBet(int *bet, struct Rectangle betBox, bool *gameButtons, bool *alreadyBet);                                //Gets set bet number
-void getUserName(char *userName, int *charCount);                                                                    //Gets user name
-void loadRankingVariables(const char **playerRankings, const char **playerNames, const char **playerScores);       //Loads scoreboard into three variables
-int showGraphicRanking(const char *playerRankings, const char *playerNames, const char *playerScores);            //Displays three variables set in loadRankingVariables
+void initializeGraphicsConfig();
+//Searches for values in the .env file config
+void loadCardTextures();
+//Loads the textures of the cards into four Texture2D arrays.
+void unloadCardTextures();
+//Unloads the textures used by the cards, think of it like dynamic memory
+void printCard(int *amountCards, myDeck *cartas1, int playerCropier);
+//Prints cards depending on which side you want
+void getBet(int *bet, struct Rectangle betBox, bool *gameButtons, bool *alreadyBet);
+//Gets set bet number
+void getUserName(char *userName, int *charCount);
+//Gets user name
+void loadRankingVariables(const char **playerRankings, const char **playerNames, const char **playerScores);
+//Loads scoreboard into three variables
+int showGraphicRanking(const char *playerRankings, const char *playerNames, const char *playerScores);
+//Displays three variables set in loadRankingVariables
 void startRound(int *amountCardsPlayer, int *amountCardsDealer, int *playerPoints, int *dealerPoints, int *bet, myDeck playerDeck[MAX_CARDS_DISPLAYED], myDeck dealerDeck[MAX_CARDS_DISPLAYED], gameState *currentGame);
+//Starts a new round, might need to compress the parameters a bit
 
 
 #endif // graphics_storage

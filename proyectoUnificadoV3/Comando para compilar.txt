@@ -1,0 +1,2 @@
+Donde esta USUARIO se debe reemplazar
+gcc -o main main.c -I/home/USUARIO/raylib/src -I/home/USUARIO/glfw/include/GLFW -L/home/USUARIO/raylib/src -L/home/USUARIO/glfw/build/src -lraylib -lglfw -lgdi32 config.c gamelogic.c graphics_storage.c jugador.c record.c scoreboard.c

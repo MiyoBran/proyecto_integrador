@@ -17,13 +17,15 @@ Texture2D hearts[13];
 Texture2D clubs[13];
 Texture2D diamonds[13];
 Texture2D spades[13];
+//Initializes array of variables that are going to hold the cards' images
 
 int SCREEN_WIDTH;
 int SCREEN_HEIGHT;
 int MAX_CARDS_DISPLAYED;
+//Declares variables whose values are going to be found in .env file
 
 int screenState = 0;                              //Variable that changes screens
-bool alreadyBet = false;
+bool alreadyBet = false;                          //Checks if the player made a bet
 
 int x_playerPosition = 0;                                               //Player's text x position
 int x_dealerPosition = 0;                                               //Dealer's text x position 
@@ -94,8 +96,8 @@ const char *spadesFiles[13] = {
 //This are pointers to strings. The LoadTexture function needs this type of variable
 
 
-
-void initializeGraphicsConfig(){                                                                //Searches for values in the .env file config
+//Searches for values in the .env file config
+void initializeGraphicsConfig(){                                                             
     char *stringScreenWidth = getconfig("SCREEN_WIDTH");
     char *stringScreenHeight = getconfig("SCREEN_HEIGHT");
     char *stringMaxCards = getconfig("MAX_CARDS_DISPLAYED");
@@ -125,8 +127,8 @@ void initializeGraphicsConfig(){                                                
     }
 }
 
-
-void loadCardTextures() {                                                                       //Loads the textures of the cards into four Texture2D arrays.
+//Loads the textures of the cards into four Texture2D arrays.
+void loadCardTextures() {                                                                  
     for (int i = 0; i < 13; i++) {
         hearts[i] = LoadTexture(heartsFiles[i]);
         clubs[i] = LoadTexture(clubsFiles[i]);
@@ -147,8 +149,8 @@ void loadCardTextures() {                                                       
     }
 }
 
-
-void unloadCardTextures() {                                                                          //Unloads the textures used by the cards, think of it like dynamic memory
+//Unloads the textures used by the cards, think of it like dynamic memory
+void unloadCardTextures() {                                                                 
     for (int i = 0; i < 13; i++) {
         UnloadTexture(hearts[i]);
         UnloadTexture(clubs[i]);
@@ -157,8 +159,8 @@ void unloadCardTextures() {                                                     
     }
 }
 
-
-void printCard(int *amountCards, myDeck *cartas1, int playerCropier) {                              //Prints cards depending on which side you want
+//Prints cards depending on which side you want
+void printCard(int *amountCards, myDeck *cartas1, int playerCropier) {                       
     if (playerCropier == DEALER) {
         for (int i = 0; i < *amountCards; i ++) {
             switch (cartas1[i].cardType) {
@@ -196,8 +198,8 @@ void printCard(int *amountCards, myDeck *cartas1, int playerCropier) {          
     }
 }
 
-
-void getBet(int *bet, struct Rectangle betBox, bool *gameButtons, bool *alreadyBet) {               //Gets set bet number
+//Gets set bet number
+void getBet(int *bet, struct Rectangle betBox, bool *gameButtons, bool *alreadyBet) { 
     Vector2 mousePosition = GetMousePosition();
     Rectangle bet100 = {betBox.x+170, betBox.y-55, 100, 50};
     Rectangle bet200 = {betBox.x+170, betBox.y+20, 100, 50};
@@ -222,8 +224,8 @@ void getBet(int *bet, struct Rectangle betBox, bool *gameButtons, bool *alreadyB
     }
 }
 
-
-void getUserName(char *userName, int *charCount) {                                                  //Gets user name
+//Gets user name
+void getUserName(char *userName, int *charCount) {
     int key = GetCharPressed();
     if ((key >= 32) && (key <= 125) && (*charCount < 3)) {
         userName[*charCount] = (char)key;
@@ -238,9 +240,8 @@ void getUserName(char *userName, int *charCount) {                              
     }
 }
 
-
-
-void loadRankingVariables(const char **playerRankings, const char **playerNames, const char **playerScores) {       //Loads scoreboard into three variables
+//Loads scoreboard into three variables
+void loadRankingVariables(const char **playerRankings, const char **playerNames, const char **playerScores) { 
     static char allRankings[100] = "";
     static char allNames[300] = "";
     static char allScores[300] = "";
@@ -279,8 +280,8 @@ void loadRankingVariables(const char **playerRankings, const char **playerNames,
     free(nombreArchivo);
 }
 
-
-int showGraphicRanking(const char *playerRankings, const char *playerNames, const char *playerScores) {             //Displays three variables set in loadRankingVariables
+//Displays three variables set in loadRankingVariables
+int showGraphicRanking(const char *playerRankings, const char *playerNames, const char *playerScores) { 
     bool showScoreboard = true;
     if (showScoreboard) {
         BeginDrawing();
@@ -301,7 +302,7 @@ int showGraphicRanking(const char *playerRankings, const char *playerNames, cons
     return showScoreboard;
 }
 
- 
+//Starts a new round, might need to compress the parameters a bit
 void startRound(int *amountCardsPlayer, int *amountCardsDealer, int *playerPoints, int *dealerPoints, int *bet, myDeck playerDeck[MAX_CARDS_DISPLAYED], myDeck dealerDeck[MAX_CARDS_DISPLAYED], gameState *currentGame) {
     *amountCardsPlayer = 0;
     *amountCardsDealer = 0;
