@@ -27,7 +27,7 @@ int main() {
 
     int charCount = 0;
     Score *scoreList = calloc(TOTAL_REGISTROS, sizeof(Score));
-    char *scoreFileName = getconfig("archivo_datos");
+    char *scoreFileName = getconfig("datos_ranking");
     if (scoreList == NULL) {
         printf("Error al asignar memoria para lista de puntaje\n");
         return 1;

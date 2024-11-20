@@ -247,7 +247,7 @@ void loadRankingVariables(const char **playerRankings, const char **playerNames,
     static char allScores[300] = "";
 
     Score scoreList[TOTAL_REGISTROS] = {0};
-    char *nombreArchivo = getconfig("archivo_datos");
+    char *nombreArchivo = getconfig("datos_ranking");
     if (nombreArchivo == NULL) {
         printf("No se pudo obtener el nombre del archivo de configuración.\n");
         return;
