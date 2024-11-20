@@ -1,6 +1,7 @@
 Base
 *Proyecto en GitHub.com/MiyoBran/proyecto_integrador.git 
 *Proyecto en Drive : con todas las "copias de seguridad" enviadas
+*https://youtu.be/R2IVVA3_pPk?feature=shared
 
 
 ----------------------------Proyecto modularizado MIYO-----------------------------------------

@@ -121,7 +121,7 @@ int main() {
                 break;
             case 2: {
                 // Si saco la verificacion, podriamos dejar en el historial saldos negativos de partidas
-                if (jugador1.saldo <= 0) {
+                if (jugador1.saldo <= apuesta) {
                     printf("\n*** No tienes saldo suficiente para jugar. ¡Vuelve cuando tengas más dinero! ***\n");
                 } else {
                     // Simulacion de una Ronda completa -> Verificar paso de punteros correctamente
