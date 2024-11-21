@@ -108,3 +108,19 @@ void preguntarNombre(char *nombreJugador) {
     while ((c = getchar()) != '\n' && c != EOF);  // Lee y descarta el resto de la línea
 }
 
+// Función para crear un nuevo historial de jugador
+Jugador crearHistorial(char nombre[], int saldo, int victorias, int derrotas, int blackjack) {
+    Jugador nuevoJugador;
+
+    // Copiar el nombre del jugador al nuevo historial
+    strcpy(nuevoJugador.nombre, nombre);
+    
+    // Asignar los otros datos al historial
+    nuevoJugador.saldo = saldo;
+    nuevoJugador.victorias = victorias;
+    nuevoJugador.derrotas = derrotas;
+    nuevoJugador.blackjack = blackjack;
+
+    // Devolver el historial del jugador
+    return nuevoJugador;
+}

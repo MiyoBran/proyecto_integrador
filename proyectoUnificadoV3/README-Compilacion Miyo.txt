@@ -1,5 +1,5 @@
 -----------------------------------------------------------------------------------------------
-/*Para compilar y probar solo 1 a la vez // Comentar el include raylib si se puede
+/*Para compilar y probar solo 1 a la vez // Comentar el include raylib si esta, para probar solo esto
 
 /*Para compilar JUEGO ACTUAL:
 

@@ -8,7 +8,7 @@ Base
 TAMAÑO PANTALLA 1280 * 720
 -----------------------------------------------------------------------------------------------
 
-Horas Programacion
+Horas Programacion:
 //IntegratorMiyoV1 -> Prototipo de funciones y main inicial 
 *3hs iniciales
 //Modificacion para coordenadas relativas en funciones graficas
@@ -24,12 +24,24 @@ Horas Programacion
 -------->Implementacion de lo anterior en el juego actual.
 15-11 / 16-11 / 17-11 / 18-11 -> 20/22 horas aprox , nuevo juego completo sin graficos
 19/11 -> TXT y PDF GuiA Implementacion,  -> 2HS -> Juego_Completo_M1.0
+20/11 -> Cracion proyectoUnificadoV3 incluye propio:
+    *config.c/h
+    *jugador.c/h
+    *record.c/h
+    *scoreboard.c/h 
+    *datos_historial.dat y datos_ranking.dat
+    *.env con los nombres de esos 2 archivos.
+    *Carpeta Para Grafis y guia instalacion bibliotecas
+    *Archivos README : Changelog - compilacion - guia implementacion funciones proyecto
+21/11 2HS   -> Funcion para crear struct jugador, a partir de nombre y puntaje, asi usar historial
+            -> Modificacion guia de implementacion.
 
 ------------------------------------------------------------------------------------------------
 PENDIENTES / funcionalidades posibles para los archivos actuales al 19-11:
 //  Falta logica para opcion Doblar apuesta 
 //  Falta logica para recuperar apuesta si perdemos pero teniamos blackjack
-//  Falta logica para dividir cartas
+//  Falta logica para dividir cartas (lista enlazada/doblemente o Jump_table)
+//  Multiplayer vs banca (Jump_table?)
 //  Falta solucionar/revisar problema con indice en manoInicial usando formato
 //  Imprimir reglas (europeo) , leer desde archivo txt?
 //  Exportar registro a txt/csv.

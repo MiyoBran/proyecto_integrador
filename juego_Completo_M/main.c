@@ -34,7 +34,8 @@ void mostrarMenuPrincipal() {
 int main() {
     // Variables necesarias
     srand(time(NULL)); // Inicializar la semilla aleatoria
-    Jugador *historial = NULL;  // Puntero al arreglo de jugadores
+    // Inicialización del puntero historial a NULL; la memoria se asigna dentro de recordImport()
+    Jugador *historial = NULL; // La memoria se asigna dentro de recordImport
 
     // Asignando memoria dinámica para el arreglo de lista Ranking
     Score *scoreList = calloc(TOTAL_REGISTROS, sizeof(Score)); // Asigna memoria y la inicializa en cero
@@ -65,12 +66,15 @@ int main() {
     // Importar registros del archivo
     recordImport(&historial, recordFileName);
 
-
+    // Para poder agergar en struct Ranking/Historial
     char nombreJugador[MAX_NOMBRE];
+    Jugador jugador1; // Estructura con Nombre, Saldos, victorias y empates
+
+
     myDeck mazo;
     myDeck mazoJugador;
     myDeck mazoCroupier;
-    Jugador jugador1; // Estructura con Nombre, Saldos, victorias y empates
+
 
     // Mostrar mensaje de bienvenida
     mensajeBienvenida();
@@ -149,12 +153,34 @@ int main() {
         }//Fin Menu Principal
         
     } // Fin While Externo
+    
+    //Si no se uso la struct Jugador1, estas 2 variables sacan la info de otro lado
+
+    // Elejir como  hacer esto para pasar los datos de la partida
+    char nombreFinal[MAX_NOMBRE];
+    strcpy(nombreFinal, jugador1.nombre);  // Copiar el nombre del jugador
+    int puntajeFInal = jugador1.saldo;
+    int victoriasFinal = jugador1.victorias;
+    int derrotasFinal = jugador1.derrotas;
+    int blackjackFinal = jugador1.blackjack;
+
+    /* // PAra agregar registro:*/
+    // strcpy(nombreFinal, "MJS");  // Copiar el nombre del jugador
+    // puntajeFInal = 99999;
+    // victoriasFinal = 2;
+    // derrotasFinal = 11;
+    // blackjackFinal = 23;
+
+    // Crear structs para manejar el ranking e historial
+    Score nuevoJugador = crearScore(nombreFinal, puntajeFInal); // Convierte nombre y dinero a tipo Score
+    Jugador nuevoJuego = crearHistorial(nombreFinal, puntajeFInal, victoriasFinal, derrotasFinal, blackjackFinal); // Manejo del historial
+
+
 
     // Actualizacion del Ranking
     rankingImport(scoreList, nombreArchivoRanking);
 
     // Verificar y agregar el jugador al ranking
-    Score nuevoJugador = crearScore(jugador1.nombre, jugador1.saldo); // Convierte nombre y dinero a tipo Score
     checkScore(scoreList, nuevoJugador, nombreArchivoRanking); // Verifica y agrega el jugador
 
 
@@ -172,8 +198,8 @@ int main() {
     printf("==========================================================\n");
 
         
-    // Agregar el nuevo registro al historial --> importante tiene que haber 1 struct jugador creado
-    insertRecordEOF(&historial, jugador1, cantidadRegistros);
+     // Agregar el nuevo registro al historial --> importante tiene que haber 1 struct jugador creado
+    insertRecordEOF(&historial, nuevoJuego, cantidadRegistros);
 
     // Guardar el historial actualizado
     cantidadRegistros++;  // Incrementar el número de registros
@@ -181,10 +207,12 @@ int main() {
  
 
     // Liberar la memoria dinámica antes de salir
-    free(scoreList);
-    free(nombreArchivoRanking);
-    free(historial);
-    free(recordFileName);
+    if (scoreList != NULL) free(scoreList);
+    if (historial != NULL) free(historial);
+    
+    // Revisar si es necesario liberar memoria para nombres de archivo si no son asignados dinámicamente
+    if (nombreArchivoRanking != NULL) free(nombreArchivoRanking);
+    if (recordFileName != NULL) free(recordFileName);
 
 
     return 0;

@@ -36,7 +36,8 @@ void mensajeBienvenida();
 // Mensaje donde nos pide ingresar un nombre usando MAX_NOMBRE de límite
 void preguntarNombre(char *nombreJugador);
 
-
+// Función para crear un nuevo historial de jugador
+Jugador crearHistorial(char nombre[], int saldo, int victorias, int derrotas, int blackjack);
 
 
 
