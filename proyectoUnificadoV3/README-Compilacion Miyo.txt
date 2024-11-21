@@ -1,9 +1,14 @@
 -----------------------------------------------------------------------------------------------
 /*Para compilar y probar solo 1 a la vez // Comentar el include raylib si esta, para probar solo esto
 
-/*Para compilar JUEGO ACTUAL:
+/*Para compilar JUEGO ACTUAL archivos propios:
 
 gcc -o blackjack main.c config.c jugador.c logica.c mazo.c record.c scoreboard.c
+
+/*Para compilar JUEGO ACTUAL archivos unificadosV3:
+
+gcc -o blackjack main.c config.c jugador.c gamelogic.c graphics_storage.c record.c scoreboard.c -I/home/Miyo/raylib/src -I/home/Miyo/glfw/include/GLFW -L/home/Miyo/raylib/src -L/home/Miyo/glfw/build/src
+
 
 -----------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------

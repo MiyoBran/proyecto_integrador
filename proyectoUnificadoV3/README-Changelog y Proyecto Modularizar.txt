@@ -33,8 +33,9 @@ Horas Programacion:
     *.env con los nombres de esos 2 archivos.
     *Carpeta Para Graficos y guia instalacion bibliotecas
     *Archivos README : Changelog - compilacion - guia implementacion funciones proyecto
-21/11 3HS   -> Funcion para crear struct jugador, a partir de nombre y puntaje, asi usar historial
+21/11 4HS   -> Funcion para crear struct jugador, a partir de nombre y puntaje, asi usar historial
             -> Modificacion guia de implementacion.
+            -> Main para crear archivo historial o archivo ranking con datos ingresados por teclado
 
 ------------------------------------------------------------------------------------------------
 PENDIENTES / funcionalidades posibles para los archivos actuales al 19-11:

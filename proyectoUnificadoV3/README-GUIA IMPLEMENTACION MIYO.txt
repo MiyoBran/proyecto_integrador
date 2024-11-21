@@ -7,7 +7,7 @@ para achicar tambien algunas verificaciones de error, corroborar liberacion fina
 #include "jugador.h"    // Funciones y estructuras del jugador durante la sesión
 #include "scoreboard.h" // Estructuras y funciones para el manejo del ranking
 #include "record.h"     // Funciones para el manejo del historial de partidas
-(revisar los includes que tienen adentro cada uno, seguro algunas cosas hay que borrar)
+(revisar los includes que tienen adentro, algunas cosas hay que borrar x redundantes o cambiar nombres)
 /////////////////////////////////////////////////////////////////////////////////////
 
 int main() {
@@ -68,14 +68,14 @@ int main() {
     // Elejir como  hacer esto para pasar los datos de la partida
     char nombreFinal[MAX_NOMBRE];
     strcpy(nombreFinal, jugador1.nombre);  // Copiar el nombre del jugador
-    int puntajeFInal = jugador1.saldo;
+    int puntajeFinal = jugador1.saldo;
     int victoriasFinal = jugador1.victorias;
     int derrotasFinal = jugador1.derrotas;
     int blackjackFinal = jugador1.blackjack;
 
     // Crear structs para manejar el ranking e historial
-    Score nuevoScore = crearScore(nombreFinal, puntajeFInal); // Convierte nombre y dinero a tipo Score
-    Jugador nuevoJuego = crearHistorial(nombreFinal, puntajeFInal, victoriasFinal, derrotasFinal, blackjackFinal); // Manejo del historial
+    Score nuevoScore = crearScore(nombreFinal, puntajeFinal); // Convierte nombre y dinero a tipo Score
+    Jugador nuevoJuego = crearHistorial(nombreFinal, puntajeFinal, victoriasFinal, derrotasFinal, blackjackFinal); // Manejo del historial
 
     // Actualizacion del Ranking
     rankingImport(scoreList, nombreArchivoRanking);

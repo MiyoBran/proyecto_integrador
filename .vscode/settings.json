@@ -24,6 +24,7 @@
         "logica.h": "c",
         "jugador.h": "c",
         "record.h": "c",
-        "config.h": "c"
+        "config.h": "c",
+        "scoreboard.h": "c"
     }
 }
