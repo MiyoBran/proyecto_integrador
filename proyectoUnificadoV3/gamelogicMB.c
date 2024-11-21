@@ -14,8 +14,18 @@
 #include "graphics_storage.h" // las funciones declaradas para la parte grafica - UI
 ////////////////////////Funciones propias////////////////////////
 
-
-
+//Funcion que mezcla el mazo
+void shuffleDeck(myDeck Deck[], int n){
+    for (int i = n - 1; i > 0; i--) {
+        // Genera un índice aleatorio entre 0 e i
+        int j = rand() % (i + 1);
+        
+        // Intercambia los elementos en las posiciones i y j
+        myDeck temp = Deck[i];
+        Deck[i] = Deck[j];
+        Deck[j] = temp;
+    }
+}
 
 void initDeck(myDeck Deck[],int *remaining_cards/*, myDeck Crupier[], myDeck Player[]*/){
     int index = 0;
@@ -33,25 +43,8 @@ void initDeck(myDeck Deck[],int *remaining_cards/*, myDeck Crupier[], myDeck Pla
             index++;
         }
     }
-    /*for (int i = 0; i < 5; i++)
-    {
-        Crupier[i].cardType = -1;
-        Player[i].cardType = -1;
-    }*/
     (*remaining_cards) = 52*decks;
 }
-
-
-
-/*PARA ELEGIR UNA CARTA ALEATORIA DEL MAZO - funcion de tipo card*/
-myDeck randomCard(myDeck Deck[], int *remaining_cards){
-    myDeck Card;
-    int randomIndex = rand() % *remaining_cards;
-    Card = Deck[randomIndex];
-    Deck[randomIndex] = Deck[(*remaining_cards)-1];
-    (*remaining_cards)--;
-    return Card;
-};
 
 void orderAs(myDeck Deck[], int amountCards) {
     myDeck temp;
@@ -95,6 +88,28 @@ int calculatePoints(myDeck Deck[], int amountCards){
     }
 
     return points;
+}
+
+void getCard(int countCard, int *dealtCards, int *dealtCardsTarget, myDeck Deck[], myDeck target[]){
+    for(int i=0 ; i<countCard ; i++){    
+        target[*dealtCardsTarget]=Deck[*dealtCards]; 
+        (*dealtCards)++;
+        (*dealtCardsTarget)++;
+    }
+}
+
+void crupierLogic(myDeck Deck[], int *dealtCards, myDeck Crupier[], int *dealtCardsCrupier){
+    while (calculatePoints(Crupier,*dealtCardsCrupier) < 17){
+        getCard(1,dealtCards,dealtCardsCrupier,Deck,Crupier);
+        (*dealtCards)++;
+    }
+}
+
+bool blackJack(myDeck Player[]){
+    if(calculatePoints(Player,2) == 21){
+        return true;
+    }
+    return false;
 }
 
 bool defineWinner(int playerPoints, int crupierPoints){
