@@ -1,4 +1,7 @@
-Como Incluir archivos Miyo en Main:
+Como Incluir archivos Miyo en Main.c:
+/*Todo lo que sigue hasta la linea 105 , debe ir, aunque se podrian cambiar nombres de variables y
+para achicar tambien algunas verificaciones de error, corroborar liberacion final de memoria*/
+
 ////////////////////////Funciones propias////////////////////////
 #include "config.h"     // Configuración del sistema y lectura de .env
 #include "jugador.h"    // Funciones y estructuras del jugador durante la sesión
@@ -7,8 +10,6 @@ Como Incluir archivos Miyo en Main:
 (revisar los includes que tienen adentro cada uno, seguro algunas cosas hay que borrar)
 /////////////////////////////////////////////////////////////////////////////////////
 
-En main.c:
-Declaraciones iniciales:
 int main() {
     // Variables necesarias
     srand(time(NULL)); // Inicializar la semilla aleatoria

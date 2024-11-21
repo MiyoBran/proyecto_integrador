@@ -31,9 +31,9 @@ Horas Programacion:
     *scoreboard.c/h 
     *datos_historial.dat y datos_ranking.dat
     *.env con los nombres de esos 2 archivos.
-    *Carpeta Para Grafis y guia instalacion bibliotecas
+    *Carpeta Para Graficos y guia instalacion bibliotecas
     *Archivos README : Changelog - compilacion - guia implementacion funciones proyecto
-21/11 2HS   -> Funcion para crear struct jugador, a partir de nombre y puntaje, asi usar historial
+21/11 3HS   -> Funcion para crear struct jugador, a partir de nombre y puntaje, asi usar historial
             -> Modificacion guia de implementacion.
 
 ------------------------------------------------------------------------------------------------
