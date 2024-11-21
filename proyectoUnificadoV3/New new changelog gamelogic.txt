@@ -1,0 +1,32 @@
+---------------
+  gamelogic.h
+---------------
+added playerBlackjack variable in gameState struct
+added allowMoneyUpdate variable in gameState struct
+moved startRound from graphics_storage.h to gamelogic.h
+added declarations of allowBlackJackWin and playerAbove21
+
+
+---- Declaration of functions before: ---- 
+int getPlayerMoney(int bet, bool *playerWin);
+void getCard(myDeck *deck, int *amountCards);
+int calculatePoints(myDeck *deck, int *amountCards);
+bool compareScores(int puntajeJugador, int puntajeCroupier);
+
+
+---- Declaration of functions after: ----
+int getPlayerMoney(int playerMoney, int bet, bool playerWin);
+void getCard(myCard *deck, int *amountCards);
+int calculatePoints(myCard *deck, int *amountCards);
+bool compareScores(int puntajeJugador, int puntajeCroupier);
+
+
+---------------
+  gamelogic.c
+---------------
+Changed the way compareScores worked, now it only compares scores between dealer and player
+Changed getPlayerMoney, for some reason I used a pointer before, dunno why. Also deleted the line 'int money = 10000'
+
+added allowBlackjackWin, which checks if the player got a blackjack on the first hand
+added playerAbove21, which checks if someone went above 21 points
+Moved startRound from graphics_storage.h to gamelogic.h, which sets the variables to start a new round

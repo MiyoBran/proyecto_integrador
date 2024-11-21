@@ -13,47 +13,35 @@
 #include "record.h"
 #include "jugador.h"
 
-
-
 ////////////////////////////////////////////////////////////////
 
 int main() {
     srand(time(NULL));
     initializeGraphicsConfig();                                             //Searches for configuration values
+    InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Blackjack");                    //Initializes Window parameters.
+
+//////////Variables related to user//////////
     char *playerName = malloc(4*sizeof(char));
-
-    bool tableUnloaded = false;                                             //This variable prevents the compiler to keep unloading the table image during
-                                                                            //Scoreboard screen
-
+    Jugador mainCharacter = {0};
     int charCount = 0;
     Score *scoreList = calloc(TOTAL_REGISTROS, sizeof(Score));
-    char *scoreFileName = getconfig("datos_ranking");
-    if (scoreList == NULL) {
-        printf("Error al asignar memoria para lista de puntaje\n");
-        return 1;
-    }
-    if (playerName == NULL) {
-        printf("Error al asignar memoria para nombre de usuario\n");
-        return 1;
-    }
-    if (scoreFileName == NULL) {
-        printf("No se pudo obtener el nombre del archivo de configuración.\n");
-        return 1;
-    }
-    
-    myDeck playerDeck[MAX_CARDS_DISPLAYED];
-    myDeck dealerDeck[MAX_CARDS_DISPLAYED];
-    gameState currentGame = {false, false};             //Makes struct that tracks if the player won or if the round ended
-    
-    /////////////////////////////
+    char *scoreFileName = getconfig("archivo_ranking");
+////////////////////////////////////////////
+
+
+///////Variables related to game logic///////
+    myCard playerDeck[MAX_CARDS_DISPLAYED];
+    myCard dealerDeck[MAX_CARDS_DISPLAYED];
+    gameState currentGame = {false, false, false, false};             //Makes struct that tracks if the player won or if the round ended
     int amountCardsPlayer = 0;
     int amountCardsDealer = 0;
     int playerPoints = 0;
     int dealerPoints = 0;
-    int bet = 0;
-    int playerMoney = getPlayerMoney(bet, &currentGame.playerWin);
-    ////////////////////////////        All of this variables can go into a struct if we really wanted
+    int playerBet = 0;
+////////////////////////////////////////////
 
+////////Variables related to graphics////////
+    bool tableUnloaded = false;                                       //This variable prevents the compiler to keep unloading the table image during
     buttons gameButtons = {false, false, false, false, false};              //Struct for logic with buttons. The order is hold, bet, hit, gameContinue and gameEnd
     buttonBoxes gameBoxes = {                                               //Struct for logic with buttons
         //      x,                       y,                 wid,         height
@@ -67,8 +55,29 @@ int main() {
         {SCREEN_WIDTH/3  - 110, SCREEN_HEIGHT /3+ 275, BUTTON_WIDTH+15 , BUTTON_HEIGHT+10}         //menuQuit box
     };
     Vector2 mousePosition = { 0.0f, 0.0f };                                  //Declares and initializes variable that tracks mouse position.
-    InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Blackjack");                    //Initializes Window parameters.
-    Texture2D texture_table = LoadTexture("Blackjack cards/Table blank.png");//Loads table's image into a variable
+    Texture2D upsideDownCard = LoadTexture("Blackjack cards/Upside down card.png");
+    Texture2D texture_table;// = LoadTexture("Blackjack cards/Table blank.png");//Loads table's image into a variable
+
+/////////////////////////////////////////////
+
+/////Measures to stop program if variables fail/////
+    if (scoreList == NULL) {
+        printf("Error al asignar memoria para lista de puntaje\n");
+        return 1;
+    }
+    if (playerName == NULL) {
+        printf("Error al asignar memoria para nombre de usuario\n");
+        return 1;
+    }   else {
+        playerName[0] = '\0';
+    }
+    if (scoreFileName == NULL) {
+        printf("No se pudo obtener el nombre del archivo de configuración.\n");
+        return 1;
+    }
+/////////////////////////////////////////////////
+
+
     SetTargetFPS(60);   //Makes the game run at 60 frames per second because we clearly need those 60 FPS for a card game
     loadCardTextures(); //Loads all the cards so they can be drawn later
     
@@ -78,9 +87,11 @@ int main() {
 
          if (texture_table.id == 0 && !tableUnloaded) {                 //Checks if the table's image needs to be loaded
             texture_table = LoadTexture("Blackjack cards/Table blank.png");
+            upsideDownCard = LoadTexture("Blackjack cards/Upside down card.png");
         } 
         DrawTexture(texture_table, 0, 0, WHITE);        //Shows the table's image 
         switch (screenState) {
+///////////////////////////////////////////////////////////////////////// CASE 1: MAIN MENU /////////////////////////////////////////////////////////////////////////
             case 0:                         //Main menu
                 BeginDrawing();
 
@@ -89,7 +100,10 @@ int main() {
                 DrawRectangle(gameBoxes.menuPlay.x, gameBoxes.menuPlay.y, gameBoxes.menuPlay.width, gameBoxes.menuPlay.height, WHITE);
                 if (CheckCollisionPointRec(mousePosition, gameBoxes.menuPlay) && IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
                     screenState = 1;
-                    startRound(&amountCardsPlayer, &amountCardsDealer, &playerPoints, &dealerPoints, &bet, playerDeck, dealerDeck, &currentGame);
+                    startRound(&amountCardsPlayer, &amountCardsDealer, &playerPoints, &dealerPoints, &playerBet, playerDeck, dealerDeck, &currentGame);
+                    mainCharacter.saldo = 10000;
+                    playerPoints = 21;
+                    allowBlackjackWin(playerPoints, amountCardsPlayer, &currentGame);
                 }
                 DrawText("Jugar", SCREEN_WIDTH/3-100, SCREEN_HEIGHT/3+125, 58, BLACK);
                 //Button that lets you play the game
@@ -107,12 +121,13 @@ int main() {
                 //Button to quit game instead of clicking the 'x' or pressing ESC
                 EndDrawing();
                 break;
-            case 1:                         //Play
+///////////////////////////////////////////////////////////////////////// CASE 1: GAME STARTS /////////////////////////////////////////////////////////////////////////
+            case 1:
                 BeginDrawing();
-                const char *moneyPrint = TextFormat("Dinero: %d", playerMoney);     
+                const char *moneyPrint = TextFormat("Dinero: %d", mainCharacter.saldo);     
                 const char *playerPointPrint = TextFormat("Puntos: %d", playerPoints);
                 const char *dealerPointPrint = TextFormat("Puntos: %d", dealerPoints);
-                const char *betPrint = TextFormat("Apuesta: %d", bet);
+                const char *betPrint = TextFormat("Apuesta: %d", playerBet);
                 //Transforms variables in order to be shown on screen
                 if (amountCardsPlayer <= 2) {
                     x_playerPosition = (CARD_WIDTH*3)+50;
@@ -122,6 +137,7 @@ int main() {
 
                 if (amountCardsDealer <= 2) {
                     x_dealerPosition = (CARD_WIDTH*3)+50;
+                    DrawTexture(upsideDownCard, CARD_WIDTH*(amountCardsDealer+1)+(CARD_DISTANCE*amountCardsDealer), VERTICAL_MARGIN*2, WHITE);
                 }   else {
                     x_dealerPosition = (CARD_WIDTH + CARD_DISTANCE)*(amountCardsDealer+1);
                 }
@@ -133,6 +149,14 @@ int main() {
                 DrawText(dealerPointPrint, x_dealerPosition, y_position-400, 40, BLACK);
                 //Draws the variables from before into the screen
 
+
+/*                 if (mainCharacter.saldo < 100) {
+                    screenState = 0;
+                    break;
+                } */
+
+
+               
                 DrawRectangle(gameBoxes.betBox.x , gameBoxes.betBox.y, gameBoxes.betBox.width, gameBoxes.betBox.height, WHITE);
                 DrawText ("Apostar", gameBoxes.betBox.x+5, gameBoxes.betBox.y, 35, BLACK);
                 if (!alreadyBet || amountCardsPlayer == 2) {
@@ -141,7 +165,7 @@ int main() {
                     }
                     if (gameButtons.betButton) {
                         DrawText("Cuanto quiere apostar?", gameBoxes.betBox.x+280, gameBoxes.betBox.y, 30, BLACK);
-                            getBet(&bet, gameBoxes.betBox, &gameButtons.betButton, &alreadyBet);
+                            getBet(&playerBet, gameBoxes.betBox, &gameButtons.betButton, &alreadyBet);
                     }
                 }
                 //Button to let the player bet between 100, 200 and 300. If the player hasn't made a bet or their amount of cards is 2, they can bet
@@ -154,9 +178,13 @@ int main() {
                 if (gameButtons.hitButton) {   
                     getCard(playerDeck, &amountCardsPlayer);
                     playerPoints = calculatePoints(playerDeck, &amountCardsPlayer);
+                    if( playerAbove21(playerPoints, &currentGame) ) {
+                        currentGame.playerWin = false;
+                    }
                     gameButtons.hitButton = false;
                 }
                 //Button to let the player get another card, calculates points right after the card
+
 
                 DrawRectangle(gameBoxes.holdBox.x, gameBoxes.holdBox.y, gameBoxes.holdBox.width, gameBoxes.holdBox.height, WHITE);          //Everything about hold functions
                 DrawText("Hold", gameBoxes.holdBox.x+10, gameBoxes.holdBox.y, 35, BLACK);
@@ -164,25 +192,21 @@ int main() {
                     gameButtons.holdButton = true;
                 }
                 if (gameButtons.holdButton) {
-                    //The player holded with %d points
                     for (int i = 0; i < MAX_CARDS_DISPLAYED; i++) {
                         getCard(dealerDeck, &amountCardsDealer);
-                        dealerPoints = calculatePoints(dealerDeck, &amountCardsDealer);
                     }
+                    dealerPoints = calculatePoints(dealerDeck, &amountCardsDealer);
                                                         //Functions related to logic with dealer go here. Only works after user clicked on hold
-                    currentGame.roundEnd = true;
+                    if(playerAbove21(dealerPoints, &currentGame)) {
+                        currentGame.playerWin = true;
+                    }   else {
+                        currentGame.playerWin = compareScores(playerPoints, dealerPoints);  //Compare function goes here
+                        currentGame.allowMoneyUpdate = true;
+                        currentGame.roundEnd = true;
+                    }
                     gameButtons.holdButton = false;
                 }
                 //Button to let the player end their turn
-
-                if (playerPoints > 21) {
-                    currentGame.roundEnd = true;        
-                    currentGame.playerWin = false;
-                }   else if (playerPoints == 21) {
-                    currentGame.roundEnd = true;        
-                    currentGame.playerWin = false;
-                }
-                //Condition that constantly checks if the player went above 21
 
                 printCard(&amountCardsPlayer, playerDeck, PLAYER);
                 printCard(&amountCardsDealer, dealerDeck, DEALER);
@@ -190,8 +214,30 @@ int main() {
                 
 
                 if (currentGame.roundEnd) {                                                                 //Checks if round has ended
-                    playerMoney = getPlayerMoney(bet, &currentGame.playerWin);
                     DrawRectangle(0, buttonYPosition, SCREEN_WIDTH, 200, RED);
+                    
+                    if (currentGame.playerBlackjack) {
+                        mainCharacter.saldo = getPlayerMoney(mainCharacter.saldo, (playerBet*100000), currentGame.playerBlackjack);
+                        currentGame.playerBlackjack = false;
+                    }   else if (currentGame.allowMoneyUpdate) {
+                        mainCharacter.saldo = getPlayerMoney(mainCharacter.saldo, playerBet, currentGame.playerWin);
+                        currentGame.allowMoneyUpdate = false;
+                    }
+
+                    if (playerPoints > 21) {
+                        DrawText("Se paso de 21 puntos", SCREEN_HEIGHT/2-20, buttonYPosition, 35, BLACK);
+                    }   else if (dealerPoints > 21) {
+                        DrawText("Dealer se pasa de 21 puntos", SCREEN_HEIGHT/2-20, buttonYPosition, 35, BLACK);
+                    }
+
+                    if (currentGame.playerBlackjack) {
+                        DrawText("Obtuvo un blackjack! Apuesta x2", SCREEN_HEIGHT/2, buttonYPosition+40, 35, BLACK);
+                    }   else if (currentGame.playerWin) {
+                        DrawText("Usted gana!", SCREEN_HEIGHT/2, buttonYPosition+40, 35, BLACK);
+                    }   else {
+                        DrawText("La casa gana!", SCREEN_HEIGHT/2, buttonYPosition+40, 35, BLACK);
+                    }
+
                     DrawText("Quiere continuar el juego?", SCREEN_HEIGHT/2, buttonYPosition+75, 35, BLACK);
                     DrawRectangle(gameBoxes.gameContinueBox.x, gameBoxes.gameContinueBox.y, gameBoxes.gameContinueBox.width, gameBoxes.gameContinueBox.height, WHITE);
                     DrawText("Seguir", gameBoxes.gameContinueBox.x + 10, gameBoxes.gameContinueBox.y, 35, BLACK);
@@ -199,7 +245,8 @@ int main() {
                         gameButtons.gameContinueButton = true;
                     }
                     if (gameButtons.gameContinueButton) {                               //If player continues playing, the variables are set back to their inital value
-                        startRound(&amountCardsPlayer, &amountCardsDealer, &playerPoints, &dealerPoints, &bet, playerDeck, dealerDeck, &currentGame);
+                        startRound(&amountCardsPlayer, &amountCardsDealer, &playerPoints, &dealerPoints, &playerBet, playerDeck, dealerDeck, &currentGame);
+                        allowBlackjackWin(playerPoints, amountCardsPlayer, &currentGame);
                         gameButtons.gameContinueButton = false;
                     }
                     //Button to let the player continue playing after the round ended
@@ -216,29 +263,18 @@ int main() {
                         break;
                     }
                     //Button to let the player end the game
-                    currentGame.playerWin = compareScores(playerPoints, dealerPoints);  //Compare function goes here
-                    if (currentGame.playerWin) {
-                        DrawText("Usted gana!", SCREEN_HEIGHT/2, buttonYPosition, 35, BLACK);
-                    }   else if (!currentGame.playerWin && playerPoints > 21) {
-                        DrawText("Se paso de 21 puntos\nLa casa gana!", SCREEN_HEIGHT/2, buttonYPosition, 35, BLACK);
-                    } else if (currentGame.playerWin && dealerPoints > 21){
-                        DrawText("Dealer se pasa de 21 puntos\nLa casa gana!", SCREEN_HEIGHT/2, buttonYPosition, 35, BLACK);
-                    } else {
-                        DrawText("La casa gana!", SCREEN_HEIGHT/2, buttonYPosition, 35, BLACK);
-                    }
-                    //If compareScores returns boolean, I could use a switch instead
-                    //Maybe disable first if condition in order to explain the reason for a win/loss?
-
                 }
                 EndDrawing();
                 break;
-            case 2:                         //Finish game
+///////////////////////////////////////////////////////////////////////// CASE 2: AFTER GAME ENDS /////////////////////////////////////////////////////////////////////////
+            case 2:
             UnloadTexture(texture_table);
             texture_table.id = 0;
             tableUnloaded = true;
 
             rankingImport(scoreList, scoreFileName);    //Loads current scoreboard
             getUserName(playerName, &charCount); 
+            strcpy(mainCharacter.nombre, playerName);
 ////////////////Put jugador struct in here to change player name
             //Asks the player for their name with a maximum of 3 letters because it is clearly fitting for a good old fashioned scoreboard
             BeginDrawing();
@@ -254,11 +290,13 @@ int main() {
             DrawText("Presione enter para continuar.", SCREEN_WIDTH/3-100, SCREEN_HEIGHT/2+200, 40, BLUE);
             EndDrawing();
             if (IsKeyPressed(KEY_ENTER)){
+                    //mainCharacter.saldo = 66400;
+                    printf("\n\n\n\n%d\n\n\n\n", charCount);
                     Score newPlayer;
                 if (playerName[0] == '\0') {
-                    newPlayer = crearScore("UNI", playerMoney); // Player too shy to input their name will be called UNI instead (User Not Inserted)
+                    newPlayer = crearScore("UNI", mainCharacter.saldo); // Player too shy to input their name will be called UNI instead (User Not Inserted)
                 }   else {
-                    newPlayer = crearScore(playerName, playerMoney); // Converts player's name and their money into newPlayer struct
+                    newPlayer = crearScore(playerName, mainCharacter.saldo); // Converts player's name and their money into newPlayer struct
                 }
 
                 checkScore(scoreList, newPlayer, scoreFileName); // Checks scoreboard and decides if player is able to get into the list
@@ -267,6 +305,8 @@ int main() {
                 screenState = 3;                                //Switches to scoreboard screen
             }
             break;
+
+///////////////////////////////////////////////////////////////////////// CASE 3: SCOREBOARD /////////////////////////////////////////////////////////////////////////
             case 3:                         //  Check scoreboard
                 if (texture_table.id != 0 && !tableUnloaded) {    //Checks if the player has been through the name asking screen, to see if it needs to unload the table
                     UnloadTexture(texture_table);
@@ -287,6 +327,8 @@ int main() {
                 }
 
                 break;
+
+///////////////////////////////////////////////////////////////////////// CASE 4: EXIT GAME //////////////////////////////////////////////////////////////////////////
             case 4:                         //Exit
                     unloadCardTextures();
                     CloseWindow();

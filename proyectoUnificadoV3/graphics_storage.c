@@ -10,6 +10,8 @@
 #include "graphics_storage.h"
 #include "config.h"
 #include "gamelogic.h"
+#include "jugador.h"
+#include "record.h"
 
 /////////////////////////////////////////////////////////////////////////////////////
 
@@ -160,7 +162,7 @@ void unloadCardTextures() {
 }
 
 //Prints cards depending on which side you want
-void printCard(int *amountCards, myDeck *cartas1, int playerCropier) {                       
+void printCard(int *amountCards, myCard *cartas1, int playerCropier) {                       
     if (playerCropier == DEALER) {
         for (int i = 0; i < *amountCards; i ++) {
             switch (cartas1[i].cardType) {
@@ -247,7 +249,7 @@ void loadRankingVariables(const char **playerRankings, const char **playerNames,
     static char allScores[300] = "";
 
     Score scoreList[TOTAL_REGISTROS] = {0};
-    char *nombreArchivo = getconfig("datos_ranking");
+    char *nombreArchivo = getconfig("archivo_ranking");
     if (nombreArchivo == NULL) {
         printf("No se pudo obtener el nombre del archivo de configuración.\n");
         return;
@@ -280,6 +282,7 @@ void loadRankingVariables(const char **playerRankings, const char **playerNames,
     free(nombreArchivo);
 }
 
+
 //Displays three variables set in loadRankingVariables
 int showGraphicRanking(const char *playerRankings, const char *playerNames, const char *playerScores) { 
     bool showScoreboard = true;
@@ -302,18 +305,6 @@ int showGraphicRanking(const char *playerRankings, const char *playerNames, cons
     return showScoreboard;
 }
 
-//Starts a new round, might need to compress the parameters a bit
-void startRound(int *amountCardsPlayer, int *amountCardsDealer, int *playerPoints, int *dealerPoints, int *bet, myDeck playerDeck[MAX_CARDS_DISPLAYED], myDeck dealerDeck[MAX_CARDS_DISPLAYED], gameState *currentGame) {
-    *amountCardsPlayer = 0;
-    *amountCardsDealer = 0;
-    *bet = 100;
-    for (int i = 0; i < 2; i++) {
-        getCard(playerDeck, amountCardsPlayer);
-    }
-    getCard(dealerDeck, amountCardsDealer); 
-    *playerPoints = calculatePoints(playerDeck, amountCardsPlayer);
-    *dealerPoints = calculatePoints(dealerDeck, amountCardsDealer);
-    currentGame->playerWin = false;
-    currentGame->roundEnd = false;
-}
+
+
 

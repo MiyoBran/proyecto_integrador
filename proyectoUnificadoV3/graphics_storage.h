@@ -77,7 +77,7 @@ void loadCardTextures();
 //Loads the textures of the cards into four Texture2D arrays.
 void unloadCardTextures();
 //Unloads the textures used by the cards, think of it like dynamic memory
-void printCard(int *amountCards, myDeck *cartas1, int playerCropier);
+void printCard(int *amountCards, myCard *cartas1, int playerCropier);
 //Prints cards depending on which side you want
 void getBet(int *bet, struct Rectangle betBox, bool *gameButtons, bool *alreadyBet);
 //Gets set bet number
@@ -87,8 +87,7 @@ void loadRankingVariables(const char **playerRankings, const char **playerNames,
 //Loads scoreboard into three variables
 int showGraphicRanking(const char *playerRankings, const char *playerNames, const char *playerScores);
 //Displays three variables set in loadRankingVariables
-void startRound(int *amountCardsPlayer, int *amountCardsDealer, int *playerPoints, int *dealerPoints, int *bet, myDeck playerDeck[MAX_CARDS_DISPLAYED], myDeck dealerDeck[MAX_CARDS_DISPLAYED], gameState *currentGame);
-//Starts a new round, might need to compress the parameters a bit
+
 
 
 #endif // graphics_storage

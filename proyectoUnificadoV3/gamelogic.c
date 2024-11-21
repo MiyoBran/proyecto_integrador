@@ -15,7 +15,7 @@
 #define decks 1
 
 
-void initDeck(myDeck Deck[],int *remaining_cards, myDeck Crupier[], myDeck Player[]){
+void initDeck(myCard Deck[],int *remaining_cards, myCard Crupier[], myCard Player[]){
     int index = 0;
     for (int i = 0; i < (4*decks); i++)
     {
@@ -37,8 +37,8 @@ void initDeck(myDeck Deck[],int *remaining_cards, myDeck Crupier[], myDeck Playe
 
 
 /*PARA ELEGIR UNA CARTA ALEATORIA DEL MAZO - funcion de tipo card*/
-myDeck randomCard(myDeck Deck[], int *remaining_cards){
-    myDeck Card;
+myCard randomCard(myCard Deck[], int *remaining_cards){
+    myCard Card;
     int randomIndex = rand() % *remaining_cards;
     Card = Deck[randomIndex];
     Deck[randomIndex] = Deck[(*remaining_cards)-1];
@@ -51,7 +51,7 @@ myDeck randomCard(myDeck Deck[], int *remaining_cards){
 /*VER SI HAY QUE CAMBIARLE EL NOMBRE A LA FUNCION ESTA*/
 int gamelogic(){
     srand(time(NULL));
-    myDeck Deck[52*decks], Crupier[5], Player[5];
+    myCard Deck[52*decks], Crupier[5], Player[5];
     int remaining_cards;
     initDeck(Deck,&remaining_cards,Crupier,Player);
 }
@@ -61,36 +61,26 @@ int gamelogic(){
 
 /////////////////////////////////////////////////////////////////////////////////////
 bool compareScores(int puntajeJugador, int puntajeCroupier) {
-    
-    // Si el puntaje del jugador excede 21, el jugador ha perdido
-    if (puntajeJugador > 21) {
-        return false; // El jugador se pasa de 21
-    }
-    
     // Si el croupier se pasa de 21, o el puntaje del jugador es mayor que el del croupier, el jugador gana
-    else if (puntajeCroupier > 21 || puntajeJugador > puntajeCroupier) {
+    if (puntajeJugador > puntajeCroupier) {
         return true;  // El jugador gana
-    }
-    
-    // Si el puntaje del jugador es igual o menor que el del croupier, el jugador pierde o empata
-    else {
+    } else {
         return false; // Empate o el croupier gana
     }
 }
 
 
 /////////////////////////////////////////////////////////////////////////////////////
-int getPlayerMoney(int bet, bool *playerWin) {
-    int money = 10000;
-    if (*playerWin) {
-        money = money + bet;
+int getPlayerMoney(int playerMoney, int bet, bool playerWin) {
+    if (playerWin) {
+        playerMoney = playerMoney + bet;
     }   else {
-        money = money - bet;
+        playerMoney = playerMoney - bet;
     }
-    return money;
+    return playerMoney;
 }
 
-void getCard(myDeck *deck, int *amountCards) {
+void getCard(myCard *deck, int *amountCards) {
     if (*amountCards == MAX_CARDS_DISPLAYED) {
         *amountCards = MAX_CARDS_DISPLAYED;
     }   else {
@@ -101,11 +91,47 @@ void getCard(myDeck *deck, int *amountCards) {
 
 }
 
-int calculatePoints(myDeck *deck, int *amountCards) {
+int calculatePoints(myCard *deck, int *amountCards) {
     int totalPoints = 0;
     for (int i = 0; i < *amountCards; i++) {
         totalPoints = totalPoints + deck[i].cardNumber+1; 
     }
     return totalPoints;
 }
+
+//Checks if player got a blackjack win
+void allowBlackjackWin(int playerPoints, int amountCardsPlayer, gameState *currentGame) {
+    if (playerPoints == 21 && amountCardsPlayer == 2) {
+        currentGame->playerBlackjack = true;
+        currentGame->roundEnd = true;
+    } 
+}
+//Check if player went above 21 points
+bool playerAbove21(int points, gameState *currentGame) {
+    if (points > 21) {
+        currentGame->allowMoneyUpdate = true;
+        currentGame->roundEnd = true;   
+        return true;     
+    }
+    return false;
+}
+
+
+//Starts a new round, might need to compress the parameters a bit
+void startRound(int *amountCardsPlayer, int *amountCardsDealer, int *playerPoints, int *dealerPoints, int *bet, myCard playerDeck[MAX_CARDS_DISPLAYED], myCard dealerDeck[MAX_CARDS_DISPLAYED], gameState *currentGame) {
+    *amountCardsPlayer = 0;
+    *amountCardsDealer = 0;
+    *bet = 100;
+    for (int i = 0; i < 2; i++) {
+        getCard(playerDeck, amountCardsPlayer);
+    }
+    getCard(dealerDeck, amountCardsDealer); 
+    *playerPoints = calculatePoints(playerDeck, amountCardsPlayer);
+    *dealerPoints = calculatePoints(dealerDeck, amountCardsDealer);
+    currentGame->playerWin = false;
+    currentGame->roundEnd = false;
+    currentGame->allowMoneyUpdate = false;
+    currentGame->playerBlackjack = false;
+}
+
 /////////////////////////////////////////////////////////////////////////////////////

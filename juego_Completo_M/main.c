@@ -172,7 +172,7 @@ int main() {
     printf("==========================================================\n");
 
         
-    // Agregar el nuevo registro al historial
+    // Agregar el nuevo registro al historial --> importante tiene que haber 1 struct jugador creado
     insertRecordEOF(&historial, jugador1, cantidadRegistros);
 
     // Guardar el historial actualizado

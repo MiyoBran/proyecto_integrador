@@ -15,6 +15,8 @@ typedef enum {
 
 typedef struct {
     bool playerWin;                                                      //Variable to check if player won
+    bool allowMoneyUpdate;                                               //Variable that prevents constant money updates
+    bool playerBlackjack;                                                //Variable that checks if player won by blackjack
     bool roundEnd;                                                       //Variable to check if round ended
 }  gameState;
 
@@ -23,19 +25,19 @@ typedef struct  {
     Palo cardType;
     Carta cardNumber;
     int puntaje;            
-}   myDeck;
+}   myCard;
 // Estructura que define una carta en el juego
 
 
 // Prototipos de funciones
-void initDeck(myDeck Deck[], int *remaining_cards, myDeck Crupier[], myDeck Player[]); // Inicializa el mazo
-myDeck randomCard(myDeck Deck[], int *remaining_cards); // Función para elegir cartas aleatorias
+void initDeck(myCard Deck[], int *remaining_cards, myCard Crupier[], myCard Player[]); // Inicializa el mazo
+myCard randomCard(myCard Deck[], int *remaining_cards); // Función para elegir cartas aleatorias
 
 
 
 /*las de aca no se usan en el principal - las hace Miyo*/
-//void imprimircarta(myDeck Card); // Imprimir la carta
-//void printDeck(myDeck Deck[]); // Función para imprimir el mazo
+//void imprimircarta(myCard Card); // Imprimir la carta
+//void printDeck(myCard Deck[]); // Función para imprimir el mazo
 
                                                         //Ambas funciones movidas a test_gamelogic.c//
 
@@ -47,7 +49,7 @@ myDeck randomCard(myDeck Deck[], int *remaining_cards); // Función para elegir 
 // typedef struct  {
 //     int cardType;
 //     int cardNumber;
-// }   myDeck;
+// }   myCard;
 //Protoype of a struct containing the specifics of a card.
 
 
@@ -73,8 +75,14 @@ myDeck randomCard(myDeck Deck[], int *remaining_cards); // Función para elegir 
 
 
 /////////////////////////////////////////////////////////////////////////////////////
-int getPlayerMoney(int bet, bool *playerWin);
-void getCard(myDeck *deck, int *amountCards);
-int calculatePoints(myDeck *deck, int *amountCards);
+int getPlayerMoney(int playerMoney, int bet, bool playerWin);
+void getCard(myCard *deck, int *amountCards);
+int calculatePoints(myCard *deck, int *amountCards);
 bool compareScores(int puntajeJugador, int puntajeCroupier);
+void allowBlackjackWin(int playerPoints, int amountCardsPlayer, gameState *currentGame);
+//Checks if player got a blackjack win
+bool playerAbove21(int points, gameState *currentGame);
+//Checks whether player or dealer went above 21
+void startRound(int *amountCardsPlayer, int *amountCardsDealer, int *playerPoints, int *dealerPoints, int *bet, myCard playerDeck[MAX_CARDS_DISPLAYED], myCard dealerDeck[MAX_CARDS_DISPLAYED], gameState *currentGame);
+//Starts a new round, might need to compress the parameters a bit
 /////////////////////////////////////////////////////////////////////////////////////
