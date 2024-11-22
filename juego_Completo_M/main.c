@@ -202,7 +202,9 @@ int main() {
     cantidadRegistros++;  // Incrementar el número de registros
     recordSave(historial, recordFileName, cantidadRegistros);
 
-
+    // Limpiar el buffer de entrada en caso de que haya más caracteres sobrantes
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF);  // Lee y descarta el resto de la línea
     printf("Presione una tecla cualquiera para salir...\n");
     getchar(); // Espera una tecla
 

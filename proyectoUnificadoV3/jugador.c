@@ -55,18 +55,25 @@ void modificarSaldo(Jugador *jugador, int cantidad) {
     jugador->saldo += cantidad;  // Modifica el saldo del jugador sumando (o restando) la cantidad especificada
 }
 
-// Imprime la información relevante de un jugador, como su nombre, saldo y estadísticas.
+// Imprime la información relevante de un jugador, como su nombre, saldo y estadísticas.// Función para imprimir la información de un jugador
 void imprimirJugador(const Jugador *jugador) {
     if (jugador == NULL) {
-        printf("Jugador no válido.\n");
-        return;  // Si el puntero del jugador es nulo, se imprime un mensaje y se retorna.
+        printf("===============================================\n");
+        printf("❌ Jugador no válido. Por favor verifica los datos.\n");
+        printf("===============================================\n\n");
+        return; // Si el puntero del jugador es nulo, se imprime un mensaje y se retorna.
     }
 
-    // Imprimir el nombre del jugador y sus estadísticas
-    printf("Jugador: %s\n", jugador->nombre);
-    printf("Saldo: $%d\n", jugador->saldo);
-    printf("Victorias: %d | Derrotas: %d | BlackJacks: %d\n",
-           jugador->victorias, jugador->derrotas, jugador->blackjack);
+    printf("\n===============================================\n");
+    printf(" 📋 Información del Jugador\n");
+    printf("===============================================\n");
+    printf(" 🧑 Nombre: %-30s\n", jugador->nombre);
+    printf(" 💰 Saldo: $%-29d\n", jugador->saldo);
+    printf(" 🏆 Estadísticas:\n");
+    printf("    - Victorias: %-22d\n", jugador->victorias);
+    printf("    - Derrotas: %-23d\n", jugador->derrotas);
+    printf("    - BlackJacks: %-20d\n", jugador->blackjack);
+    printf("===============================================\n\n");
 }
 // Pregunta al jugador si desea jugar otra partida y valida la entrada.
 bool preguntarJugarOtra() {
@@ -83,12 +90,14 @@ bool preguntarJugarOtra() {
     // Retorna true si la respuesta es 1, indicando que el jugador desea continuar.
     return respuesta == 1; // Si respuesta es 1, se retorna true, de lo contrario false.
 }
+
 // Mensaje inicial al iniciar la ejecución del programa
 void mensajeBienvenida() {
-    printf("=======================================\n");
-    printf(" ¡Bienvenido al juego de Blackjack! 🎉\n");
-    printf("=======================================\n");
-    printf("Prepárate para desafiar al croupier y demostrar tu habilidad.\n");
+    printf("\n");
+    printf("===============================================\n");
+    printf(" 🃏 ¡Bienvenid@ al emocionante juego de Blackjack! 🎉\n");
+    printf("===============================================\n");
+
 }
 
 // Mensaje donde nos pide ingresar un nombre usando MAX_NOMBRE de límite
@@ -105,6 +114,17 @@ void preguntarNombre(char *nombreJugador) {
     // Limpiar el buffer de entrada en caso de que haya más caracteres sobrantes
     int c;
     while ((c = getchar()) != '\n' && c != EOF);  // Lee y descarta el resto de la línea
+}
+
+// Saludar al jugador con un mensaje personalizado
+void saludarJugador(const char *nombreJugador) {
+    printf("\n");
+    printf("=======================================\n");
+    printf(" 🌟 ¡Hola, %s! 🌟\n", nombreJugador);
+    printf("=======================================\n");
+    printf(" 🎲 Pon a prueba tu estrategia y desafía al croupier.\n");
+    printf(" 💰 ¡Apuesta, diviértete y demuestra tu habilidad! ✨\n");
+    printf("=======================================\n\n");
 }
 
 // Función para crear un nuevo historial de jugador

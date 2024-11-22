@@ -117,22 +117,33 @@ int recordSize(const char *nombreArchivo) {
     return cantidadRegistros;
 }
 
-// Muestra el historial de jugadores almacenados en memoria.
-// Esta función imprime los detalles de cada jugador desde el arreglo de historial.
+// Función para mostrar el historial de jugadores
 void showRecord(Jugador *historial, int cantidadRegistros) {
     if (historial == NULL || cantidadRegistros == 0) {
-        printf("No hay registros para mostrar.\n");
+        printf("\n===============================================\n");
+        printf("❌ No hay registros para mostrar.\n");
+        printf("===============================================\n\n");
         return;
     }
 
-    printf("Historial de Jugadores:\n");
+    // Encabezado del historial
+    printf("\n===============================================\n");
+    printf("            📜 Historial de Jugadores          \n");
+    printf("===============================================\n");
+    printf("| %-3s | %-15s | %-8s | %-10s | %-9s | %-10s |\n", 
+           "#", "Nombre", "Saldo", "Victorias", "Derrotas", "BlackJacks");
+    printf("---------------------------------------------------------------\n");
+
+    // Imprimir los datos de cada jugador
     for (int i = 0; i < cantidadRegistros; i++) {
-        printf("Jugador %d: %s | Saldo: %d | Victorias: %d | Derrotas: %d | BlackJacks: %d\n",
+        printf("| %-3d | %-15s | %-8d | %-10d | %-9d | %-10d |\n", 
                i + 1, historial[i].nombre, historial[i].saldo,
                historial[i].victorias, historial[i].derrotas, historial[i].blackjack);
     }
+    
+    // Pie de la tabla
+    printf("===============================================\n\n");
 }
-
 
 
 

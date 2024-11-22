@@ -33,21 +33,29 @@ void rankingSave(Score *scoreList, const char *nombreArchivo){
 
 // Agregar un jugador al ranking si hay lugar vacio o si es mayor al ultimo
 void checkScore(Score *scoreList, Score nuevoJugador,const char *nombreArchivo) {
+    // Si el último jugador tiene dinero, reemplazarlo si el nuevo tiene más dinero
     if (scoreList[TOTAL_REGISTROS - 1].money > 0) {
         // Si el último jugador tiene dinero, reemplazarlo si el nuevo tiene más dinero
         if (nuevoJugador.money > scoreList[TOTAL_REGISTROS - 1].money) {
-            printf("¡Felicidades! Has logrado ingresar al ranking con un saldo impresionante.\n");
-            printf("¡Sigue así y trata de mantener tu lugar!\n");
+            printf("🎉 ¡Felicidades! 🎉\n");
+            printf("Has logrado ingresar al ranking con un saldo impresionante: $%d.\n", nuevoJugador.money);
+            printf("💪 ¡Sigue así y trata de mantener tu lugar entre los mejores!\n");
             scoreList[TOTAL_REGISTROS - 1] = nuevoJugador;
             sortRanking(scoreList);
         } else {
-            printf("¡Lo sentimos! No tienes suficiente dinero para acceder al ranking.\n");
-            printf("¡Ánimo! Con un poco más de juego, podrás entrar al ranking.\n");
+            printf("🚫 ¡Lo sentimos! No alcanzaste el saldo necesario para entrar al ranking.\n");
+            printf("🎯 El saldo más bajo en el ranking actual es: $%d.\n", scoreList[TOTAL_REGISTROS - 1].money);
+            printf("💡 ¡Sigue jugando! Con un poco más de esfuerzo, seguro lo lograrás.\n");
         }
     } else {
         // Insertar el nuevo jugador al primer lugar vacío
+        printf("🎉 ¡Felicidades! 🎉\n");
+        printf("Tu puntaje ha sido registrado exitosamente en el ranking.\n");
         insertPlayer(scoreList, nuevoJugador);
     }
+
+    // Actualizar los rankings después de insertar
+    updateRanking(scoreList, nombreArchivo);
 
     // Actualizar los rankings después de insertar
     updateRanking(scoreList,nombreArchivo);

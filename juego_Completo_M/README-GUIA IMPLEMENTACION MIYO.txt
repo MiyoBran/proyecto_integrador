@@ -63,39 +63,76 @@ int main() {
     /*CODIGO QUE QUIERAN*/
 
 
-    //Si no se uso la struct Jugador1, estas variables sacan la info de otro lado
+    //Si no se uso la struct Jugador1, estas 2 variables sacan la info de otro lado
 
     // Elejir como  hacer esto para pasar los datos de la partida
     char nombreFinal[MAX_NOMBRE];
     strcpy(nombreFinal, jugador1.nombre);  // Copiar el nombre del jugador
-    int saldoFinal = jugador1.saldo;
+    int puntajeFInal = jugador1.saldo;
     int victoriasFinal = jugador1.victorias;
     int derrotasFinal = jugador1.derrotas;
     int blackjackFinal = jugador1.blackjack;
 
+
     // Crear structs para manejar el ranking e historial
-    Score nuevoScore = crearScore(nombreFinal, saldoFinal); // Convierte nombre y dinero a tipo Score
-    Jugador nuevoJuego = crearHistorial(nombreFinal, saldoFinal, victoriasFinal, derrotasFinal, blackjackFinal); // Manejo del historial
+    Score nuevoJugador = crearScore(nombreFinal, puntajeFInal); // Convierte nombre y dinero a tipo Score
+    Jugador nuevoJuego = crearHistorial(nombreFinal, puntajeFInal, victoriasFinal, derrotasFinal, blackjackFinal); // Manejo del historial
+
+
 
     // Actualizacion del Ranking
     rankingImport(scoreList, nombreArchivoRanking);
 
     // Verificar y agregar el jugador al ranking
-    checkScore(scoreList, nuevoScore, nombreArchivoRanking); // Verifica y agrega el jugador
+    checkScore(scoreList, nuevoJugador, nombreArchivoRanking); // Verifica y agrega el jugador
 
-       
+
+    // Mostrar el ranking actualizado
+    printf("\n=================== 🏆RANKING ACTUALIZADO🏆 ===================\n");
+    printf("----------------------------------------------------------\n");
+
+    showRanking(scoreList, nombreArchivoRanking);
+
+    // Línea decorativa final
+    printf("==========================================================\n");
+
+    // Mensaje de despedida
+    printf("✨¡Hasta pronto!✨🃏Gracias por jugar🃏.  \n");
+    printf("==========================================================\n");
+
+        
     // Agregar el nuevo registro al historial --> importante tiene que haber 1 struct jugador creado
     insertRecordEOF(&historial, nuevoJuego, cantidadRegistros);
 
     // Guardar el historial actualizado
     cantidadRegistros++;  // Incrementar el número de registros
     recordSave(historial, recordFileName, cantidadRegistros);
+
+    // Limpiar el buffer de entrada en caso de que haya más caracteres sobrantes
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF);  // Lee y descarta el resto de la línea
+    printf("Presione una tecla cualquiera para salir...\n");
+    getchar(); // Espera una tecla
+
+    // Mostrar el Historial actualizado
+    printf("\n=================== 🎮HISTORIAL ACTUALIZADO🎮 ===================\n");
+    printf("----------------------------------------------------------\n");
+
+    showRecord(historial, cantidadRegistros);  // Llamamos a showRecord para imprimir el historial
+
+    // Línea decorativa final
+    printf("==========================================================\n");
+
+    // Mensaje de despedida
+    printf("🎮✨🚀🏆🎲🥳🌟🔥💡🎵🎉🃏\n");
+    printf("==========================================================\n");
+ 
  
 
     // Liberar la memoria dinámica antes de salir
     if (scoreList != NULL) free(scoreList);
     if (historial != NULL) free(historial);
-
+    
     // Revisar si es necesario liberar memoria para nombres de archivo si no son asignados dinámicamente
     if (nombreArchivoRanking != NULL) free(nombreArchivoRanking);
     if (recordFileName != NULL) free(recordFileName);
@@ -103,7 +140,6 @@ int main() {
 
     return 0;
 }
-
 
 -----------------------------------------------------------------------------------------------
 importante --> archivo .env  con lo siguiente:
