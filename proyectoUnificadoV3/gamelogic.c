@@ -13,7 +13,7 @@
 #include "graphics_storage.h" // las funciones declaradas para la parte grafica - UI
 
 #define decks 1
-
+//int MAX_CARDS_DISPLAYED;
 
 void initDeck(myCard Deck[],int *remaining_cards, myCard Crupier[], myCard Player[]){
     int index = 0;

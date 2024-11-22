@@ -25,6 +25,7 @@
         "jugador.h": "c",
         "record.h": "c",
         "config.h": "c",
-        "scoreboard.h": "c"
+        "scoreboard.h": "c",
+        "graphics_storage.h": "c"
     }
 }

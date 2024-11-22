@@ -2,7 +2,7 @@
 #define gamelogic_h
 
 #include <stdbool.h>
-
+extern int MAX_CARDS_DISPLAYED;
 // Enumeraciones para los palos de las cartas
 typedef enum {
     TREBOL, DIAMANTE, CORAZON, PICA

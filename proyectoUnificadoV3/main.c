@@ -56,7 +56,7 @@ int main() {
     };
     Vector2 mousePosition = { 0.0f, 0.0f };                                  //Declares and initializes variable that tracks mouse position.
     Texture2D upsideDownCard = LoadTexture("Blackjack cards/Upside down card.png");
-    Texture2D texture_table;// = LoadTexture("Blackjack cards/Table blank.png");//Loads table's image into a variable
+    Texture2D texture_table = LoadTexture("Blackjack cards/Table blank.png");//Loads table's image into a variable
 
 /////////////////////////////////////////////
 

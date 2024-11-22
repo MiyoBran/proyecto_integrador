@@ -68,14 +68,14 @@ int main() {
     // Elejir como  hacer esto para pasar los datos de la partida
     char nombreFinal[MAX_NOMBRE];
     strcpy(nombreFinal, jugador1.nombre);  // Copiar el nombre del jugador
-    int puntajeFinal = jugador1.saldo;
+    int saldoFinal = jugador1.saldo;
     int victoriasFinal = jugador1.victorias;
     int derrotasFinal = jugador1.derrotas;
     int blackjackFinal = jugador1.blackjack;
 
     // Crear structs para manejar el ranking e historial
-    Score nuevoScore = crearScore(nombreFinal, puntajeFinal); // Convierte nombre y dinero a tipo Score
-    Jugador nuevoJuego = crearHistorial(nombreFinal, puntajeFinal, victoriasFinal, derrotasFinal, blackjackFinal); // Manejo del historial
+    Score nuevoScore = crearScore(nombreFinal, saldoFinal); // Convierte nombre y dinero a tipo Score
+    Jugador nuevoJuego = crearHistorial(nombreFinal, saldoFinal, victoriasFinal, derrotasFinal, blackjackFinal); // Manejo del historial
 
     // Actualizacion del Ranking
     rankingImport(scoreList, nombreArchivoRanking);
@@ -90,6 +90,22 @@ int main() {
     // Guardar el historial actualizado
     cantidadRegistros++;  // Incrementar el número de registros
     recordSave(historial, recordFileName, cantidadRegistros);
+
+    // Mostrar el ranking actualizado
+    printf("\n=================== 🏆RANKING ACTUALIZADO🏆 ===================\n");
+    printf("----------------------------------------------------------\n");
+
+    showRanking(scoreList, nombreArchivoRanking);
+
+    // Línea decorativa final
+    printf("==========================================================\n");
+
+    // Mensaje de despedida
+    printf("✨¡Hasta pronto!✨Gracias por jugar🥳.  \n");
+    printf("==========================================================\n");
+
+    printf("Presione una tecla cualquiera para salir...\n");
+    getchar(); // Espera una tecla
  
 
     // Liberar la memoria dinámica antes de salir
@@ -176,73 +192,21 @@ typedef struct {
 -----------------------------------------------------------------------
 Ejemplo de "main" que solo cambia al jugador:
 /////////////////////////////////////////////////////////////////////////////////////
-// La partida completa de Blackjack
+// La partida completa de Blackjack (el que estaba antes - ahora en el otro git , creo)
 void jugarPartida(myDeck *mazo, Jugador *jugador1) {
     myDeck mazoJugador, mazoCroupier;
     bool jugarOtra = true;
 
     while (jugarOtra) {
-        // Inicializar mazos para el jugador y el croupier
-        barajarMazo(mazo);
-        inicializarMazoJugador(&mazoJugador);
-        inicializarMazoJugador(&mazoCroupier);
-
-        int indiceMazo = TAMANO_MAZO - 1; // Índice de la última carta en el mazo
-        int indiceJ1 = 0, indiceC = 0;    // Índices para el jugador y el croupier
-
-        // Repartir la mano inicial
-        manoInicial(mazo, &mazoJugador, &mazoCroupier, &indiceMazo, &indiceJ1, &indiceC);
-        int puntajeJugador = calcularPuntaje(&mazoJugador, indiceJ1);
-
-        // Comprobar si el jugador tiene blackjack
-        bool jugadorBlackjack = puntajeJugador == 21;
-        if (jugadorBlackjack) {
-            printf("¡FELICITACIONES! Obtuviste BLACKJACK.\n");
-        } else {
-            // Turno del jugador
-            bool pasoDePuntajeJugador = false;
-            turnoJugador(mazo, &mazoJugador, &indiceMazo, &indiceJ1, &pasoDePuntajeJugador);
-
-            // Actualizar puntaje final del jugador
-            puntajeJugador = calcularPuntaje(&mazoJugador, indiceJ1);
-            printf("\n=== Tus cartas finales ===\n");
-            imprimirCartasJugador(&mazoJugador, indiceJ1);
-            printf("Tu puntaje final: %d\n", puntajeJugador);
-        }
-
-        // Turno del croupier
-        turnoCroupier(mazo, &mazoCroupier, &indiceMazo, &indiceC);
-        int puntajeCroupier = calcularPuntaje(&mazoCroupier, indiceC);
-
-        // Mostrar las cartas del croupier
-        printf("\n=== Cartas del Croupier ===\n");
-        imprimirCartasJugador(&mazoCroupier, indiceC);
-        printf("Puntaje del Croupier: %d\n", puntajeCroupier);
-
-        // Evaluar el resultado
-        bool jugadorGano = evaluarResultado(puntajeJugador, puntajeCroupier);
-
-        // Actualizar estadísticas y saldo del jugador (PENDIENTE POSIBILITAR DOBLAR APUESTA)
-        actualizarEstadisticas(jugador1, jugadorGano, jugadorBlackjack);
-        int apuesta = 200; // Apuesta inicial
-        if (jugadorBlackjack) {
-            apuesta *= 1.5; // Bonus por blackjack
-        }
-        modificarSaldo(jugador1, jugadorGano ? apuesta : -apuesta);
-
-        // Mostrar el resultado
-        mostrarMensajeResultado(puntajeJugador, puntajeCroupier, jugadorGano);
-
-        // Mostrar los datos actuales del jugador
-        imprimirJugador(jugador1);
-
-        // Preguntar si el jugador quiere otra partida
-        jugarOtra = preguntarJugarOtra();
+        /*CODIGO DEL JUEGO*/
+        /*CODIGO DEL JUEGO*/
+        /*CODIGO DEL JUEGO*/
+        /*CODIGO DEL JUEGO*/
     }
 }
 -----------------------------------------------------------------------
 Ejemplo de "main" que cambia todas las variables para que esten disponibles :
-// Funcion que engloba la partida completa de Blackjack:
+// Funcion que engloba la partida completa de Blackjack (el actual en juego_completo_m)
 void jugarPartida(myDeck *mazo, Jugador *jugador1, myDeck *mazoJugador, myDeck *mazoCroupier,int *indiceMazo, int *indiceJ1, int *indiceC, int apuesta, bool *pasoDePuntajeJugador) {
     /* ACLARACIÓN SOBRE PUNTEROS:
     * Esta función trabaja exclusivamente con punteros. En las llamadas internas:
@@ -252,119 +216,14 @@ void jugarPartida(myDeck *mazo, Jugador *jugador1, myDeck *mazoJugador, myDeck *
     bool jugarOtra = true;
 
     while (jugarOtra) {
-        // Inicializar mazos para el jugador y el croupier
-        barajarMazo(mazo); // ACLARACION PUNTEROS OJO!!
-        inicializarMazoJugador(mazoJugador); // ACLARACION PUNTEROS OJO!!
-        inicializarMazoJugador(mazoCroupier);// ACLARACION PUNTEROS OJO!!
-
-        // Reiniciar indices en cada partida. // ACLARACION PUNTEROS!!
-        *indiceMazo = TAMANO_MAZO - 1; // Índice de la última carta en el mazo
-        *indiceJ1 = 0; 
-        *indiceC = 0;    // Índices para el jugador y el croupier
-
-        // Repartir la mano inicial
-        // Ojo al llamar esta funcion desde otro lado aca son punteros ya, por eso no se usa &
-        manoInicial(mazo, mazoJugador, mazoCroupier, indiceMazo, indiceJ1, indiceC); // ACLARACION PUNTEROS!!
-
-
-        // ACLARACION PUNTEROS: el primer argumento es un puntero, el segundo un int
-        int puntajeJugador = calcularPuntaje(mazoJugador, *indiceJ1);// ACLARACION PUNTEROS!!
-
-        // Comprobar si el jugador tiene blackjack (21 en la ronda inicial)
-        bool jugadorBlackjack = puntajeJugador == 21;
-        if (jugadorBlackjack) {
-            // Importante --> LO IMPORTANTE ES QUE NOS SALTAMOS EL TURNO DEL JUGADOR
-            printf("¡FELICITACIONES! Obtuviste BLACKJACK.\n");
-        } else {
-            // Turno del jugador
-
-            // Este booleando Nos indica si la partida termina de manera forzada
-            *pasoDePuntajeJugador = false;
-            turnoJugador(mazo, mazoJugador, indiceMazo, indiceJ1, pasoDePuntajeJugador);// ACLARACION PUNTEROS!!
-
-            // Actualizar puntaje final del jugador
-            puntajeJugador = calcularPuntaje(mazoJugador, *indiceJ1); // ACLARACION PUNTEROS!!
-            printf("\n=== Tus cartas finales ===\n");
-            imprimirCartasJugador(mazoJugador, *indiceJ1); // ACLARACION PUNTEROS: OJO !!
-            printf("Tu puntaje final: %d\n", puntajeJugador);
-        }
-
-        // Turno del croupier - > ACLARACION PUNTEROS: OJO
-        turnoCroupier(mazo, mazoCroupier, indiceMazo, indiceC);
-        int puntajeCroupier = calcularPuntaje(mazoCroupier, *indiceC);
-
-        // Mostrar las cartas del croupier
-        printf("\n=== Cartas del Croupier ===\n");
-        imprimirCartasJugador(mazoCroupier, *indiceC);
-        printf("Puntaje del Croupier: %d\n", puntajeCroupier);
-
-        // Evaluar el resultado
-        bool jugadorGano = evaluarResultado(puntajeJugador, puntajeCroupier); // ACLARACION PUNTEROS: OJO !!
-
-        // Actualizar estadísticas y saldo del jugador (PENDIENTE POSIBILITAR DOBLAR APUESTA)
-        actualizarEstadisticas(jugador1, jugadorGano, jugadorBlackjack); // ACLARACION PUNTEROS: OJO !!
-
-        int ganancia = apuesta;
-        if (jugadorBlackjack) {
-            ganancia *= 1.5;  // Bonus por blackjack
-        }
-        //Modifica jugador1->saldo: Si jugadorGano == true paga ganancia , sino - apuesta
-        modificarSaldo(jugador1, jugadorGano ? ganancia : -apuesta); // ACLARACION PUNTEROS: OJO !!
-
-        // Mostrar el resultado
-        mostrarMensajeResultado(puntajeJugador, puntajeCroupier, jugadorGano); // ACLARACION PUNTEROS: OJO !!
-
-        // Mostrar los datos actuales del jugador
-        imprimirJugador(jugador1); // ACLARACION PUNTEROS: OJO !!
-
-        // Preguntar si el jugador quiere otra partida (true -> puede)
-        if (puedeSeguirJugando(jugador1, apuesta))
-        {
-            jugarOtra = preguntarJugarOtra();
-        }
-        else
-        {
-            jugarOtra = false;
-        }
-
-            
+        /*CODIGO DEL JUEGO*/
+        /*CODIGO DEL JUEGO*/
+        /*CODIGO DEL JUEGO*/
+        /*CODIGO DEL JUEGO*/
     }
 }
 -----------------------------------------------------------------------
 
 
 *-* ALGUNAS FUNCIONES UTILES *-*
-// Si quiero saber un puntaje:
-int puntajeCroupier = calcularPuntaje(&mazoCroupier, indiceC);
----> Cuando las variables que estamos usando ya son punteros, es al revez
-int puntajeJugador = calcularPuntaje(mazoJugador, *indiceJ1);
-
-    
-// Evaluar el resultado
-bool jugadorGano = evaluarResultado(puntajeJugador, puntajeCroupier);
-
-// Llamar la mano inicial desde la funcion donde se declaran las variables:
-manoInicial(&mazo, &mazoJugador, &mazoCroupier, &indiceMazo, &indiceJ1, &indiceC); // ACLARACION PUNTEROS!!
-
---------- MAZO.H ->  CARTAS Y MAZOS
-+++Importante+++ 
--> Recibe 4 punteros ,"copia" la carta del mazo al mazo del jugador, y cambia los indices
-pedir1carta(&mazo, &jugador, &indiceMazo, &indiceJugador);
-++++++++++++++++ 
-
-// Inicializar MAZO y barajar --> inicializar mazo "llena" , la cantidad de cartas que tiene depende de cuantos enum hay en 
-inicializarMazo(&mazo);
-barajarMazo(&mazo);
-
-// En cambio esta , inicializa un mazo con MAX_CARTAS_JUGADOR mycards ---> con 0,0,0 (ojo As de Trebol con puntaje 0 = error)
-void inicializarMazoJugador(myDeck *jugador);
-
-
-// inicializarJugadorGlobal --> Nos inicia un struct con nombre  y saldo inicial para usar durante toda la sesion
-
-// imprimirCartasJugador(&mazo, indiceC); -> imprime el mazo hasta ese punto
-
-
-
-
 

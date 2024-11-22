@@ -185,7 +185,7 @@ int main() {
 
 
     // Mostrar el ranking actualizado
-    printf("\n=================== RANKING ACTUALIZADO ===================\n");
+    printf("\n=================== 🏆RANKING ACTUALIZADO🏆 ===================\n");
     printf("----------------------------------------------------------\n");
 
     showRanking(scoreList, nombreArchivoRanking);
@@ -194,7 +194,7 @@ int main() {
     printf("==========================================================\n");
 
     // Mensaje de despedida
-    printf("Gracias por jugar. ¡Hasta pronto! 🎉\n");
+    printf("✨¡Hasta pronto!✨Gracias por jugar🥳.  \n");
     printf("==========================================================\n");
 
         
@@ -204,6 +204,24 @@ int main() {
     // Guardar el historial actualizado
     cantidadRegistros++;  // Incrementar el número de registros
     recordSave(historial, recordFileName, cantidadRegistros);
+
+
+    printf("Presione una tecla cualquiera para salir...\n");
+    getchar(); // Espera una tecla
+
+        // Mostrar el Historial actualizado
+    printf("\n=================== 🎮HISTORIAL ACTUALIZADO🎮 ===================\n");
+    printf("----------------------------------------------------------\n");
+
+    showRecord(historial, cantidadRegistros);  // Llamamos a showRecord para imprimir el historial
+
+    // Línea decorativa final
+    printf("==========================================================\n");
+
+    // Mensaje de despedida
+    printf("🎮✨🚀🏆🎲🥳🌟🔥💡🎵🎉\n");
+    printf("==========================================================\n");
+ 
  
 
     // Liberar la memoria dinámica antes de salir
