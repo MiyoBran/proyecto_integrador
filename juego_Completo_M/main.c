@@ -82,6 +82,9 @@ int main() {
     // Pedir el nombre del jugador
     preguntarNombre(nombreJugador);
 
+    // Saludar al jugador
+    saludarJugador(nombreJugador);
+
     // Inicializar el jugador con el nombre ingresado
     inicializarJugadorGlobal(&jugador1, nombreJugador, SALDO_INICIAL);
 
@@ -164,12 +167,6 @@ int main() {
     int derrotasFinal = jugador1.derrotas;
     int blackjackFinal = jugador1.blackjack;
 
-    /* // PAra agregar registro:*/
-    // strcpy(nombreFinal, "MJS");  // Copiar el nombre del jugador
-    // puntajeFInal = 99999;
-    // victoriasFinal = 2;
-    // derrotasFinal = 11;
-    // blackjackFinal = 23;
 
     // Crear structs para manejar el ranking e historial
     Score nuevoJugador = crearScore(nombreFinal, puntajeFInal); // Convierte nombre y dinero a tipo Score
@@ -194,11 +191,11 @@ int main() {
     printf("==========================================================\n");
 
     // Mensaje de despedida
-    printf("✨¡Hasta pronto!✨Gracias por jugar🥳.  \n");
+    printf("✨¡Hasta pronto!✨🃏Gracias por jugar🃏.  \n");
     printf("==========================================================\n");
 
         
-     // Agregar el nuevo registro al historial --> importante tiene que haber 1 struct jugador creado
+    // Agregar el nuevo registro al historial --> importante tiene que haber 1 struct jugador creado
     insertRecordEOF(&historial, nuevoJuego, cantidadRegistros);
 
     // Guardar el historial actualizado
@@ -209,7 +206,7 @@ int main() {
     printf("Presione una tecla cualquiera para salir...\n");
     getchar(); // Espera una tecla
 
-        // Mostrar el Historial actualizado
+    // Mostrar el Historial actualizado
     printf("\n=================== 🎮HISTORIAL ACTUALIZADO🎮 ===================\n");
     printf("----------------------------------------------------------\n");
 
@@ -219,7 +216,7 @@ int main() {
     printf("==========================================================\n");
 
     // Mensaje de despedida
-    printf("🎮✨🚀🏆🎲🥳🌟🔥💡🎵🎉\n");
+    printf("🎮✨🚀🏆🎲🥳🌟🔥💡🎵🎉🃏\n");
     printf("==========================================================\n");
  
  

@@ -101,7 +101,7 @@ int main() {
     printf("==========================================================\n");
 
     // Mensaje de despedida
-    printf("✨¡Hasta pronto!✨Gracias por jugar🥳.  \n");
+    printf("✨¡Hasta pronto!✨🃏Gracias por jugar🃏.  \n");
     printf("==========================================================\n");
 
     printf("Presione una tecla cualquiera para salir...\n");

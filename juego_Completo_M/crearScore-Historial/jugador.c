@@ -107,6 +107,12 @@ void preguntarNombre(char *nombreJugador) {
     while ((c = getchar()) != '\n' && c != EOF);  // Lee y descarta el resto de la línea
 }
 
+// Saludar al jugador con un mensaje personalizado
+void saludarJugador(const char *nombreJugador) {
+    printf("\n¡Hola, %s! 👋\n", nombreJugador);
+    printf("Espero que estés preparado para jugar. ¡Que te diviertas! 🃏✨\n\n");
+}
+
 // Función para crear un nuevo historial de jugador
 Jugador crearHistorial(char nombre[], int saldo, int victorias, int derrotas, int blackjack) {
     Jugador nuevoJugador;
