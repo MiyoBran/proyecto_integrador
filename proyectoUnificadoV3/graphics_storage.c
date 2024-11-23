@@ -23,7 +23,6 @@ Texture2D spades[13];
 
 int SCREEN_WIDTH;
 int SCREEN_HEIGHT;
-int MAX_CARDS_DISPLAYED;
 //Declares variables whose values are going to be found in .env file
 
 int screenState = 0;                              //Variable that changes screens
@@ -283,8 +282,26 @@ void loadRankingVariables(const char **playerRankings, const char **playerNames,
 }
 
 
+bool showGameInstructions(Texture2D texture_table) {
+    char caca[] = "Bienvenido a otro video de deigamer donde disfrutaras algo diferente\nRelajate, acomodate\nSiente la esencia\nDisfrutando estando en mi presencia";
+    bool showInstructions = true;
+    if (showInstructions) {
+        BeginDrawing();
+            DrawTexture(texture_table, 0, 0, WHITE);
+            DrawText(TextFormat("%s", caca), 100, 100, 40, BLACK);
+        EndDrawing();
+        for (int key = KEY_SPACE; key < KEY_KB_MENU; key++) {
+            if (IsKeyPressed(key)) {
+                showInstructions = false;
+            }
+        }
+    }
+    return showInstructions;
+}
+
+
 //Displays three variables set in loadRankingVariables
-int showGraphicRanking(const char *playerRankings, const char *playerNames, const char *playerScores) { 
+bool showGraphicRanking(const char *playerRankings, const char *playerNames, const char *playerScores) { 
     bool showScoreboard = true;
     if (showScoreboard) {
         BeginDrawing();

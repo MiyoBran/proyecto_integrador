@@ -38,6 +38,7 @@ typedef struct {
     Rectangle menuPlay;
     Rectangle menuScoreboard;
     Rectangle menuQuit;
+    Rectangle menuRecord;
 }   buttonBoxes;
 //Struct for button logic
 
@@ -58,7 +59,6 @@ extern Texture2D spades[13];
 
 extern int SCREEN_WIDTH;
 extern int SCREEN_HEIGHT;
-extern int MAX_CARDS_DISPLAYED;
 //Variables searched in .env file
 
 extern int screenState;
@@ -70,23 +70,24 @@ extern int y_position;                                                   //Gener
 extern int buttonXPosition;                                              //Difference between window "wall" and buttons
 extern int buttonYPosition;                                              //Difference between window "roof" and buttons
 
-
-void initializeGraphicsConfig();
 //Searches for values in the .env file config
-void loadCardTextures();
+void initializeGraphicsConfig();
 //Loads the textures of the cards into four Texture2D arrays.
-void unloadCardTextures();
+void loadCardTextures();
 //Unloads the textures used by the cards, think of it like dynamic memory
-void printCard(int *amountCards, myCard *cartas1, int playerCropier);
+void unloadCardTextures();
 //Prints cards depending on which side you want
-void getBet(int *bet, struct Rectangle betBox, bool *gameButtons, bool *alreadyBet);
+void printCard(int *amountCards, myCard *cartas1, int playerCropier);
 //Gets set bet number
-void getUserName(char *userName, int *charCount);
+void getBet(int *bet, struct Rectangle betBox, bool *gameButtons, bool *alreadyBet);
 //Gets user name
-void loadRankingVariables(const char **playerRankings, const char **playerNames, const char **playerScores);
+void getUserName(char *userName, int *charCount);
 //Loads scoreboard into three variables
-int showGraphicRanking(const char *playerRankings, const char *playerNames, const char *playerScores);
+void loadRankingVariables(const char **playerRankings, const char **playerNames, const char **playerScores);
 //Displays three variables set in loadRankingVariables
+bool showGraphicRanking(const char *playerRankings, const char *playerNames, const char *playerScores);
+//Shows game instructions
+bool showGameInstructions(Texture2D texture_table);
 
 
 

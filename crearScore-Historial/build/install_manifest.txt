@@ -1,0 +1,6 @@
+/home/Miyo/proyectos/tpIntegrador/proyecto_integrador/crearScore-Historial/build/_CPack_Packages/CYGWIN/TGZ/crearScoreHistorial-0.1.1-CYGWIN/blackjack/bin/crearScoreHistorial.exe
+/home/Miyo/proyectos/tpIntegrador/proyecto_integrador/crearScore-Historial/build/_CPack_Packages/CYGWIN/TGZ/crearScoreHistorial-0.1.1-CYGWIN/blackjack/share/crearScoreHistorial/datos_historial.dat
+/home/Miyo/proyectos/tpIntegrador/proyecto_integrador/crearScore-Historial/build/_CPack_Packages/CYGWIN/TGZ/crearScoreHistorial-0.1.1-CYGWIN/blackjack/share/crearScoreHistorial/datos_ranking.dat
+/home/Miyo/proyectos/tpIntegrador/proyecto_integrador/crearScore-Historial/build/_CPack_Packages/CYGWIN/TGZ/crearScoreHistorial-0.1.1-CYGWIN/blackjack/share/crearScoreHistorial/README.txt
+/home/Miyo/proyectos/tpIntegrador/proyecto_integrador/crearScore-Historial/build/_CPack_Packages/CYGWIN/TGZ/crearScoreHistorial-0.1.1-CYGWIN/blackjack/share/crearScoreHistorial/.env
+/home/Miyo/proyectos/tpIntegrador/proyecto_integrador/crearScore-Historial/build/_CPack_Packages/CYGWIN/TGZ/crearScoreHistorial-0.1.1-CYGWIN/blackjack/share/crearScoreHistorial/.env

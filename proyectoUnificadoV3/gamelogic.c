@@ -13,7 +13,7 @@
 #include "graphics_storage.h" // las funciones declaradas para la parte grafica - UI
 
 #define decks 1
-//int MAX_CARDS_DISPLAYED;
+int MAX_CARDS_DISPLAYED;
 
 void initDeck(myCard Deck[],int *remaining_cards, myCard Crupier[], myCard Player[]){
     int index = 0;
@@ -104,13 +104,13 @@ void allowBlackjackWin(int playerPoints, int amountCardsPlayer, gameState *curre
     if (playerPoints == 21 && amountCardsPlayer == 2) {
         currentGame->playerBlackjack = true;
         currentGame->roundEnd = true;
+        currentGame->allowMoneyUpdate = true;
     } 
 }
+
 //Check if player went above 21 points
-bool playerAbove21(int points, gameState *currentGame) {
+bool playerAbove21(int points) {
     if (points > 21) {
-        currentGame->allowMoneyUpdate = true;
-        currentGame->roundEnd = true;   
         return true;     
     }
     return false;

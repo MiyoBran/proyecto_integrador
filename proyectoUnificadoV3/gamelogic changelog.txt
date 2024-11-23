@@ -1,0 +1,36 @@
+gamelogic.c
+
+line 16
+MAX_CARDS_DISPLAYED is not marked as a comment anymore
+
+line 107
+added currentGame->allowMoneyUpdate = true;
+
+changed playerAbove21 function from this:
+bool playerAbove21(int points, gameState *currentGame) {
+    if (points > 21) {
+        currentGame->allowMoneyUpdate = true;
+        currentGame->roundEnd = true;   
+        return true;     
+    }
+    return false;
+}
+to this:
+
+bool playerAbove21(int points) {
+    if (points > 21) {
+        return true;     
+    }
+    return false;
+}
+
+
+gamelogic.h
+line 31
+extern int MAX_CARDS_DISPLAYED is now located in this line instead of line 5, dunno why I made this change
+
+Lines 80 to 91
+changed comments to be above functions so they show up when hovering on their names
+
+line 87
+playerAbove21 only accepts int points instead of int points and pointer to gameState struct

@@ -1,0 +1,9 @@
+/home/Miyo/proyectos/tpIntegrador/proyecto_integrador/crearScore-Historial/build/CMakeFiles/crearScoreHistorial.dir
+/home/Miyo/proyectos/tpIntegrador/proyecto_integrador/crearScore-Historial/build/CMakeFiles/package.dir
+/home/Miyo/proyectos/tpIntegrador/proyecto_integrador/crearScore-Historial/build/CMakeFiles/package_source.dir
+/home/Miyo/proyectos/tpIntegrador/proyecto_integrador/crearScore-Historial/build/CMakeFiles/edit_cache.dir
+/home/Miyo/proyectos/tpIntegrador/proyecto_integrador/crearScore-Historial/build/CMakeFiles/rebuild_cache.dir
+/home/Miyo/proyectos/tpIntegrador/proyecto_integrador/crearScore-Historial/build/CMakeFiles/list_install_components.dir
+/home/Miyo/proyectos/tpIntegrador/proyecto_integrador/crearScore-Historial/build/CMakeFiles/install.dir
+/home/Miyo/proyectos/tpIntegrador/proyecto_integrador/crearScore-Historial/build/CMakeFiles/install/local.dir
+/home/Miyo/proyectos/tpIntegrador/proyecto_integrador/crearScore-Historial/build/CMakeFiles/install/strip.dir

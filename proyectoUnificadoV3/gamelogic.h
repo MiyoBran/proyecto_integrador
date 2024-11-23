@@ -2,7 +2,7 @@
 #define gamelogic_h
 
 #include <stdbool.h>
-extern int MAX_CARDS_DISPLAYED;
+
 // Enumeraciones para los palos de las cartas
 typedef enum {
     TREBOL, DIAMANTE, CORAZON, PICA
@@ -28,6 +28,8 @@ typedef struct  {
 }   myCard;
 // Estructura que define una carta en el juego
 
+extern int MAX_CARDS_DISPLAYED;
+//Some value searched in .env
 
 // Prototipos de funciones
 void initDeck(myCard Deck[], int *remaining_cards, myCard Crupier[], myCard Player[]); // Inicializa el mazo
@@ -79,10 +81,11 @@ int getPlayerMoney(int playerMoney, int bet, bool playerWin);
 void getCard(myCard *deck, int *amountCards);
 int calculatePoints(myCard *deck, int *amountCards);
 bool compareScores(int puntajeJugador, int puntajeCroupier);
-void allowBlackjackWin(int playerPoints, int amountCardsPlayer, gameState *currentGame);
 //Checks if player got a blackjack win
-bool playerAbove21(int points, gameState *currentGame);
+void allowBlackjackWin(int playerPoints, int amountCardsPlayer, gameState *currentGame);
 //Checks whether player or dealer went above 21
-void startRound(int *amountCardsPlayer, int *amountCardsDealer, int *playerPoints, int *dealerPoints, int *bet, myCard playerDeck[MAX_CARDS_DISPLAYED], myCard dealerDeck[MAX_CARDS_DISPLAYED], gameState *currentGame);
+bool playerAbove21(int points);
 //Starts a new round, might need to compress the parameters a bit
+void startRound(int *amountCardsPlayer, int *amountCardsDealer, int *playerPoints, int *dealerPoints, int *bet, myCard playerDeck[MAX_CARDS_DISPLAYED], myCard dealerDeck[MAX_CARDS_DISPLAYED], gameState *currentGame);
+
 /////////////////////////////////////////////////////////////////////////////////////

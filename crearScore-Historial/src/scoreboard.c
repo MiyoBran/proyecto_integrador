@@ -57,8 +57,6 @@ void checkScore(Score *scoreList, Score nuevoJugador,const char *nombreArchivo) 
     // Actualizar los rankings después de insertar
     updateRanking(scoreList, nombreArchivo);
 
-    // Actualizar los rankings después de insertar
-    updateRanking(scoreList,nombreArchivo);
 }
 
 // Función para insertar al jugador en el ultimo lugar
