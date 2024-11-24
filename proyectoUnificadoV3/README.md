@@ -1,7 +1,3 @@
-Aquí tienes el archivo completo para copiar y pegar:
-
----
-
 ### **README.md**
 
 ```markdown
@@ -143,11 +139,3 @@ En caso de dudas o sugerencias, no dudes en contactar con el equipo de desarroll
 ```
 
 ---
-
-### **Instrucciones**
-
-1. Crea un archivo llamado `README.md` en la carpeta raíz de tu proyecto (`blackjack/`).
-2. Copia y pega el contenido anterior.
-3. Guarda el archivo.
-
-Este archivo es fácil de leer y contiene toda la información necesaria para que otros usuarios puedan configurar y ejecutar tu proyecto sin problemas. 😊
