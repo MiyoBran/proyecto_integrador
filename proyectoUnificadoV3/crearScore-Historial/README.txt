@@ -69,6 +69,17 @@ mv ./build/crearScoreHistorial-0.1.1-CYGWIN.tar.gz ~/
 extraer contenido
 tar -xvzf ~/crearScoreHistorial-0.1.1-CYGWIN.tar.gz -C ~/
 
+Chequear
+ls ~/
+Si esta la carpeta
+cd ~/blackjack
+o sino
+cd ~/crearScoreHistorial-0.1.1-CYGWIN/blackjack
+
+
+
+
+
 
 
 

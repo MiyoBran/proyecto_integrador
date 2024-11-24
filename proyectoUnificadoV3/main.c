@@ -73,6 +73,7 @@ int main() {
 ////////////////////////////////////////////
 
 ////////Variables related to graphics////////
+    int indexUpsideCards;
     bool tableUnloaded = false;                                       //This variable prevents the compiler to keep unloading the table image during
     buttons gameButtons = {false, false, false, false, false};              //Struct for logic with buttons. The order is hold, bet, hit, gameContinue and gameEnd
     buttonBoxes gameBoxes = {                                               //Struct for logic with buttons
@@ -105,7 +106,8 @@ int main() {
 
          if (texture_table.id == 0 && !tableUnloaded) {                 //Checks if the table's image needs to be loaded
             texture_table = LoadTexture("Blackjack cards/Table blank.png");
-            upsideDownCard = LoadTexture("Blackjack cards/Upside down card.png");
+            indexUpsideCards = chooseRandomUpsideCard();
+   //         upsideDownCard = LoadTexture("Blackjack cards/Upside down card.png");
         } 
         DrawTexture(texture_table, 0, 0, WHITE);        //Shows the table's image 
         switch (screenState) {
@@ -169,7 +171,7 @@ int main() {
 
                 if (amountCardsDealer <= 2) {
                     x_dealerPosition = (CARD_WIDTH*3)+50;
-                    DrawTexture(upsideDownCard, CARD_WIDTH*(amountCardsDealer+1)+(CARD_DISTANCE*amountCardsDealer), VERTICAL_MARGIN*2, WHITE);
+                    DrawTexture(upsideCards[indexUpsideCards], CARD_WIDTH*(amountCardsDealer+1)+(CARD_DISTANCE*amountCardsDealer), VERTICAL_MARGIN*2, WHITE);
                 }   else {
                     x_dealerPosition = (CARD_WIDTH + CARD_DISTANCE)*(amountCardsDealer+1);
                 }
@@ -189,7 +191,7 @@ int main() {
                     }
                     if (gameButtons.betButton) {
                         DrawText("Cuanto quiere apostar?", gameBoxes.betBox.x+280, gameBoxes.betBox.y, 30, BLACK);
-                            getBet(&playerBet, gameBoxes.betBox, &gameButtons.betButton, &alreadyBet);
+                        getBet(&playerBet, gameBoxes.betBox, &gameButtons.betButton, &alreadyBet);
                     }
                 }
                 //Button to let the player bet between 100, 200 and 300. If the player hasn't made a bet or their amount of cards is 2, they can bet

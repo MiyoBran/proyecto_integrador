@@ -55,6 +55,7 @@ extern Texture2D hearts[13];
 extern Texture2D clubs[13];
 extern Texture2D diamonds[13];
 extern Texture2D spades[13];
+extern Texture2D upsideCards[9];
 //Variables that hold all the card textures
 
 extern int SCREEN_WIDTH;
@@ -72,9 +73,11 @@ extern int buttonYPosition;                                              //Diffe
 
 //Searches for values in the .env file config
 void initializeGraphicsConfig();
-//Loads the textures of the cards into four Texture2D arrays.
+//Chooses a random index for the upside down cards
+int chooseRandomUpsideCard();
+//Loads the textures of the cards into five Texture2D arrays.
 void loadCardTextures();
-//Unloads the textures used by the cards, think of it like dynamic memory
+//Unloads the textures used by the cards
 void unloadCardTextures();
 //Prints cards depending on which side you want
 void printCard(int *amountCards, myCard *cartas1, int playerCropier);

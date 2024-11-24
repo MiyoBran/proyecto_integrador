@@ -19,7 +19,44 @@ gcc -o blackjackFull main.c config.c gamelogic.c graphics_storage.c jugador.c re
     -lglfw3 \
     -lgdi32
 
+---- PROBAR:
+1. Compilación estática (si es posible)
+Si las bibliotecas que estás usando (raylib, GLFW) tienen versiones estáticas (.a),
+puedes generar un ejecutable independiente que no dependa de bibliotecas externas. 
+Modifica tu comando de compilación para incluir -static:
+gcc -o blackjackFull.exe main.c -I/home/Miyo/raylib/src -I/home/Miyo/glfw/include/GLFW \
+    -L/home/Miyo/glfw/build/src -L/home/Miyo/raylib/src -L/usr/local/lib \
+    -lraylib -lglfw3 -lgdi32 -static config.c gamelogic.c graphics_storage.c jugador.c record.c scoreboard.c
+----
+2. Compilación dinámica
+En este caso, debes copiar las bibliotecas necesarias (como raylib.dll y glfw3.dll) junto con el ejecutable. 
+El comando sigue siendo el mismo, pero el ejecutable dependerá de estas bibliotecas dinámicas. No uses -static.
 
+gcc -o blackjackFull.exe main.c -I/home/Miyo/raylib/src -I/home/Miyo/glfw/include/GLFW \
+    -L/home/Miyo/glfw/build/src -L/home/Miyo/raylib/src -L/usr/local/lib \
+    -lraylib -lglfw3 -lgdi32 config.c gamelogic.c graphics_storage.c jugador.c record.c scoreboard.c
+Busca los archivos .dll necesarios:
+raylib.dll: Normalmente está en el directorio bin de raylib.
+glfw3.dll: Debe estar en tu instalación de GLFW.
+Cualquier otra biblioteca adicional que use tu programa.
+Copia estos archivos en la misma carpeta que blackjackFull.exe.
+-----
+3. Organizar la carpeta de distribución
+Crea una carpeta (por ejemplo, Blackjack_Distribucion) y coloca en ella:
+
+El ejecutable (blackjackFull.exe).
+Las bibliotecas dinámicas necesarias (raylib.dll, glfw3.dll, etc.).
+Cualquier otro recurso necesario para tu programa (imágenes, sonidos, archivos de configuración).
+---
+4. Crear el archivo .bat
+Crea un archivo jugar_blackjack.bat dentro de esa carpeta con el siguiente contenido:
+
+
+@echo off
+title Blackjack - Tu Juego de Cartas Favorito
+echo Iniciando Blackjack...
+blackjackFull.exe
+pause
 -----------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------
 importante --> archivo .env  con lo siguiente:

@@ -19,6 +19,7 @@ Texture2D hearts[13];
 Texture2D clubs[13];
 Texture2D diamonds[13];
 Texture2D spades[13];
+Texture2D upsideCards[9];
 //Initializes array of variables that are going to hold the cards' images
 
 int SCREEN_WIDTH;
@@ -94,6 +95,17 @@ const char *spadesFiles[13] = {
                                 "Blackjack cards/Spades/Spades queen.png",
                                 "Blackjack cards/Spades/Spades king.png"
 };
+const char *upsideCardsFiles[9] = {
+                                "Blackjack cards/Upside down cards/card1.png",
+                                "Blackjack cards/Upside down cards/card2.png",
+                                "Blackjack cards/Upside down cards/card3.png",
+                                "Blackjack cards/Upside down cards/card4.png",
+                                "Blackjack cards/Upside down cards/card5.png",
+                                "Blackjack cards/Upside down cards/card6.png",
+                                "Blackjack cards/Upside down cards/card7.png",
+                                "Blackjack cards/Upside down cards/card8.png",
+                                "Blackjack cards/Upside down cards/card9.png"
+};
 //This are pointers to strings. The LoadTexture function needs this type of variable
 
 
@@ -128,6 +140,11 @@ void initializeGraphicsConfig(){
     }
 }
 
+int chooseRandomUpsideCard() {
+    int index = rand() % 9;
+    return index;
+}
+
 //Loads the textures of the cards into four Texture2D arrays.
 void loadCardTextures() {                                                                  
     for (int i = 0; i < 13; i++) {
@@ -148,6 +165,12 @@ void loadCardTextures() {
             printf("\n\n%s texture not loaded properly\n\n", spadesFiles[i]);
         }
     }
+    for (int i = 0; i < 9; i++) {
+        upsideCards[i] =  LoadTexture(upsideCardsFiles[i]);
+        if (upsideCards[i].id == 0) {
+            printf("\n\n%s texture not loaded properly\n\n", upsideCardsFiles[i]);
+        }
+    }
 }
 
 //Unloads the textures used by the cards, think of it like dynamic memory
@@ -157,6 +180,9 @@ void unloadCardTextures() {
         UnloadTexture(clubs[i]);
         UnloadTexture(diamonds[i]);
         UnloadTexture(spades[i]);
+    }
+    for (int i = 0; i < 9; i++) {
+        UnloadTexture(upsideCards[i]);
     }
 }
 
