@@ -42,6 +42,10 @@ void saludarJugador(const char *nombreJugador);
 // Función para crear un nuevo historial de jugador
 Jugador crearHistorial(char nombre[], int saldo, int victorias, int derrotas, int blackjack);
 
+// Función para mostrar el contenido de un archivo con diferentes velocidades de presentación
+// según el parámetro 'velocidadDisplay'. La velocidad de presentación afecta cómo se 
+// muestra el contenido: letra por letra, palabra por palabra, o línea por línea. Si el valor 
+// de 'velocidadDisplay' es 0 o cualquier otro número, se muestra todo el contenido de una vez.
 void mostrarContenidoArchivo(const char *nombreArchivo, int velocidadDisplay);
 
 

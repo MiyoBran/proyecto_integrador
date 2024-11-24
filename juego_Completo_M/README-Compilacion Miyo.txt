@@ -3,7 +3,7 @@
 
 /*Para compilar JUEGO ACTUAL:
 
-gcc -o blackjack main.c config.c jugador.c logica.c mazo.c record.c scoreboard.c
+gcc -o blackjack main.c config.c jugador.c logica.c mazo.c record.c scoreboard.c -static
 
 -----------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------

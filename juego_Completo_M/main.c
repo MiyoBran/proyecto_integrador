@@ -150,7 +150,7 @@ int main() {
                 2: palabra por palabra (más rápido).
                 3: línea por línea (más rápido).
                 Cualquier otro valor se comporta como la opción predeterminada, mostrando todo de una vez.*/
-                mostrarContenidoArchivo("reglas.txt", 3); // Cambia el 2 por 1, 2 o 3 según el comportamiento deseado
+                mostrarContenidoArchivo("reglas.txt", 3); // Cambia el 0 por 1, 2 o 3 según el comportamiento deseado
                 break;
             case 6:
                 salir = true;

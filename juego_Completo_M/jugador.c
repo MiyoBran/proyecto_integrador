@@ -105,7 +105,7 @@ void mensajeBienvenida() {
 
 // Mensaje donde nos pide ingresar un nombre usando MAX_NOMBRE de límite
 void preguntarNombre(char *nombreJugador) {
-    printf("Por favor, introduce tu nombre (máximo %d caracteres): ", MAX_NOMBRE - 1);
+    printf("Por favor, introduce tu nombre: ");
     if (fgets(nombreJugador, MAX_NOMBRE, stdin) == NULL) {
         printf("Error al leer la entrada.\n");
         nombreJugador[0] = '\0';  // Asigna una cadena vacía en caso de error
