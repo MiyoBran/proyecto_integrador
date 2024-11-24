@@ -3,6 +3,7 @@
 #include <stdbool.h> // Para manejar valores booleanos
 #include <string.h>
 #include <unistd.h>  // Para la función usleep (para control de velocidad)
+#include <time.h>   // para funcion nanosleep q remplaza usleep
 ////////////////////////Funciones propias////////////////////////
 
 #include "mazo.h"       // donde estan declaradas las funciones y structs del mazo y las cartas
@@ -155,55 +156,55 @@ void saludarJugador(const char *nombreJugador) {
 // muestra el contenido: letra por letra, palabra por palabra, o línea por línea. Si el valor 
 // de 'velocidadDisplay' es 0 o cualquier otro número, se muestra todo el contenido de una vez.
 void mostrarContenidoArchivo(const char *nombreArchivo, int velocidadDisplay) {
-    // Abre el archivo para lectura
     FILE *f = fopen(nombreArchivo, "r");
-    if (!f) { // Si el archivo no se puede abrir, muestra un mensaje de error y termina
+    if (!f) {
         perror("No se puede abrir el archivo");
         return;
     }
 
-    // Variables para almacenar los caracteres y las palabras leídas
-    char c; // Variable para leer un carácter a la vez
-    char palabra[1024]; // Buffer para leer palabras
-    int i = 0; // Contador que no se utiliza en esta versión, se podría eliminar
+    char c;
+    char palabra[1024];
 
-    // Dependiendo del valor de 'velocidadDisplay', se toma una de las siguientes opciones:
+    // Estructura timespec para usar con nanosleep
+    struct timespec ts;
+
     switch (velocidadDisplay) {
         case 1: // Mostrar letra por letra (más lento)
-            // Lee el archivo carácter por carácter
             while ((c = fgetc(f)) != EOF) {
-                putchar(c); // Imprime el carácter leído
-                fflush(stdout);  // Asegura que el carácter se imprima inmediatamente
-                usleep(500000);  // Pausa de 0.5 segundos entre caracteres
+                putchar(c);
+                fflush(stdout);  // Asegura que se muestre inmediatamente
+                ts.tv_sec = 0;  // 0 segundos
+                ts.tv_nsec = 500000000L;  // 500 ms (500,000,000 nanosegundos)
+                nanosleep(&ts, NULL);  // Pausa entre letras
             }
             break;
 
         case 2: // Mostrar palabra por palabra (más rápido)
-            // Lee el archivo palabra por palabra
             while (fscanf(f, "%1023s", palabra) != EOF) {
-                printf("%s ", palabra); // Imprime la palabra leída
-                fflush(stdout);  // Asegura que la palabra se imprima inmediatamente
-                usleep(300000);  // Pausa de 0.3 segundos entre palabras
+                printf("%s ", palabra);
+                fflush(stdout);
+                ts.tv_sec = 0;
+                ts.tv_nsec = 300000000L;  // 300 ms (300,000,000 nanosegundos)
+                nanosleep(&ts, NULL);  // Pausa entre palabras
             }
             break;
 
-        case 3: // Mostrar línea por línea (más rápido y respeta saltos de línea)
-            // Lee el archivo línea por línea
+        case 3: // Mostrar línea por línea (más rápido)
             while (fgets(palabra, sizeof(palabra), f) != NULL) {
-                printf("%s", palabra); // Imprime la línea leída
-                fflush(stdout);  // Asegura que la línea se imprima inmediatamente
-                usleep(500000);  // Pausa de 0.5 segundos entre líneas
+                printf("%s", palabra);
+                fflush(stdout);
+                ts.tv_sec = 0;
+                ts.tv_nsec = 500000000L;  // 500 ms (500,000,000 nanosegundos)
+                nanosleep(&ts, NULL);  // Pausa entre líneas
             }
             break;
 
-        default: // Mostrar todo el contenido de una vez (sin pausas)
-            // Lee el archivo carácter por carácter hasta el final
+        default: // Mostrar todo el contenido de una vez
             while ((c = fgetc(f)) != EOF) {
-                putchar(c); // Imprime cada carácter directamente
+                putchar(c);
             }
             break;
     }
 
-    // Cierra el archivo una vez que se ha terminado de leer
     fclose(f);
 }
