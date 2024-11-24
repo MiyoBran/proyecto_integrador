@@ -1,13 +1,14 @@
 -----------------------------------------------------------------------------------------------
 /*Para compilar JUEGO ACTUAL archivos unificadosV3:
 
-gcc -o blackjackFull main.c -I/home/Miyo/raylib/src -I/home/Miyo/glfw/include/GLFW -L/home/Miyo/glfw/build/src -L/home/Miyo/raylib/src -L/usr/local/lib -lraylib -lglfw3 -lgdi32 config.c gamelogic.c graphics_storage.c jugador.c record.c scoreboard.c
+gcc -o blackjackFull main.c -I/home/Miyo/raylib/src -I/home/Miyo/glfw/include/GLFW -L/home/Miyo/glfw/build/src -L/home/Miyo/raylib/src -L/usr/local/lib -lraylib -lglfw3 -lgdi32 config.c gamelogic.c graphics_storage.c jugador.c record.c scoreboard.c -static -O2
 
 
 OPCION con desglose
 gcc -o blackjackFull main.c -I/home/Miyo/raylib/src -I/home/Miyo/glfw/include/GLFW \
     -L/home/Miyo/glfw/build/src -L/home/Miyo/raylib/src -L/usr/local/lib \
     -lraylib -lglfw3 -lgdi32 config.c gamelogic.c graphics_storage.c jugador.c record.c scoreboard.c
+    -static -O2
 --- OpcionB:
 gcc -o blackjackFull main.c config.c gamelogic.c graphics_storage.c jugador.c record.c scoreboard.c \
     -I/home/Miyo/raylib/src \
@@ -18,6 +19,8 @@ gcc -o blackjackFull main.c config.c gamelogic.c graphics_storage.c jugador.c re
     -lraylib \
     -lglfw3 \
     -lgdi32
+    -static 
+    -O2
 
 ---- PROBAR:
 1. Compilación estática (si es posible)
@@ -51,7 +54,6 @@ Cualquier otro recurso necesario para tu programa (imágenes, sonidos, archivos 
 4. Crear el archivo .bat
 Crea un archivo jugar_blackjack.bat dentro de esa carpeta con el siguiente contenido:
 
-
 @echo off
 title Blackjack - Tu Juego de Cartas Favorito
 echo Iniciando Blackjack...
@@ -71,8 +73,12 @@ SI se usa raylib
 $(pkg-config --cflags raylib) $(pkg-config --cflags glfw3) -L/usr/local/lib $(pkg-config --libs raylib) $(pkg-config --libs glfw3) -lm
 
 Flags adicionales
-* -Iinclude -I. // donde buscar headers si hay carpetas
-* -Wall -std=c11 // para depurar y ver errores
+* -Iinclude src/*.c //  Si tenemos carpetas /include y /src
+* -static           //  asegura que todas las bibliotecas se vinculen de manera estática
+* -O2               //  Activa optimizaciones moderadas sin aumentar significativamente el tiempo de compilación 
+* -03               //  Activa optimizaciones más agresivas que pueden aumentar el rendimiento pero a veces generan binarios más grandes o comportamientos inesperados
+* -Iinclude -I.     //  donde buscar headers si hay carpetas
+* -Wall -std=c11    //  para depurar y ver errores
 
 Linux--->Main EJ:
 gcc -o blackjackFull main.c config.c gamelogic.c graphics_storage.c jugador.c record.c scoreboard.c \
@@ -80,8 +86,16 @@ gcc -o blackjackFull main.c config.c gamelogic.c graphics_storage.c jugador.c re
     -L/usr/local/lib \
     $(pkg-config --libs raylib) $(pkg-config --libs glfw3) \
     -lm
+Linux con estructura carpetas:
+gcc -o blackjackFull main.c src/config.c src/gamelogic.c src/graphics_storage.c \
+    src/jugador.c src/record.c src/scoreboard.c \
+    -Iinclude \
+    $(pkg-config --cflags raylib) $(pkg-config --cflags glfw3) \
+    -L/usr/local/lib \
+    $(pkg-config --libs raylib) $(pkg-config --libs glfw3) \
+    -lm
 
-
+ULTIMO FUNCIONANDO:
 gcc -o blackjackFull main.c config.c gamelogic.c graphics_storage.c jugador.c record.c scoreboard.c $(pkg-config --cflags raylib) $(pkg-config --cflags glfw3) -L/usr/local/lib $(pkg-config --libs raylib) $(pkg-config --libs glfw3) -lm
 -----------------------------------------------------------------------------------------------
 Para Windows+cygwin
@@ -96,6 +110,18 @@ gcc -o blackjackFull main.c config.c gamelogic.c graphics_storage.c jugador.c re
     -lraylib \
     -lglfw3 \
     -lgdi32
+    -static
+    -O2
 
 Example:
 gcc -o blackjackFull main.c -I/home/Miyo/raylib/src -I/home/Miyo/glfw/include/GLFW -L/home/Miyo/glfw/build/src -L/home/Miyo/raylib/src -L/usr/local/lib -lraylib -lglfw3 -lgdi32 config.c gamelogic.c graphics_storage.c jugador.c record.c scoreboard.c
+
+
+----
+Las opciones de preprocesador (-I) van primero.
+Luego las opciones de vinculación (-L).
+Después las bibliotecas (-l).
+Finalmente, las opciones generales (-static, -O2).
+
+-- Posibles faltantes en linux
+-lm -lpthread -lX11

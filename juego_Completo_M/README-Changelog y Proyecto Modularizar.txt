@@ -22,7 +22,7 @@ Horas Programacion:
 14-11 -> 2 horas , Edicion de READMES , creacion de carpeta Pruebas con menos archivos, para hacer un gamelogic+main de prueba
 15-11 -> 2 Horas , division de vector de cada mazo en cartas individuales .png
 -------->Implementacion de lo anterior en el juego actual.
-15-11 / 16-11 / 17-11 / 18-11 -> 20/22 horas aprox , nuevo juego completo sin graficos
+15-11 / 16-11 / 17-11 / 18-11 -> 20/22 horas aprox , Nuevo JUGADOR/scoreboard/RECORD+ juego completo sin graficos
 19/11 -> TXT y PDF GuiA Implementacion,  -> 2HS -> Juego_Completo_M1.0
 20/11 -> Cracion proyectoUnificadoV3 incluye propio:
     *config.c/h
@@ -36,6 +36,8 @@ Horas Programacion:
 21/11 4HS   -> Funcion para crear struct jugador, a partir de nombre y puntaje, asi usar historial
             -> Modificacion guia de implementacion.
             -> Main para crear archivo historial o archivo ranking con datos ingresados por teclado
+23/11 4HS   -> Cmakelist + Cpack + compilacion en carpetas ---> Portables andando en Windows
+24/11       -> Reglas desde txt , 
 
 ------------------------------------------------------------------------------------------------
 PENDIENTES / funcionalidades posibles para los archivos actuales al 19-11:
@@ -44,17 +46,19 @@ PENDIENTES / funcionalidades posibles para los archivos actuales al 19-11:
 //  Falta logica para dividir cartas (lista enlazada/doblemente o Jump_table)
 //  Multiplayer vs banca (Jump_table?)
 //  Falta solucionar/revisar problema con indice en manoInicial usando formato
-//  Imprimir reglas (europeo) , leer desde archivo txt?
 //  Exportar registro a txt/csv.
 //  Validar archivo para poder importar (hashing?)
 //  Importar archivo de registro de alguien mas para merge
 //  Funciones de busqueda y ordenamiento para un registro mas grande
-//  
+//  Compilar todo Usando SHA 256 y Certificado de seguridad
 
+
+Listo:
+// Imprimir reglas (europeo) , leer desde archivo txt?
 // Verificar compilacion con archivos en diferentes carpetas
 // Crear cmakelist
 // Empaquetar y crear paquete de instalacion
-// Version otro SO ?
+// Version otro SO -> con -static y/o +dll
 // configuracion con .env o .txt?
 
 ---> Entrega 25/11
@@ -91,29 +95,41 @@ Opcion B:
 
 Reglas:
 https://www.casino.es/blackjack/reglas-blackjack-europeo/
-Posible Estructura
 
+El proyecto tiene la siguiente estructura de directorios:
+```
 blackjack/
+├── Blackjack cards/
+│   ├── Recursos Graficos
+├── Tools/
+│   ├── Programa Compilado para crear archivos.dat
+├── Para Graficos/
+│   ├── Instalacion glfw.txt
+│   ├── Instalacion raylib.txt
+│   ├── glfw-master.zip
+│   ├── raylib-master.zip
+├── DOCUMENTACION/
+│   ├── Changelog - Miyo.txt
+│   ├── Changelog - Lizandro.txt
+│   ├── Changelog - Manu y Benja.txt
+│   ├── Bibliotecas Graficas.txt
 ├── include/
 │   ├── config.h
 │   ├── jugador.h
-│   ├── logica.h
-│   ├── mazo.h
+│   ├── gamelogic.h
+│   ├── graphics_storage.h
 │   ├── record.h
 │   ├── scoreboard.h
 ├── src/
 │   ├── config.c
 │   ├── jugador.c
-│   ├── logica.c
-│   ├── mazo.c
+│   ├── gamelogic.c
+│   ├── graphics_storage.c
 │   ├── record.c
 │   ├── scoreboard.c
-├── .env
 ├── main.c
-├── README/
-│   ├── Changelog.txt
-│   ├── Modularizar.txt
-│   ├── Compilacion.txt
-│   └── Implementacion_Funciones.txt
-└── Makefile
-
+├── reglas.txt
+├── datos_historial.dat
+├── datos_ranking.dat
+├── Makefile
+└── BlackJackFinal.exe (si se compila en Windows)
