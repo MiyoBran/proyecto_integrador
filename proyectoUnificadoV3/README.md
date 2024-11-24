@@ -127,9 +127,9 @@ Una vez compilado, puedes ejecutar el programa con el siguiente comando:
 
 ## **Contribuidores**
 
-- **Miyo** - *Desarrollador Archivos y Modularizacion*
-- **Lizandro** - *Soporte gráfico*
-- **Manu y Benja** - *Logica Desde Cero para implementacion Grafica*
+- **Miyo** - *Desarrollo de módulos y gestión de archivos.*
+- **Lizandro** - *Implementación y soporte de gráficos.*
+- **Manu y Benja** - *Diseño e implementación de la lógica desde cero para integración gráfica.*
 
 ---
 
