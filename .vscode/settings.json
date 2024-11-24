@@ -26,6 +26,7 @@
         "record.h": "c",
         "config.h": "c",
         "scoreboard.h": "c",
-        "graphics_storage.h": "c"
+        "graphics_storage.h": "c",
+        "unistd.h": "c"
     }
 }

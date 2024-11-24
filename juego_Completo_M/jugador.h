@@ -42,6 +42,7 @@ void saludarJugador(const char *nombreJugador);
 // Función para crear un nuevo historial de jugador
 Jugador crearHistorial(char nombre[], int saldo, int victorias, int derrotas, int blackjack);
 
+void mostrarContenidoArchivo(const char *nombreArchivo, int velocidadDisplay);
 
 
 

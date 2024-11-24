@@ -23,10 +23,11 @@ void mostrarMenuPrincipal() {
         printf("2. Jugar una partida\n");
         printf("3. Mostrar Ranking actual\n");
         printf("4. Mostrar Historial de Partidas\n");
+        printf("5. Mostrar Reglas\n");   
         // Espacio para nueva funcionalidad o juego
         // Espacio para nueva funcionalidad o juego
         // Espacio para nueva funcionalidad o juego
-        printf("5. Salir\n");
+        printf("6. Salir\n");
         printf("Seleccione una opción: ");
 }
 
@@ -145,6 +146,13 @@ int main() {
                 showRecord(historial, cantidadRegistros);  // Llamamos a showRecord para imprimir el historial
                 break;
             case 5:
+                /*1: letra por letra (la opción más lenta).
+                2: palabra por palabra (más rápido).
+                3: línea por línea (más rápido).
+                Cualquier otro valor se comporta como la opción predeterminada, mostrando todo de una vez.*/
+                mostrarContenidoArchivo("reglas.txt", 3); // Cambia el 2 por 1, 2 o 3 según el comportamiento deseado
+                break;
+            case 6:
                 salir = true;
                 printf("\n=== Gracias por jugar. ¡Hasta pronto! 🎉 ===\n");
                 break;

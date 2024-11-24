@@ -49,6 +49,9 @@ int main() {
 
     // Opcionales , se puede no usar mi struct y comentar
 
+    //Muestra las reglas de 1 vez, que estan en el archivo reglas.txt
+    mostrarContenidoArchivo("reglas.txt", 0); // Cambia el 0 por 1, 2 o 3 según el comportamiento deseado
+
     // Para poder agergar en struct Ranking/Historial 
     char nombreJugador[MAX_NOMBRE];
     Jugador jugador1; // Estructura con Nombre, Saldos, victorias y empates
