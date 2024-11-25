@@ -113,3 +113,14 @@ Function to hold card						// DONE
 Finish drawing part of game					// DONE
 Once round ends, function to ask user if they want to stop or continue		//DONE
 Function to unload cards once round begins									// DONE
+
+gcc -o blackjack main.c \
+-I/home/Lizandro/trabajos/drawings/include \
+-I/home/Lizandro/trabajos/drawings \
+-I/home/Lizandro/raylib/src \
+-I/home/Lizandro/glfw/include/GLFW \
+-L/home/Lizandro/raylib/src \
+-L/home/Lizandro/glfw/build/src \
+-L/home/Lizandro/trabajos/drawings/libs \
+-lraylib -lglfw -lgdi32 \
+config.c src/gamelogic.c graphics_storage.c src/jugador.c src/record.c src/scoreboard.c

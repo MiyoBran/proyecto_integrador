@@ -1,4 +1,4 @@
-### **README.md**
+Aquí tienes el archivo `README.md` correctamente formateado y ajustado:
 
 ```markdown
 # Blackjack - Juego en C
@@ -15,10 +15,9 @@ Antes de compilar, asegúrate de tener instaladas las siguientes herramientas y 
 - **pkg-config** (para gestionar las rutas de las bibliotecas)
 - **raylib** (biblioteca gráfica)
 - **glfw3** (biblioteca para manejar ventanas y entradas)
-### **Instalación de Dependencias**
-- **glfw3** y **raylib** Instrucciones para instalacion en windows y linux en carpeta Para Graficos/
 
----
+### **Instalación de Dependencias**
+Consulta las instrucciones de instalación para Windows y Linux en la carpeta **Para Graficos/**.
 
 #### En distribuciones basadas en Debian/Ubuntu:
 ```bash
@@ -35,15 +34,13 @@ sudo dnf install glfw-devel raylib-devel pkg-config gcc
 
 ## **Estructura del Proyecto**
 
-# Estructura del Proyecto
-
-```
 El proyecto tiene la siguiente estructura de directorios:
+
 ```
 blackjack/
 ├── blackjack_grafico
 │   ├── .env
-│   ├── Blackjack cards
+│   ├── Blackjack cards/
 │   │   └── Recursos Graficos
 │   ├── blackjackFull.exe
 │   ├── config.c
@@ -51,23 +48,22 @@ blackjack/
 │   ├── cygglfw-3.dll      // Necesario para compilar en algunos entornos
 │   ├── graphics_storage.c
 │   ├── graphics_storage.h
-│   ├── include
+│   ├── include/
 │   │   ├── gamelogic.h
 │   │   ├── jugador.h
 │   │   ├── record.h
 │   │   └── scoreboard.h
 │   ├── main.c
-│   ├── Makefile
-│   ├── README.md       // para compilacion Juego completo con graficos
+│   ├── README.md          // Compilación juego completo con gráficos
 │   ├── reglas.txt
-│   └── src
+│   └── src/
 │       ├── gamelogic.c
 │       ├── jugador.c
 │       ├── record.c
 │       └── scoreboard.c
 ├── completo_terminal
 │   ├── .env
-│   ├── include
+│   ├── include/
 │   │   ├── config.h
 │   │   ├── jugador.h
 │   │   ├── logica.h
@@ -75,9 +71,9 @@ blackjack/
 │   │   ├── record.h
 │   │   └── scoreboard.h
 │   ├── main.c
-│   ├── Readme.MD       // para compilacion juego completo por terminal
-│   ├── reglas.txt      // diferentes a las que se muestran en la otra carpeta
-│   └── src
+│   ├── Readme.MD          // Compilación juego completo por terminal
+│   ├── reglas.txt         // Diferentes a las de la otra carpeta
+│   └── src/
 │       ├── config.c
 │       ├── jugador.c
 │       ├── logica.c
@@ -94,7 +90,7 @@ blackjack/
 │   ├── glfw-master.zip
 │   ├── raylib-master.zip
 │   └── README-Bilbiotecas graficas.txt
-└── README.md  // Arbol de proyecto - Compilacion - Recursos
+└── README.md              // Árbol de proyecto - Compilación - Recursos
 ```
 
 ---
@@ -116,27 +112,23 @@ blackjack/
    cmake ..
    cmake --build .
    ```
-   Esto generará un archivo ejecutable llamado `blackjackFull` `blackjack` o `crearScoreHistorial` .
+   Esto generará un archivo ejecutable llamado `blackjackFull`, `blackjack` o `crearScoreHistorial`.
 
-3. Para compilar desde cero en entorno cygwyn - > Cambiar USUARIO :
+3. Para compilar desde cero en entorno Cygwin (reemplaza `USUARIO` por tu nombre de usuario):
    ```bash
-   cd ..
    gcc -o blackjackFull main.c config.c src/gamelogic.c graphics_storage.c src/jugador.c src/record.c src/scoreboard.c \
       -I/home/USUARIO/raylib/src \
       -I/home/USUARIO/glfw/include/GLFW \
-      -I./include
-      -I.
+      -I./include \
       -L/home/USUARIO/glfw/build/src \
       -L/home/USUARIO/raylib/src \
       -L/usr/local/lib \
       -lraylib \
       -lglfw3 \
-      -lgdi32
-      -static 
-      -O2
+      -lgdi32 \
    ```
 
-4. Si deseas recompilar desde cero, en linux:
+4. Si deseas recompilar desde cero en Linux:
    ```bash
    gcc -o blackjackFull main.c config.c src/gamelogic.c graphics_storage.c \
       src/jugador.c src/record.c src/scoreboard.c \
@@ -151,7 +143,7 @@ blackjack/
 
 ## **Ejecución**
 
-Una vez compilado, puedes ejecutar el programa con el siguiente comando:
+Una vez compilado, puedes ejecutar el programa con los siguientes comandos según el ejecutable generado:
 ```bash
 ./blackjackFull
 ```
