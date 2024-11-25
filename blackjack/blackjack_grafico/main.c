@@ -48,7 +48,7 @@ int main() {
 ////////////////////////////////////////////
 
 ////////Variables related to graphics////////
-    int indexUpsideCards;                                             //Tracks the current upside down card
+    int indexUpsideCards = 0;                                             //Tracks the current upside down card
     bool tableUnloaded = false;                                       //This variable prevents the compiler to keep unloading the table image during
     buttons gameButtons = {false, false, false, false, false};              //Struct for logic with buttons. The order is hold, bet, hit, gameContinue and gameEnd
     buttonBoxes gameBoxes = {                                               //Struct for logic with buttons
@@ -118,7 +118,6 @@ int main() {
 
          if (texture_table.id == 0 && !tableUnloaded) {                 //Checks if the table's image needs to be loaded
             texture_table = LoadTexture("Blackjack cards/Table blank.png");
-            upsideDownCard = LoadTexture("Blackjack cards/Upside down card.png");
         } 
         DrawTexture(texture_table, 0, 0, WHITE);        //Shows the table's image 
         switch (screenState) {
@@ -130,6 +129,7 @@ int main() {
                 DrawRectangle(gameBoxes.menuPlay.x, gameBoxes.menuPlay.y, gameBoxes.menuPlay.width, gameBoxes.menuPlay.height, WHITE);
                 if (CheckCollisionPointRec(mousePosition, gameBoxes.menuPlay) && IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
                     screenState = 1;
+                    indexUpsideCards = chooseRandomUpsideCard();
                     mainCharacter.saldo = 10000;
                     startRound(&amountCardsPlayer, &amountCardsCrupier, &remainingCards, &dealtCards, &playerPoints, &crupierPoints, &playerBet, &playerDeck, &crupierDeck, Deck, &currentGame);
                     allowBlackjackWin(playerPoints, amountCardsPlayer, &currentGame);
@@ -176,7 +176,7 @@ int main() {
                 }   else {
                     x_playerPosition = (CARD_WIDTH + CARD_DISTANCE)*(amountCardsPlayer+1);
                 }
-                if (amountCardsCrupier <= 2) {
+                if (amountCardsCrupier < 2) {
                     x_crupierPosition = (CARD_WIDTH*3)+50;
                     DrawTexture(upsideCards[indexUpsideCards], CARD_WIDTH*(amountCardsCrupier+1)+(CARD_DISTANCE*amountCardsCrupier), VERTICAL_MARGIN*2, WHITE);
                 }   else {

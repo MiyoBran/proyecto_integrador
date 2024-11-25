@@ -1,0 +1,16 @@
+1. Objetivo del juego:
+   El objetivo es obtener una mano con un valor de cartas lo más cercano posible a 21
+   Si tu mano supera 21, pierdes automáticamente.
+2. Valor de las cartas:
+   - Cartas del 2 al 10: Su valor es igual al número que aparece en la carta.
+   - Jotas, Reinas y Reyes: Tienen un valor de 10.
+   - Ases: Pueden valer 1 o 11, dependiendo de lo que sea más favorable para el jugador.
+3. El juego:
+   - Al inicio, tanto el jugador como el crupier reciben dos cartas.
+   - Las cartas del jugador son visibles, mientras que solo se muestra una del crupier.
+   - El jugador puede elegir entre pedir una carta o terminar su turno.
+   - Si el jugador pide carta y su total supera 21, pierde automáticamente.
+4. Victoria:
+   - El jugador gana si su mano es más cercana a 21 que la del crupier
+   - Si el crupier tiene una mano más cercana a 21, el crupier gana.
+   - Si ambas manos tienen el mismo valor, el crupier gana

@@ -1,7 +1,7 @@
 -----------------------------------------------------------------------------------------------
 /*Para compilar JUEGO ACTUAL archivos unificadosV3:
 
-gcc -o blackjackFull main.c -I/home/Miyo/raylib/src -I/home/Miyo/glfw/include/GLFW -L/home/Miyo/glfw/build/src -L/home/Miyo/raylib/src -L/usr/local/lib -lraylib -lglfw3 -lgdi32 config.c gamelogic.c graphics_storage.c jugador.c record.c scoreboard.c -static -O2
+gcc -o blackjackFull main.c -I/home/Miyo/raylib/src -I/home/Miyo/glfw/include/GLFW -I. -L/home/Miyo/glfw/build/src -L/home/Miyo/raylib/src -L/usr/local/lib -lraylib -lglfw3 -lgdi32 config.c gamelogic.c graphics_storage.c jugador.c record.c scoreboard.c -static -O2
 
 
 OPCION con desglose

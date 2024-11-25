@@ -1,4 +1,11 @@
------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------3
+Jimi Alpha test
+https://www.youtube.com/watch?v=0w-_GU6QhZ4
+
+Video compilacion directa pUV3
+https://www.youtube.com/watch?v=IPSyxNNgq8w
+Video lunes mañana
+https://youtu.be/UWwxNm3aNhk 
 -----------------------------------------------------------------------------------------------
 importante --> archivo .env  con lo siguiente:
 
@@ -48,7 +55,7 @@ Example:
 gcc -o blackjackFull main.c -I/home/Miyo/raylib/src -I/home/Miyo/glfw/include/GLFW -I./include -I. -L/home/Miyo/glfw/build/src -L/home/Miyo/raylib/src -L/usr/local/lib -lraylib -lglfw3 -lgdi32 config.c src/gamelogic.c graphics_storage.c src/jugador.c src/record.c src/scoreboard.c -static -O2
 
 -----------------------------------------------------------------------------------------------
-/*Para compilar JUEGO ACTUAL archivos unificadosV3:
+/*Para compilar JUEGO ACTUAL archivos Entrega Final:
 
 gcc -o blackjackFull main.c -I/home/Miyo/raylib/src -I/home/Miyo/glfw/include/GLFW -I./include -I. -L/home/Miyo/glfw/build/src -L/home/Miyo/raylib/src -L/usr/local/lib -lraylib -lglfw3 -lgdi32 config.c src/gamelogic.c graphics_storage.c src/jugador.c src/record.c src/scoreboard.c -static -O2
 

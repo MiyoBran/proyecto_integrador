@@ -1,0 +1,36 @@
+Manuel y Benjamin nos encargamos de la parte del Diseño e implementación de la lógica desde cero para integración gráfica del BLACKJACK.
+Al tener la misma division de trabajo hemos decidido trabajar juntos en toda la logica /funciones/estucturas, para hacer funcionar el juego. Nuestro trabajo estuvo muy concectado con el que se encargaba de la parte grafica.
+
+Entre todas las funciones que nos encargamos de hacer estan
+
+initDeck  (Inicializa el mazo utilizando como parametros variables de estructuras creadas para simular el palo, valor de carta, numero);
+
+suffleDeck (Funcion que toma al mazo original y lo mezcla para poder ser utilizado en la funcion getCard. El algoritmo de mezcla que se implemento fue el de "Fisher-Yates");
+
+getCard (Esta funcion es llamada para que agarre del mazo ya mezcaldo las n primeras cartas, que seran estregadas al crupier o al player, mientras va contando cuantas cartas va entregando);
+
+calculatePoints (Funcion que se encarga de ir contando los puntos del crupier y del player para posteriormente definir quien gana. En esta funcion tambien se tuvo en cuenta el valor del As que podia cambiar dependiendo los puntos ya obtenidos anteriormente);
+
+orderAs(Como el As puede tomar el valor de 1 u 11 dependiendo de la cantidad de puntos acumulados anteriormente, se crea esta funcion para evaluar cuantos puntos se tienen y si se necesita un 1 o un 11);
+
+crupierLogic (Funcion que se encarga de decidir si el crupier toma cartas o no. Esta funcion usaba tambien la funcion "calculatePoints()" y "getCard()");
+
+
+Horas trabajadas
+Benjamin:
+	Fechas anterios de planificacion y demas: 5 Hs aprox	    
+	15/11 ---> 3 Hs
+	16/11 ---> 2:30 Hs
+	18/11 ---> 2 Hs
+	21/11 ---> 3:30 Hs
+	24/11 ---> 3 Hs
+
+Manuel:
+	Fechas anterios de planificacion y demas: 5hs aprox
+	11/11 -> 2hs
+	15/11 -> 3hs
+	16/11 -> 2:30hs
+	16/11 -> 4hs
+	20/11 -> 3 hs
+	21/11 -> 3 hs
+	24/11 -> 3 hs
