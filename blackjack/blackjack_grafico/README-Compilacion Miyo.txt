@@ -16,6 +16,8 @@ gcc -o blackjackFull main.c -I/home/Miyo/raylib/src -I/home/Miyo/glfw/include/GL
 gcc -o blackjackFull main.c config.c gamelogic.c graphics_storage.c jugador.c record.c scoreboard.c \
     -I/home/Miyo/raylib/src \
     -I/home/Miyo/glfw/include/GLFW \
+    -I./include
+    -I.
     -L/home/Miyo/glfw/build/src \
     -L/home/Miyo/raylib/src \
     -L/usr/local/lib \

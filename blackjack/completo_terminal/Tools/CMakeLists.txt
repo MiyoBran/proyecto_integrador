@@ -36,8 +36,8 @@ set(CPACK_PACKAGE_CONTACT "tuemail@ejemplo.com")
 
 # Configurar archivos que serán incluidos en el paquete
 install(TARGETS crearScoreHistorial DESTINATION bin)
-install(FILES datos_historial.dat datos_ranking.dat README.txt DESTINATION share/crearScoreHistorial)
-install(FILES .env DESTINATION share/crearScoreHistorial)
+install(FILES datos_historial.dat datos_ranking.dat README.txt DESTINATION bin)
+install(FILES .env DESTINATION bin)
 
 
 # Generar un instalador para múltiples sistemas

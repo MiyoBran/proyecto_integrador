@@ -1,4 +1,5 @@
-Crear una carpeta de compilación: Es buena práctica generar los archivos de compilación en una carpeta separada:
+Crear una carpeta de compilación: 
+Es buena práctica generar los archivos de compilación en una carpeta separada:
 
 mkdir build
 cd build
