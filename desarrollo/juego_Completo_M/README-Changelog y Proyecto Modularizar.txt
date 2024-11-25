@@ -10,11 +10,11 @@ TAMAÑO PANTALLA 1280 * 720
 
 Horas Programacion:
 //IntegratorMiyoV1 -> Prototipo de funciones y main inicial 
-*3hs iniciales
+-> 3 horas iniciales
 //Modificacion para coordenadas relativas en funciones graficas
-*8hs con parte grafica Domingo
+-> 8 horas con parte grafica Domingo
 // IntegradorMiyoV2 -> memoria dinamica y primer intento de integracion de todos los codigos de cada uno
-*7hs nueva estructura archivos, memoria dinamica y lograr compilar todo junto
+-> 7 horas nueva estructura archivos, memoria dinamica y lograr compilar todo junto
 12/11 -> 5 horas, de nuevo cambio la estructura de archivos // ahora config.c scoreboardV1 y scoreboardV2 junto a scoreboard_test
 12/11 -> 4 horas , revision de funciones memoria dinamica, proyecto en git y config.
 12-11 -> 4 horas , correcta instalacion de las bibliotecas graficas , en vez de copiarlas y qeu funcione a veces
@@ -23,21 +23,21 @@ Horas Programacion:
 15-11 -> 2 Horas , division de vector de cada mazo en cartas individuales .png
 -------->Implementacion de lo anterior en el juego actual.
 15-11 / 16-11 / 17-11 / 18-11 -> 20/22 horas aprox , Nuevo JUGADOR/scoreboard/RECORD+ juego completo sin graficos
-19/11 -> TXT y PDF GuiA Implementacion,  -> 2HS -> Juego_Completo_M1.0
-20/11 -> Cracion proyectoUnificadoV3 incluye propio:
+19/11 2HS   -> TXT y PDF GuiA Implementacion,  -> Juego_Completo_M1.0
+20/11 1H    -> Creacion proyectoUnificadoV3 incluye propio:
     *config.c/h
     *jugador.c/h
     *record.c/h
     *scoreboard.c/h 
     *datos_historial.dat y datos_ranking.dat
     *.env con los nombres de esos 2 archivos.
-    *Carpeta Para Grafis y guia instalacion bibliotecas
+    *Carpeta Para Graficos y guia instalacion bibliotecas
     *Archivos README : Changelog - compilacion - guia implementacion funciones proyecto
 21/11 4HS   -> Funcion para crear struct jugador, a partir de nombre y puntaje, asi usar historial
             -> Modificacion guia de implementacion.
             -> Main para crear archivo historial o archivo ranking con datos ingresados por teclado
 23/11 4HS   -> Cmakelist + Cpack + compilacion en carpetas ---> Portables andando en Windows
-24/11       -> Reglas desde txt , 
+24/11 4HS   -> Carpeta Para Entrega + Cmakelists + Readme.MD + PRUEBAS de Compilación
 
 ------------------------------------------------------------------------------------------------
 PENDIENTES / funcionalidades posibles para los archivos actuales al 19-11:

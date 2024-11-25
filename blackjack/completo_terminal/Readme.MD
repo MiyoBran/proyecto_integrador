@@ -4,6 +4,12 @@
 gcc -o blackjack main.c -I./include -I.  src/config.c src/jugador.c src/logica.c src/mazo.c src/record.c src/scoreboard.c -static -O2
 
 -----------------------------------------------------------------------------------------------
+   ```bash
+   mkdir build
+   cd build
+   cmake ..
+   cmake --build .
+   ```
 -----------------------------------------------------------------------------------------------
 importante --> archivo .env  con lo siguiente:
 
