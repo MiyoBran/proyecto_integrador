@@ -100,6 +100,10 @@ Opcion B:
 Reglas:
 https://www.casino.es/blackjack/reglas-blackjack-europeo/
 
+en la carpeta del build
+find . -type f
+find . -maxdepth 3
+
 El proyecto tiene la siguiente estructura de directorios:
 ```
 blackjack/

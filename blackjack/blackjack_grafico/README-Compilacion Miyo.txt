@@ -8,12 +8,7 @@ gcc -o blackjackFull main.c -I/home/Miyo/raylib/src -I/home/Miyo/glfw/include/GL
 
 
 OPCION con desglose
-gcc -o blackjackFull main.c -I/home/Miyo/raylib/src -I/home/Miyo/glfw/include/GLFW \
-    -L/home/Miyo/glfw/build/src -L/home/Miyo/raylib/src -L/usr/local/lib \
-    -lraylib -lglfw3 -lgdi32 config.c gamelogic.c graphics_storage.c jugador.c record.c scoreboard.c
-    -static -O2
---- OpcionB:
-gcc -o blackjackFull main.c config.c gamelogic.c graphics_storage.c jugador.c record.c scoreboard.c \
+gcc -o blackjackFull main.c config.c src/gamelogic.c graphics_storage.c src/jugador.c src/record.c src/scoreboard.c \
     -I/home/Miyo/raylib/src \
     -I/home/Miyo/glfw/include/GLFW \
     -I./include

@@ -31,8 +31,8 @@ include(CPack)
 set(CPACK_PACKAGE_NAME "CrearScoreHistorial")
 set(CPACK_PACKAGE_VERSION "1.0.0")
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Un programa para gestionar historial y puntuaciones")
-set(CPACK_PACKAGE_VENDOR "TuNombre")
-set(CPACK_PACKAGE_CONTACT "tuemail@ejemplo.com")
+set(CPACK_PACKAGE_VENDOR "Miyo")
+set(CPACK_PACKAGE_CONTACT "miyenbrandolino@gmail.com")
 
 # Configurar archivos que serán incluidos en el paquete
 install(TARGETS crearScoreHistorial DESTINATION bin)

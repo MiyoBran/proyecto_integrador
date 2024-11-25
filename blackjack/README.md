@@ -35,43 +35,66 @@ sudo dnf install glfw-devel raylib-devel pkg-config gcc
 
 ## **Estructura del Proyecto**
 
+# Estructura del Proyecto
+
+```
 El proyecto tiene la siguiente estructura de directorios:
 ```
 blackjack/
-├── Blackjack cards/
-│   ├── Recursos Graficos
-├── Tools/
-│   ├── Programa Compilado para crear archivos.dat
-├── Para Graficos/
-│   ├── Instalacion glfw.txt
-│   ├── Instalacion raylib.txt
+├── blackjack_grafico
+│   ├── .env
+│   ├── Blackjack cards
+│   │   └── Recursos Graficos
+│   ├── blackjackFull.exe
+│   ├── config.c
+│   ├── config.h
+│   ├── cygglfw-3.dll      // Necesario para compilar en algunos entornos
+│   ├── graphics_storage.c
+│   ├── graphics_storage.h
+│   ├── include
+│   │   ├── gamelogic.h
+│   │   ├── jugador.h
+│   │   ├── record.h
+│   │   └── scoreboard.h
+│   ├── main.c
+│   ├── Makefile
+│   ├── README.md       // para compilacion Juego completo con graficos
+│   ├── reglas.txt
+│   └── src
+│       ├── gamelogic.c
+│       ├── jugador.c
+│       ├── record.c
+│       └── scoreboard.c
+├── completo_terminal
+│   ├── .env
+│   ├── include
+│   │   ├── config.h
+│   │   ├── jugador.h
+│   │   ├── logica.h
+│   │   ├── mazo.h
+│   │   ├── record.h
+│   │   └── scoreboard.h
+│   ├── main.c
+│   ├── Readme.MD       // para compilacion juego completo por terminal
+│   ├── reglas.txt      // diferentes a las que se muestran en la otra carpeta
+│   └── src
+│       ├── config.c
+│       ├── jugador.c
+│       ├── logica.c
+│       ├── mazo.c
+│       ├── record.c
+│       └── scoreboard.c
+├── DOCUMENTACION
+│   ├── Changelog Manu_Benja.txt
+│   ├── Lizandro, Work log and to do list.txt
+│   └── README-Changelog MIYO.txt
+├── Para Graficos
+│   ├── 1 - Instalacion glfw.txt
+│   ├── 2 - Instalacion raylib.txt
 │   ├── glfw-master.zip
 │   ├── raylib-master.zip
-├── DOCUMENTACION/
-│   ├── Changelog - Miyo.txt
-│   ├── Changelog - Lizandro.txt
-│   ├── Changelog - Manu y Benja.txt
-│   ├── Bibliotecas Graficas.txt
-├── include/
-│   ├── config.h
-│   ├── jugador.h
-│   ├── gamelogic.h
-│   ├── graphics_storage.h
-│   ├── record.h
-│   ├── scoreboard.h
-├── src/
-│   ├── config.c
-│   ├── jugador.c
-│   ├── gamelogic.c
-│   ├── graphics_storage.c
-│   ├── record.c
-│   ├── scoreboard.c
-├── main.c
-├── reglas.txt
-├── datos_historial.dat
-├── datos_ranking.dat
-├── Makefile
-└── BlackJackFinal.exe (si se compila en Windows)
+│   └── README-Bilbiotecas graficas.txt
+└── README.md  // Arbol de proyecto - Compilacion - Recursos
 ```
 
 ---
@@ -80,24 +103,48 @@ blackjack/
 
 ### **Pasos para Compilar**
 
-1. Navega al directorio del proyecto:
+1. Navega al directorio del proyecto que desees compilar:
    ```bash
-   cd blackjack/
+   cd blackjack_grafico/
+   cd completo_terminal/
+   cd completo_terminal/Tools/
    ```
 2. Ejecuta el siguiente comando para compilar el proyecto:
    ```bash
-   make
+   mkdir build
+   cd build
+   cmake ..
+   cmake --build .
    ```
-   Esto generará un archivo ejecutable llamado `blackjackFull`.
+   Esto generará un archivo ejecutable llamado `blackjackFull` `blackjack` o `crearScoreHistorial` .
 
-3. Para limpiar los archivos binarios generados durante la compilación, usa:
+3. Para compilar desde cero en entorno cygwyn - > Cambiar USUARIO :
    ```bash
-   make clean
+   cd ..
+   gcc -o blackjackFull main.c config.c src/gamelogic.c graphics_storage.c src/jugador.c src/record.c src/scoreboard.c \
+      -I/home/USUARIO/raylib/src \
+      -I/home/USUARIO/glfw/include/GLFW \
+      -I./include
+      -I.
+      -L/home/USUARIO/glfw/build/src \
+      -L/home/USUARIO/raylib/src \
+      -L/usr/local/lib \
+      -lraylib \
+      -lglfw3 \
+      -lgdi32
+      -static 
+      -O2
    ```
 
-4. Si deseas recompilar desde cero, usa:
+4. Si deseas recompilar desde cero, en linux:
    ```bash
-   make rebuild
+   gcc -o blackjackFull main.c config.c src/gamelogic.c graphics_storage.c \
+      src/jugador.c src/record.c src/scoreboard.c \
+      -Iinclude \
+      $(pkg-config --cflags raylib) $(pkg-config --cflags glfw3) \
+      -L/usr/local/lib \
+      $(pkg-config --libs raylib) $(pkg-config --libs glfw3) \
+      -lm
    ```
 
 ---
@@ -108,13 +155,19 @@ Una vez compilado, puedes ejecutar el programa con el siguiente comando:
 ```bash
 ./blackjackFull
 ```
+```bash
+./blackjack
+```
+```bash
+./crearScoreHistorial
+```
 
 ---
 
 ## **Detalles Adicionales**
 
 - **Archivos necesarios en tiempo de ejecución**:
-  Asegúrate de que los archivos `reglas.txt`, `datos_historial.dat` y `datos_ranking.dat` estén en el mismo directorio que el ejecutable `blackjackFull`.
+  Asegúrate de que los archivos `reglas.txt`, `.env` y `Blackjack cards/` estén en el mismo directorio que el ejecutable `blackjackFull`.
 
 - **Funciones Principales del Programa**:
   - Implementación de las reglas del Blackjack.
