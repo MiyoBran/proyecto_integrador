@@ -3,7 +3,10 @@ Aquí tienes el archivo `README.md` correctamente formateado y ajustado:
 ```markdown
 # Blackjack - Juego en C
 
-Este proyecto implementa un juego de Blackjack desarrollado en lenguaje C, utilizando bibliotecas gráficas **raylib** y **glfw3**. A continuación, se explican los requisitos y los pasos necesarios para compilar y ejecutar el proyecto en un sistema operativo Linux.
+Este proyecto implementa un juego de Blackjack desarrollado en lenguaje C, utilizando bibliotecas gráficas **raylib** y **glfw3**. 
+- Git del proyecto: https://github.com/MiyoBran/proyecto_integrador
+- Drive del proyecto: https://drive.google.com/drive/folders/1eUS_w_vo_eg3GkFpGmb9hGzu-Kx6sQyM?usp=drive_link
+- A continuación, se explican los requisitos y los pasos necesarios para compilar y ejecutar el proyecto en un sistema operativo Linux o Windows usando Cygwin.
 
 ---
 
