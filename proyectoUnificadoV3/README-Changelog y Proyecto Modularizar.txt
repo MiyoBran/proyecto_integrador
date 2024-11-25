@@ -3,7 +3,7 @@ Base
 *Proyecto en Drive : con todas las "copias de seguridad" enviadas
 // Prueba Juego Completo Terminal
 https://youtu.be/0w-_GU6QhZ4?feature=shared
-// Prueba Portable con graficos
+// Prueba Portable con graficos sin reverso
 https://youtu.be/IPSyxNNgq8w
 
 
@@ -313,12 +313,4 @@ rebuild: clean all
 
 
 
-
-├── tools/
-│   ├── CrearScore-Historial/
-
-
-blackjack/
-├── bin/
-│   ├── BlackJackFinal.exe
 

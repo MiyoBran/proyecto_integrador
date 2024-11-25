@@ -1,0 +1,115 @@
+I use this command to compile in Cygwin using Windows:
+
+gcc -o blackjack main.c -I/home/Lizandro/raylib/src -I/home/Lizandro/glfw/include/GLFW -L/home/Lizandro/raylib/src -L/home/Lizandro/glfw/build/src -lraylib -lglfw -lgdi32 config.c gamelogic.c graphics_storage.c jugador.c record.c scoreboard.c
+
+
+START OF WORK LOG:
+worked on the project for about 7 hours by now
+
+got together to discuss on 18/10, talked for about an hour and something
+
+26/10
+Started working at about 16:10, I've been making a function to get userName, might start working on main menu
+took a break at 17:00
+Started working again at 18:30
+Stopped at 20:41, I'm tired. Managed to make a function to print cards
+Ended up not stopping, Now I definitely stopped at 21:15. Made part of drawing card function to work with hit button.
+
+27/10
+started working at about 10:51, finally modified keepText function, it should be useless now. Made some structs to unite some variables,
+did some cleaning of the code, removed lines that weren't neccesary, now it looks better.
+Stopped at 11:55
+
+Started again at 16:11
+Did function that shows cards on hit, now it doesn't need an extra array of Texture2D variables to keep the textures since the original
+purpose of the loadCardsTexture function is to do just that.
+update: nevermind, cards break if you spam click on hit button
+Ended up fixing it, now it works as intended
+Moved the functions that are ready into the header(by that I mean draw function and bet function),
+now it is called "graphics_storage.c"
+We had a meeting at 17:20, stopped at 19:06
+
+28/10
+started working at 16:21, took a break at 16:50 and started again at 17:15. Made a function to ask user name in the console, using dynamic memory
+Modified printCard function so that it also works for the croupier
+Made function to show total money available and another one to show current bet. Modified bet function so that it doesn't allow the player
+to play until they bet at least 100, and also prevents the player to press the bet button again until they have 2 cards in their deck
+Stopped at 18:17
+
+
+02/11
+Started working at 11:19
+Took a break at 12:08
+
+03/11
+Started at 11:45. Stopped at 16:50. Made a lot of things relative to the screen position. Changed table image to a table without anything drawn on it
+These changes were made in order to make the program more flexible towards different screen resolutions
+
+06/11
+Started working at 16:00 more or less, took a break at 17:00
+
+12/11
+Started working at 14:25. Modified dealer points to work in conjunction with dealer cards and not the player's
+Stopped at 16:07. Made cards, points and money to depend on functions. Still need to make dealer points to work with a function
+Started again at 17:05, put config.c header in main.c, stopped at 18:08
+Started again at 19:30. Stopped at 22:10
+
+13/11
+Started working at about 15:30 something, stopped at 17:46. Made functions to load scoreboard and show scoreboard
+Started at about 19:00 something, probably earlier like 18:00. Stopped at 00:10. Changed a lot
+
+17/11
+Started working at 10:30, stopped at 12:24
+
+in total so far:
+Have been working on this proyect for about 40 hours
+
+
+Don't remember when I did this
+about 3 more hours
+about 2 to 3 hours??
+
+23/11
+I've been working today since 17:30 more or less. Stopped at 19:00. Made if condition to check if player has enough money to make the minimal bet. After that I realized the player could click on bet or hold
+after they ran out of money, fixed that by adding (AND playerMoney >= 100) conditions for the hit and hold buttons. Made comments so that logic part can find the sections of the code where their functions
+need to be
+
+Started again at 19:12, made it so upside down cards can have 9 different variants, it chooses randomly. I might make it so that the actual cards' style can be chosen in the menu. Stopped at 20:06
+
+24/11
+Started at 17:30, I've been trying to figure out why the cards and their values explode after a while.
+Figured it out, turns out the array of cards wasn't making a new one at the start of the round. Logical part came up with a solution for it
+
+Finished at 20:17, made a function to show instructions and a function to load the contents of a txt file. Deleted comments that were unnecessary, made comments appear when hovering on parts of the code
+Made the program look better, at least by my poor standards
+
+
+END TIME:
+I have worked on my part for 49.4 hours, more or less
+
+NEVERMIND THAT, I have no idea what happened, but the last version of my header is gone. I'll have to redo the last changes, which include the functions related to instructions and all the comments. Great!
+
+I did it, that is definitely the worst thing I have done to myself this month. Now I finished at 20:57, I did everything stated above
+
+REAL END TIME:
+I have worked on my part for 50.3 hours. More or less
+
+
+TO DO LIST:
+Function for main menu						//DONE
+Function for scoreboard						//DONE
+Function to ask user name					//DONE
+Function to load card textures	 			// DONE
+Function to get user betting amount 		// DONE
+Function to show game instructions			//DONE
+Function to unload card textures			//DONE
+Function to show different reversed cards	//IMPLEMENTED
+Function to show bet						// DONE
+Function to show money available			// DONE
+Function to print cards						// DONE
+Function to print points					// DONE
+Function to hit card						// DONE
+Function to hold card						// DONE
+Finish drawing part of game					// DONE
+Once round ends, function to ask user if they want to stop or continue		//DONE
+Function to unload cards once round begins									// DONE

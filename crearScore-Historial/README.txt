@@ -1,102 +1,69 @@
+Crear una carpeta de compilación: Es buena práctica generar los archivos de compilación en una carpeta separada:
 
-```
-# Instalación
-
-## Requisitos previos
-
-Asegúrate de tener los siguientes programas instalados:
-- Un sistema operativo compatible (Linux, macOS, Windows).
-- Herramientas de descompresión (por ejemplo, `unzip` o `tar`).
-
-## 1. Instalación desde archivo `.zip`
-
-### En Linux/macOS:
-
-1. Descarga el archivo `crearScoreHistorial-0.1.1-CYGWIN.zip`.
-2. Abre una terminal y navega hasta el directorio donde descargaste el archivo.
-3. Descomprime el archivo:
-
-   ```bash
-   unzip crearScoreHistorial-0.1.1-CYGWIN.zip
-   ```
-
-4. Entra en el directorio descomprimido:
-
-   ```bash
-   cd crearScoreHistorial-0.1.1-CYGWIN
-   ```
-
-5. Dale permisos de ejecución al archivo si es necesario:
-
-   ```bash
-   chmod +x bin/crearScoreHistorial.exe
-   ```
-
-6. Ejecuta el programa:
-
-   ```bash
-   ./bin/crearScoreHistorial.exe
-   ```
-
-### En Windows:
-
-1. Descarga el archivo `crearScoreHistorial-0.1.1-CYGWIN.zip`.
-2. Extrae el archivo usando una herramienta como WinRAR o 7-Zip.
-3. Navega hasta el directorio extraído.
-4. Ejecuta `bin/crearScoreHistorial.exe` haciendo doble clic o desde la terminal de Windows.
-
----
-
-## 2. Instalación desde archivo `.tar.gz`
-
-### En Linux/macOS:
-
-1. Descarga el archivo `crearScoreHistorial-0.1.1-CYGWIN.tar.gz`.
-2. Abre una terminal y navega hasta el directorio donde descargaste el archivo.
-3. Descomprime el archivo:
-
-   ```bash
-   tar -xzvf crearScoreHistorial-0.1.1-CYGWIN.tar.gz
-   ```
-
-4. Entra en el directorio descomprimido:
-
-   ```bash
-   cd crearScoreHistorial-0.1.1-CYGWIN
-   ```
-
-5. Dale permisos de ejecución al archivo si es necesario:
-
-   ```bash
-   chmod +x bin/crearScoreHistorial.exe
-   ```
-
-6. Ejecuta el programa:
-
-   ```bash
-   ./bin/crearScoreHistorial.exe
-   ```
-
-### En Windows:
-
-1. Descarga el archivo `crearScoreHistorial-0.1.1-CYGWIN.tar.gz`.
-2. Extrae el archivo usando una herramienta como 7-Zip o WinRAR.
-3. Navega hasta el directorio extraído.
-4. Ejecuta `bin/crearScoreHistorial.exe` haciendo doble clic o desde la terminal de Windows.
-```
+mkdir build
+cd build
+cmake ..
+cmake --build .
 
 
 
+Ejecutar el programa: Una vez compilado, puedes ejecutar el programa desde la carpeta build con:
 
-unzip CrearScoreHistorial-1.0.0-Linux.zip
-
-
-Navegar a la carpeta de los binarios y ejecutar el programa:
-cd CrearScoreHistorial-1.0.0-Linux/usr/bin
+cd ..
 ./crearScoreHistorial
 
+--------------
+Con Cpack
+Desde la raiz
+rm -rf build
+mkdir build
+cd build
+cmake ..
+cmake --build .
+
+--- crear el paquete
+cpack
+Resultado:
 
 
+-----
+rm -rf build             # Elimina la carpeta build anterior (si existe)
+mkdir build              # Crea una nueva carpeta build
+cd build                 # Entra en la carpeta build
+cmake ..                 # Configura el proyecto
+cmake --build . --target package  # Compila y empaqueta
+cpack                    # Crea el paquete comprimido
+
+
+
+
+Opcional:
+cd ..
+en la carpeta del build
+find . -type f
+find . -maxdepth 3
+
+Mover a home
+mv ./build/crearScoreHistorial-0.1.1-CYGWIN.tar.gz ~/
+
+extraer contenido
+tar -xvzf ~/crearScoreHistorial-0.1.1-CYGWIN.tar.gz -C ~/
+
+Chequear
+ls ~/
+Si esta la carpeta
+cd ~/blackjack
+o sino
+cd ~/crearScoreHistorial-0.1.1-CYGWIN/blackjack
+
+
+
+
+
+
+
+
+ls -R ~/crearScoreHistorial
 
 
 
